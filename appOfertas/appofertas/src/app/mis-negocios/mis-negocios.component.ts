@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ListarService } from '../serviciosListar/listar.service';
 import { AuthServiceManual } from '../authService/auth.service';
 import { EliminarService } from '../serviciosEliminar/eliminar.service';
+import { EditarService } from '../serviciosEditar/editar.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { RegistrarNegocioComponent } from '../registrar-negocio/registrar-negocio.component';
+import { EditarNegoComponent } from '../editar-nego/editar-nego.component';
+
 
 @Component({
   selector: 'app-mis-negocios',
@@ -16,7 +21,9 @@ export class MisNegociosComponent implements OnInit {
 
   constructor(private listarService: ListarService,
               private auth: AuthServiceManual,
-              private eliminarService: EliminarService) { }
+              private eliminarService: EliminarService,
+              private editarService: EditarService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getNegociosAdmin(this.auth.getIdAdmin());
@@ -40,6 +47,12 @@ export class MisNegociosComponent implements OnInit {
     });
   }
 
+  putEditarNegocio(body: string): any {
+    this.editarService.putEditarNegocio(body).subscribe((data) => {
+      console.log('Datos devueltos del servicio: '+data)
+    });
+  }
+
   eliminarNegocio(idNegocio: string){
     console.log(idNegocio);
     let body = {
@@ -53,5 +66,13 @@ export class MisNegociosComponent implements OnInit {
     this.deleteEliminarNegocio(JSON.stringify(body));
     //console.log('El body que esta mandando es: '+JSON.stringify(body));
     alert('Eliminando el negocio '+idNegocio);
+  }
+
+  editarNegocio(body: string) {
+    let dialogRef = this.dialog.open(EditarNegoComponent, {
+      height: '795px',
+      width: '800px',
+    });
+    this.putEditarNegocio(JSON.stringify(body));
   }
 }
