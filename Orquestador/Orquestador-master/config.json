@@ -1,0 +1,8 @@
+{  
+   "basePackage":"com.accenture.Orquestador",
+   "configPackage":"com.accenture.microOfertas.config",
+   "apiPackage":"com.accenture.microOfertas.api",
+   "modelPackage":"com.accenture.microOfertas.model",
+   "groupId":"com.accenture.orquestador",
+   "artifactId":"orquestador"
+}

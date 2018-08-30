@@ -1,0 +1,233 @@
+swagger: '2.0'
+info:
+  description: Este micro se utiliza para gestionar el servicios de personas tanto clientes como administradores y super-administradores
+  version: 1.0.0
+  title: Microservicio personas
+  contact:
+    email: jonathan.payares@accenture.com
+host: 'localhost:8091'
+basePath: /negocios
+paths:
+  /registrar:
+    post:
+      tags:
+        - negocios
+      summary: registro de negocios
+      description: registro de negocios
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+      responses:
+        '200':
+          description: negocio registrado correctamente
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '400':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /listar:
+    get:
+      tags:
+        - negocios
+      summary: buscar
+      description: devuelve todos los negocios que esten almacenados
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: negocios encontrados
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /listar/{id}:
+    get:
+      tags:
+        - negocios
+      summary: buscar un negocio
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of pet that needs to be fetched
+          required: true
+          type: string
+      responses:
+        '200':
+          description: negocio encontrado
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  '/listar/negocio/{tipo}':
+    get:
+      tags:
+        - negocios
+      summary: buscar un negocio por el tipo de negocio
+      produces:
+        - application/json
+      parameters:
+        - name: tipo
+          in: path
+          description: se recibe el tipo de negocio
+          required: true
+          type: string
+      responses:
+        '200':
+          description: persona encontrada
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /eliminar:
+    delete:
+      tags:
+        - negocios
+      summary: eliminar un negocio
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequestDelete'
+      responses:
+        '200':
+          description: negocio eliminado
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /editar:
+    put:
+      tags:
+        - negocios
+      summary: edición de negocios
+      description: registro de negocios
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+      responses:
+        '200':
+          description: persona registrada correctamente
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '400':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+definitions:
+  JsonApiBodyRequestDelete:
+    type: object
+    required:
+      - negocio
+    properties:
+      negocio:
+        type: array
+        items:
+          $ref: '#/definitions/DeleteRequest'
+  JsonApiBodyRequest:
+    type: object
+    required:
+      - negocio
+    properties:
+      negocio:
+        type: array
+        items:
+          $ref: '#/definitions/RegistrarRequest'
+  DeleteRequest:
+    type: object
+    required:
+      - idnegocio
+      - parametro
+    properties:
+      idnegocio:
+        type: string
+      parametro:
+        type: string
+  RegistrarRequest:
+    type: object
+    required:
+      - nit
+      - nombre
+      - email
+      - idnegocio
+      - idadmin
+      - ciudad
+      - telefono
+      - tipo
+      - direccion
+      - foto
+      - detalle
+    properties:
+      nit:
+        type: string
+      nombre:
+        type: string
+      email:
+        type: string
+      idnegocio:
+        type: string
+      idadmin:
+        type: string
+      ciudad:
+        type: string
+      telefono:
+        type: string
+      tipo:
+        type: string
+      direccion:
+        type: string
+      foto:
+        type: string
+      detalle:
+        type: string
+  JsonApiBodyResponseErrors:
+    type: object
+    required:
+      - codigo
+      - detalle
+    properties:
+      codigo:
+        type: string
+      detalle:
+        type: string
+  JsonApiBodyResponseSuccess:
+    type: object
+    required:
+      - id
+      - nombre
+      - estado
+    properties:
+      id:
+        type: string
+      nombre:
+        type: string
+      estado:
+        type: string

@@ -1,0 +1,41 @@
+<div class="divImgHeader">
+  <img class="imgHeader" src="../../assets/imagenes/logoOfertApp.png" alt="logoImg">
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #751836; color: #FFFFFF; font-family: Lobster;">
+  <a class="navbar-brand" style="font-size: 1.5rem;" href="/">
+    OfertApp
+  </a>
+  <!-- <img class="logoNavBar" src="../../assets/imagenes/logoOfertApp.png" alt="LogoMenu"> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav" style="font-size: 1.2rem;">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="switchContainer('1')">Inicio
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="rol=='Administrador' ">
+        <a class="nav-link" (click)="switchContainer('3')" >Mis Negocios</a>
+      </li>
+      <li class="nav-item" *ngIf="rol=='Administrador' ">
+        <a class="nav-link" (click)="switchContainer('2')">Registrar Negocio</a>
+      </li>
+      <li class="nav-item" *ngIf="rol=='Administrador' ">
+        <a class="nav-link" href="#">Historial de Ofertas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Información</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<section>
+  <div [ngSwitch]="currentContainer">
+    <app-mapa *ngSwitchCase="'inicio'"></app-mapa>
+    <app-registrar-negocio *ngSwitchCase="'registronegocio'"></app-registrar-negocio>
+    <app-mis-negocios *ngSwitchCase="'misnegocios'"></app-mis-negocios>
+  </div>
+</section>

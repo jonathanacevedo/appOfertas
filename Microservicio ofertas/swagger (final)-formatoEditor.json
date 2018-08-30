@@ -1,0 +1,226 @@
+swagger: '2.0'
+info:
+  description: Este micro se utiliza para gestionar las ofertas
+  version: 1.0.0
+  title: Microservicio ofertas
+  contact:
+    email: jonathan.payares@accenture.com
+host: 'localhost:8092'
+basePath: /ofertas
+paths:
+  /registrar:
+    post:
+      tags:
+        - ofertas
+      summary: registro de ofertas
+      description: registro de ofertas
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+      responses:
+        '200':
+          description: oferta registrada correctamente
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '400':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /listar:
+    get:
+      tags:
+        - ofertas
+      summary: buscar
+      description: devuelve todos las ofertas que esten almacenadas
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ofertas encontradas
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+        '404':
+          description: datos incompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /eliminar:
+    delete:
+      tags:
+        - ofertas
+      summary: eliminar una oferta
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequestDelete'
+      responses:
+        '200':
+          description: oferta eliminada
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /editar:
+    put:
+      tags:
+        - ofertas
+      summary: edición de ofertas
+      description: registro de ofertas
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequestEdit'
+      responses:
+        '200':
+          description: persona registrada correctamente
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '400':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+definitions:
+  JsonApiBodyRequestEdit:
+    type: object
+    required:
+      - oferta
+    properties:
+      oferta:
+        type: array
+        items:
+          $ref: '#/definitions/EditRequest'
+  JsonApiBodyRequestDelete:
+    type: object
+    required:
+      - oferta
+    properties:
+      oferta:
+        type: array
+        items:
+          $ref: '#/definitions/DeleteRequest'
+  JsonApiBodyRequest:
+    type: object
+    required:
+      - oferta
+    properties:
+      oferta:
+        type: array
+        items:
+          $ref: '#/definitions/RegistrarRequest'
+  EditRequest:
+    type: object
+    required:
+      - id
+      - producto
+      - detalle
+      - valor
+      - descuento
+      - foto
+      - idnegocio
+      - fecha_inicio
+      - fecha_fin
+      - parametro
+    properties:
+      id:
+        type: string
+      producto:
+        type: string
+      detalle:
+        type: string
+      valor:
+        type: string
+      descuento:
+        type: string
+      foto:
+        type: string
+      idnegocio:
+        type: string
+      fecha_inicio:
+        type: string
+      fecha_fin:
+        type: string
+      parametro:
+        type: string
+  DeleteRequest:
+    type: object
+    required:
+      - id
+      - parametro
+    properties:
+      id:
+        type: string
+      parametro:
+        type: string
+  RegistrarRequest:
+    type: object
+    required:
+      - id
+      - producto
+      - detalle
+      - valor
+      - descuento
+      - foto
+      - idnegocio
+      - fecha_inicio
+      - fecha_fin
+    properties:
+      id:
+        type: string
+      producto:
+        type: string
+      detalle:
+        type: string
+      valor:
+        type: string
+      descuento:
+        type: string
+      foto:
+        type: string
+      idnegocio:
+        type: string
+      fecha_inicio:
+        type: string
+      fecha_fin:
+        type: string
+  JsonApiBodyResponseErrors:
+    type: object
+    required:
+      - codigo
+      - detalle
+    properties:
+      codigo:
+        type: string
+      detalle:
+        type: string
+  JsonApiBodyResponseSuccess:
+    type: object
+    required:
+      - id
+      - nombre
+      - estado
+    properties:
+      id:
+        type: string
+      nombre:
+        type: string
+      estado:
+        type: string

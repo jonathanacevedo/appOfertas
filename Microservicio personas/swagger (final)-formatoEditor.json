@@ -1,0 +1,255 @@
+swagger: '2.0'
+info:
+  description: Este micro se utiliza para gestionar el servicios de personas tanto clientes como administradores y super-administradores
+  version: 1.0.0
+  title: Microservicio personas
+  contact:
+    email: alexis.correa@accenture.com
+host: 'localhost:8090'
+basePath: /personas
+paths:
+  /registrar:
+    post:
+      tags:
+        - personas
+      summary: registro de personas
+      description: registro de personas clientes y administradores
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+      responses:
+        '200':
+          description: persona registrada correctamente
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '400':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /listar:
+    get:
+      tags:
+        - personas
+      summary: buscar personas
+      description: devuelve todos los usuarios que esten almacenados
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: personas encontradas
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /listar/{id}:
+    get:
+      tags:
+        - personas
+      summary: buscar una persona
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of pet that needs to be fetched
+          required: true
+          type: string
+      responses:
+        '200':
+          description: persona encontrada
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  '/listar/rol/{rol}':
+    get:
+      tags:
+        - personas
+      summary: buscar una personas por el tipo de rol
+      produces:
+        - application/json
+      parameters:
+        - name: rol
+          in: path
+          description: se recibe el rol del usuario
+          required: true
+          type: string
+      responses:
+        '200':
+          description: persona encontrada
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  '/listar/estado/{estado}':
+    get:
+      tags:
+        - personas
+      summary: buscar una personas por el tipo de rol
+      produces:
+        - application/json
+      parameters:
+        - name: estado
+          in: path
+          description: se recibe el rol del usuario
+          required: true
+          type: string
+      responses:
+        '200':
+          description: persona encontrada
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /eliminar:
+    delete:
+      tags:
+        - personas
+      summary: eliminar persona
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequestDelete'
+      responses:
+        '200':
+          description: persona eliminada
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '404':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+  /editar:
+    put:
+      tags:
+        - personas
+      summary: registro de personas
+      description: registro de personas clientes y administradores
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            $ref: '#/definitions/JsonApiBodyRequest'
+      responses:
+        '200':
+          description: persona registrada correctamente
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseSuccess'
+        '400':
+          description: datos imcompletos o incorrectos
+          schema:
+            $ref: '#/definitions/JsonApiBodyResponseErrors'
+definitions:
+  JsonApiBodyRequestDelete:
+    type: object
+    required:
+      - persona
+    properties:
+      persona:
+        type: array
+        items:
+          $ref: '#/definitions/DeleteRequest'
+  JsonApiBodyRequest:
+    type: object
+    required:
+      - persona
+    properties:
+      persona:
+        type: array
+        items:
+          $ref: '#/definitions/RegistrarRequest'
+  DeleteRequest:
+    type: object
+    required:
+      - id
+      - parametro
+      - token
+    properties:
+      id:
+        type: string
+      parametro:
+        type: string
+      token:
+        type: string
+  RegistrarRequest:
+    type: object
+    required:
+      - id
+      - nombre
+      - apellidos
+      - correo
+      - contrasena
+      - telefono
+      - genero
+      - rol
+      - estado
+      - token
+    properties:
+      id:
+        type: string
+      nombre:
+        type: string
+      apellidos:
+        type: string
+      correo:
+        type: string
+      contrasena:
+        type: string
+      telefono:
+        type: string
+      genero:
+        type: string
+      rol:
+        type: string
+      estado:
+        type: string
+      token:
+        type: string
+  JsonApiBodyResponseErrors:
+    type: object
+    required:
+      - codigo
+      - detalle
+    properties:
+      codigo:
+        type: string
+      detalle:
+        type: string
+  JsonApiBodyResponseSuccess:
+    type: object
+    required:
+      - id
+      - nombre
+      - estado
+    properties:
+      id:
+        type: string
+      nombre:
+        type: string
+      estado:
+        type: string

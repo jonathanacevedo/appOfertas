@@ -1,0 +1,33 @@
+<table cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <div style="width: 100%; height: 420px; overflow-y: scroll;">
+        <div class="containerCards" *ngFor="let oferta of ofertas">
+          <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{oferta.producto}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Descuento del {{oferta.descuento}}%</h6>
+                <p class="card-text">{{oferta.detalle}}</p>
+                <a href="#" class="card-link" style="color: #60132c;
+                 font-family: Lobster; font-size: 1.1rem;">
+                 <img src="../../assets/imagenes/marcador2.png" alt="">
+                 Ubicar
+                </a>
+                <a href="#" class="card-link" style="color: #751836;
+                 font-family: Lobster; font-size: 1.1rem;">
+                 <img src="../../assets/imagenes/negocio.png" alt="">
+                 Negocio
+                </a>
+            </div>
+            </div>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="containerMap">
+        <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
+      </div>
+    </td>
+  </tr>
+</table>

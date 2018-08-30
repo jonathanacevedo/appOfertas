@@ -1,0 +1,33 @@
+
+<div class="row card-group">
+    <div class="col-4" *ngFor="let oferta of ofertas">
+        <div class="card">
+            <div class="card">
+                <img class="card-img-top" src="../../assets/imagenes/banner3.png" alt="Banner">
+                <div class="card-body">
+                    <h5 class="card-title">{{oferta.producto | uppercase}}</h5>
+                    <p class="card-text">{{oferta.detalle}} </p>
+                    <strong>Valor: </strong> {{oferta.valor}}
+                    <br>
+                    <strong>Descuento: </strong>{{oferta.descuento}}%
+                    <br>
+                    <br>
+                    <a href="#" class="btnDetalle" (click)="alerta()">Ver detalle</a>
+                </div>
+                <div class="card-footer text-muted">
+                   del {{oferta.fecha_inicio}} hasta el {{oferta.fecha_fin}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="card" *ngFor="let persona of personas">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div *ngIf="persona.nombre==''">Condicionando</div>
+    <div class="card-body">
+      <h5 class="card-title">{{persona.nombre}}</h5>
+      <p class="card-text">La persona {{persona.nombre}} {{persona.apellidos}} esta registrada como {{persona.rol}}</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>  -->

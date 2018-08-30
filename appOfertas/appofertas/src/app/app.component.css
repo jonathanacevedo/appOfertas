@@ -1,0 +1,88 @@
+@font-face {
+    font-family: Lobster;
+    src: url("../assets/fuentes/Lobster.otf") format("opentype");
+}
+
+.principal{
+    text-align: center;
+    width: 80%;
+    padding: 10px;
+    margin: auto;
+}
+
+.cabecera{
+    background-color: #280603 ;
+    padding-top: 20px;
+    color: #FFFFFF;
+}
+
+.imgHead{
+    padding-right: 20px;
+}
+
+h1{
+    font-family: Lobster;
+    font-size: 4rem;
+    color: #f1e88b;
+}
+
+.loginLogo{
+    width: 20px;
+    padding-right: 10px;
+  }
+
+  .boton{
+    padding: 6px 10px;
+    border: none;
+    height: 100%;
+    background: none;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    transition-duration: 0.5s;
+    cursor: pointer;
+  }
+
+  .buttonGroup{
+      background-color: #92411e;
+      text-align: right;
+  }
+
+  .buttonUp{
+        background-color: #e7e7e7; 
+        border: none;
+        padding: 10px 22px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 4px 2px;
+        cursor: pointer;
+  }
+
+  .btnDetalle{
+    background-color: #280603; /* Green */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.fotoPerfil{
+    width: 4.5%;
+    height: 4.5%;
+    border-radius: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.tituloBienvenido{
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    padding-right: 10px;
+}

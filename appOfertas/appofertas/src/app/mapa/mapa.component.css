@@ -1,0 +1,43 @@
+@font-face {
+    font-family: Lobster;
+    src: url("../../assets/fuentes/Lobster.otf") format("opentype");
+}
+
+agm-map {
+    height: 428px;
+    width: 900px;
+}
+
+.containerCards{
+    padding: 20px;
+}
+
+container{
+    width: 200px;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+.containerMap{
+    width: 70%;
+    text-align: left;
+    vertical-align: top;
+}
+
+td{
+    vertical-align: top;
+    background-color: beige;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+btnIcono{
+    width: 1px;
+    height: 1px;
+}
