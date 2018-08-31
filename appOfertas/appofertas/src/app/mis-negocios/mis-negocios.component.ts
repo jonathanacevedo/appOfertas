@@ -6,7 +6,7 @@ import { EditarService } from '../serviciosEditar/editar.service';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { RegistrarNegocioComponent } from '../registrar-negocio/registrar-negocio.component';
 import { EditarNegoComponent } from '../editar-nego/editar-nego.component';
-
+import { CrearOfertaComponent } from '../crear-oferta/crear-oferta.component';
 
 
 @Component({
@@ -25,9 +25,7 @@ export class MisNegociosComponent implements OnInit {
     private auth: AuthServiceManual,
     private eliminarService: EliminarService,
     private editarService: EditarService,
-    private dialog: MatDialog) {
-
-  }
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getNegociosAdmin(this.auth.getIdAdmin());
@@ -70,7 +68,7 @@ export class MisNegociosComponent implements OnInit {
     alert('Eliminando el negocio ' + idNegocio);
   }
 
-  openDialog(body: any) {
+  openDialogEditar(body: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -108,7 +106,31 @@ export class MisNegociosComponent implements OnInit {
     );    
   }
 
+  openDialogOferta(idNegocio: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '55%';
+    dialogConfig.height = '40%';
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.position = {
+      'top': '0%',
+      'right': '25px',
+      'bottom': '10%',
+      'left': '20%'
+    };
+    dialogConfig.data = {
+      idnegocio: idNegocio
+    };
+
+    this.dialog.open(CrearOfertaComponent, dialogConfig);
+  }
+
   editarNegocio(body: string) {    //este body está en string.
-    this.openDialog(body);
+    this.openDialogEditar(body);
+  }
+
+  crearOferta(idNegocio: string) {
+    this.openDialogOferta(idNegocio);
   }
 }
