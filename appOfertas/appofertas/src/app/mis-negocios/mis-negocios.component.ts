@@ -3,9 +3,10 @@ import { ListarService } from '../serviciosListar/listar.service';
 import { AuthServiceManual } from '../authService/auth.service';
 import { EliminarService } from '../serviciosEliminar/eliminar.service';
 import { EditarService } from '../serviciosEditar/editar.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { RegistrarNegocioComponent } from '../registrar-negocio/registrar-negocio.component';
 import { EditarNegoComponent } from '../editar-nego/editar-nego.component';
+
 
 
 @Component({
@@ -16,19 +17,21 @@ import { EditarNegoComponent } from '../editar-nego/editar-nego.component';
 export class MisNegociosComponent implements OnInit {
 
   private negocios: any[] = [];
+  private idnegocio: any;
 
   private activarVista: boolean = false;
 
   constructor(private listarService: ListarService,
-              private auth: AuthServiceManual,
-              private eliminarService: EliminarService,
-              private editarService: EditarService,
-              private dialog: MatDialog) { }
+    private auth: AuthServiceManual,
+    private eliminarService: EliminarService,
+    private editarService: EditarService,
+    private dialog: MatDialog) {
+
+  }
 
   ngOnInit() {
     this.getNegociosAdmin(this.auth.getIdAdmin());
   }
-
 
   getNegociosAdmin(idAdmin: string): void {
     this.listarService.getNegociosAdmin(idAdmin).subscribe((data) => {
@@ -40,39 +43,72 @@ export class MisNegociosComponent implements OnInit {
     });
   }
 
-
-  deleteEliminarNegocio(body: string) : void {
+  deleteEliminarNegocio(body: string): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
-      console.log('Datos devueltos del eliminar negocio: '+data);
+      console.log('Datos devueltos del eliminar negocio: ' + data);
     });
   }
 
   putEditarNegocio(body: string): any {
     this.editarService.putEditarNegocio(body).subscribe((data) => {
-      console.log('Datos devueltos del servicio: '+data)
+      console.log('Datos devueltos del servicio: ' + data)
     });
   }
 
-  eliminarNegocio(idNegocio: string){
+  eliminarNegocio(idNegocio: string) {
     console.log(idNegocio);
     let body = {
-      "negocio" : [
+      "negocio": [
         {
-          "idnegocio" : idNegocio,
-          "parametro" : this.auth.getIdAdmin()
+          "idnegocio": idNegocio,
+          "parametro": this.auth.getIdAdmin()
         }
       ]
     };
     this.deleteEliminarNegocio(JSON.stringify(body));
     //console.log('El body que esta mandando es: '+JSON.stringify(body));
-    alert('Eliminando el negocio '+idNegocio);
+    alert('Eliminando el negocio ' + idNegocio);
   }
 
-  editarNegocio(body: string) {
-    let dialogRef = this.dialog.open(EditarNegoComponent, {
-      height: '795px',
-      width: '800px',
-    });
-    this.putEditarNegocio(JSON.stringify(body));
+  openDialog(body: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '55%';
+    dialogConfig.height = '40%';
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.position = {
+      'top': '0%',
+      'right': '25px',
+      'bottom': '10%',
+      'left': '20%'
+    };
+
+    dialogConfig.data = {
+      nombre: body.nombre,
+      ciudad: body.ciudad,
+      detalle: body.detalle,
+      direccion: body.direccion,
+      email: body.email,
+      foto: body.foto,
+      idadmin: body.idadmin,
+      idnegocio: body.idnegocio,
+      nit: body.nit,
+      telefono: body.telefono,
+      tipo: body.tipo,
+    };
+    //this.dialog.open(EditarNegoComponent, dialogConfig);
+    const dialogRef = this.dialog.open(EditarNegoComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(() =>  {
+      console.log("Se cerró esa vuelta.")
+      this.negocios = [];
+      this.getNegociosAdmin(this.auth.getIdAdmin());
+    }
+    );    
+  }
+
+  editarNegocio(body: string) {    //este body está en string.
+    this.openDialog(body);
   }
 }

@@ -29,7 +29,7 @@ import java.util.List;
 @Api(value = "listar", description = "the listar API")
 public interface ListarApi {
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "*")
     @ApiOperation(value = "buscar", nickname = "listarGet", notes = "devuelve todos las ofertas que esten almacenadas", response = JsonApiBodyRequest.class, tags={ "ofertas", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "ofertas encontradas", response = JsonApiBodyRequest.class),
@@ -39,7 +39,7 @@ public interface ListarApi {
         method = RequestMethod.GET)
     ResponseEntity<Iterable<RegistrarRequest>> listarGet();
     
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "*")
     @ApiOperation(value = "buscar una oferta por la id del negocio", nickname = "listarOfertaNegocioGet", notes = "", response = JsonApiBodyRequest.class, tags={ "ofertas", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "negocio encontrado", response = JsonApiBodyRequest.class),

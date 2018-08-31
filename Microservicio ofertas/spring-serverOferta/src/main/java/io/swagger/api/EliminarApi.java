@@ -11,6 +11,7 @@ import io.swagger.model.JsonApiBodyResponseSuccess;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -28,6 +29,7 @@ import java.util.List;
 @Api(value = "eliminar", description = "the eliminar API")
 public interface EliminarApi {
 
+    @CrossOrigin(origins = "*")
     @ApiOperation(value = "eliminar una oferta", nickname = "eliminarDelete", notes = "", response = JsonApiBodyResponseSuccess.class, tags={ "ofertas", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "oferta eliminada", response = JsonApiBodyResponseSuccess.class),

@@ -19,6 +19,7 @@ export class EditarService {
         'Accept' : 'application/json'
       })
     };
+    console.log('El body para enviar es: '+body);
     return this.http.put(this.urlEditarNegocio, JSON.parse(body), httpOptions);
   }
 }

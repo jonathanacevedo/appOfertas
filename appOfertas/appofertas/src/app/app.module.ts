@@ -6,6 +6,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { AgmCoreModule } from '@agm/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from "@angular/material";
+
 
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
@@ -35,6 +37,7 @@ import { HeaderComponent } from './header/header.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { MisNegociosComponent } from './mis-negocios/mis-negocios.component';
 import { EditarNegoComponent } from './editar-nego/editar-nego.component';
+import { CrearOfertaComponent } from './crear-oferta/crear-oferta.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -42,8 +45,6 @@ const appRoutes: Routes = [
   { path: 'inicio', component: VistaComponent },
   { path: 'registrar-negocio', component: RegistrarNegocioComponent},
   { path: 'misnegocios', component: MisNegociosComponent},
-  { path: 'prueba', component: EditarNegoComponent},
-
   // { path: 'login', component: LoginComponent, outlet: 'noLogueado'},
   // { path: 'registrar', component: RegistrarPersonaComponent, outlet: 'noLogueado' },
   // { path: 'registrar', component: RegistrarPersonaComponent },
@@ -81,7 +82,8 @@ export function provideConfig() {
     HeaderComponent,
     MapaComponent,
     MisNegociosComponent,
-    EditarNegoComponent
+    EditarNegoComponent,
+    CrearOfertaComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -102,6 +104,7 @@ export function provideConfig() {
     MatGridListModule,
     MatDialogModule
   ],
+  entryComponents: [EditarNegoComponent, CrearOfertaComponent],
   providers: [
     ListarService,
     RegistrarPersonaService,
@@ -114,5 +117,6 @@ export function provideConfig() {
     }
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

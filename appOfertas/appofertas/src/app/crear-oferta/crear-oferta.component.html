@@ -1,0 +1,58 @@
+<div class="containerForm">
+    <h1>Crear Oferta para bussiness</h1>
+    <br>
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Nombre:</label>
+          <input type="email" class="form-control" id="inputNombre2" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" placeholder="Nombre">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Nit:</label>
+          <input type="text" class="form-control" id="inputApellidos2" [(ngModel)]="nit" [ngModelOptions]="{standalone: true}" placeholder="Nit">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Dirección:</label>
+          <input type="email" class="form-control" id="inputDireccion2" [(ngModel)]="direccion" [ngModelOptions]="{standalone: true}" placeholder="Direccion">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Email:</label>
+          <input type="text" class="form-control" id="inputEmail2" [(ngModel)]="correo" [ngModelOptions]="{standalone: true}" placeholder="Email">
+        </div>
+      </div>
+      <!-- Línea nueva  -->
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputEmail4">Telefono:</label>
+          <input type="text" class="form-control" id="inputTelefono2" [(ngModel)]="telefono" [ngModelOptions]="{standalone: true}" placeholder="Telefono">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputEmail4">Ciudad:</label>
+          <input type="text" class="form-control" id="inputCiudad2" [(ngModel)]="ciudad" [ngModelOptions]="{standalone: true}" placeholder="Ciudad">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">Tipo de negocio:</label>
+          <select id="inputTipo2" class="form-control" [(ngModel)]="tipo" [ngModelOptions]="{standalone: true}">
+            <option>Restaurante</option>
+            <option>Hotel</option>
+            <option>Bar</option>
+            <option>Almacen</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail4">Detalle:</label>
+        <textarea class="form-control" rows="5" id="detalle2" [(ngModel)]="detalle" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+  
+      <div class="form-group col-md-4">
+        <label for="inputEmail4">Foto: </label>
+        <input type="text" class="form-control" [(ngModel)]="foto" [ngModelOptions]="{standalone: true}" id="inputFoto2" placeholder="Foto">
+      </div>
+  <br>
+  <button type="submit" (click)="registrarNegocio()" class="btnDetalle">Registrar Negocio</button>
+  </form>
+  </div>
