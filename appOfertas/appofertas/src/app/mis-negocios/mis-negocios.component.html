@@ -7,7 +7,7 @@
         <div class="col-4" *ngFor="let negocio of negocios; let i index">
             <div class="card">
                 <div class="card">
-                    <!-- <img class="card-img-top" src="../../assets/imagenes/banner3.png" alt="Banner"> -->
+                    <img class="card-img-top" src="{{negocio.foto}}" alt="Banner">
                     <div class="card-body">
                         <h5 class="card-title">{{negocio.nombre}}</h5>
                         <p class="card-text">{{negocio.detalle}} </p>
@@ -21,13 +21,13 @@
                         <strong>Ciudad: </strong>{{negocio.ciudad}}
                         <br>
                         <br>
-                        <button class="btnDetalle" (click)="eliminarNegocio(i.idnegocio)">Eliminar</button>
+                        <button class="btnDetalle" (click)="eliminarNegocio(i.idnegocio, i.nombre)">Eliminar</button>
                         <button class="btnDetalle" (click)="editarNegocio(i)" >Editar</button>
                         <div>
                         </div>
                     </div>
                     <div class="card-footer text-muted">
-                            <button class="btnDetalle" (click)="crearOferta(i.idnegocio)" >Crear Oferta</button>
+                            <button class="btnDetalle" (click)="crearOferta(i.idnegocio, i.nombre)" >Crear Oferta</button>
                         </div>
                 </div>
             </div>

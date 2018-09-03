@@ -15,7 +15,8 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputEmail4">Dirección:</label>
-        <input type="email" class="form-control" id="inputDireccion2" [(ngModel)]="direccion" [ngModelOptions]="{standalone: true}" placeholder="Direccion">
+        <input type="email" class="form-control" id="inputDireccion2" [(ngModel)]="direccion" [ngModelOptions]="{standalone: true}"
+          placeholder="Direccion">
       </div>
       <div class="form-group col-md-6">
         <label for="inputPassword4">Email:</label>
@@ -26,7 +27,8 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="inputEmail4">Telefono:</label>
-        <input type="text" class="form-control" id="inputTelefono2" [(ngModel)]="telefono" [ngModelOptions]="{standalone: true}" placeholder="Telefono">
+        <input type="text" class="form-control" id="inputTelefono2" [(ngModel)]="telefono" [ngModelOptions]="{standalone: true}"
+          placeholder="Telefono">
       </div>
       <div class="form-group col-md-4">
         <label for="inputEmail4">Ciudad:</label>
@@ -48,11 +50,25 @@
       <textarea class="form-control" rows="5" id="detalle2" [(ngModel)]="detalle" [ngModelOptions]="{standalone: true}"></textarea>
     </div>
 
-    <div class="form-group col-md-4">
-      <label for="inputEmail4">Foto: </label>
-      <input type="text" class="form-control" [(ngModel)]="foto" [ngModelOptions]="{standalone: true}" id="inputFoto2" placeholder="Foto">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          Foto del negocio
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Seleccionar la foto:</h5>
+          <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+        </div>
+      </div>
     </div>
-<br>
-<button type="submit" (click)="registrarNegocio()" class="btnDetalle">Registrar Negocio</button>
-</form>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
+        [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div *ngIf="porcentaje=='1'" class="alert alert-info" role="alert">
+      Archivo subido
+    </div>
+    <br>
+    <button type="submit" (click)="registrarNegocio()" class="btnDetalle">Registrar Negocio</button>
+  </form>
 </div>

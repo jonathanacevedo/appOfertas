@@ -7,6 +7,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 export class EliminarService {
 
   urlEliminarNegocio: string = "http://localhost:8091/negocios/eliminar";
+  urlEliminarOferta: string = "http://localhost:8092/ofertas/eliminar";
 
   constructor(private http: HttpClient) { }
 
@@ -14,6 +15,13 @@ export class EliminarService {
   deleteEliminarNegocio(body: string): any {
     let newBody = JSON.parse(body);
     let req = new HttpRequest('DELETE', this.urlEliminarNegocio);
+    let newReq = req.clone({body: newBody});
+    return this.http.request(newReq);
+  }
+
+  deleteEliminarOferta(body: string): any {
+    let newBody = JSON.parse(body);
+    let req = new HttpRequest('DELETE', this.urlEliminarOferta);
     let newReq = req.clone({body: newBody});
     return this.http.request(newReq);
   }

@@ -30,6 +30,9 @@ export class HeaderComponent implements OnInit {
       case '3':
         this.currentContainer = 'misnegocios';
         break;
+      case '4':
+        this.currentContainer = 'misofertas';
+        break;
       default:
         this.currentContainer = 'inicio';
     }

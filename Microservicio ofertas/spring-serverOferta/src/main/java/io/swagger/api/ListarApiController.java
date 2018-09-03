@@ -62,7 +62,6 @@ public class ListarApiController implements ListarApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-            	System.out.println("Listando... "+repo.findByIdnegocio(idnegocio));
                 return new ResponseEntity<Iterable<RegistrarRequest>>(repo.findByIdnegocio(idnegocio), HttpStatus.ACCEPTED);
             } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
@@ -71,5 +70,21 @@ public class ListarApiController implements ListarApi {
         }
         return new ResponseEntity<Iterable<RegistrarRequest>>(HttpStatus.NOT_IMPLEMENTED);
     }
+    
+    public ResponseEntity<Iterable<RegistrarRequest>> listarOfertaIdGet(@ApiParam(value = "se recibe el id de la oferta",required=true) @PathVariable("id") String id) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            try {
+            	System.out.println("Listando... "+repo.findById(id));
+                return new ResponseEntity<Iterable<RegistrarRequest>>(repo.findById(id), HttpStatus.ACCEPTED);
+            } catch (Exception e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<Iterable<RegistrarRequest>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return new ResponseEntity<Iterable<RegistrarRequest>>(HttpStatus.NOT_IMPLEMENTED);
+    }
+    
+    
 
 }

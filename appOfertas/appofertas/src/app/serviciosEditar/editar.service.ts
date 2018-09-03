@@ -8,6 +8,7 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 export class EditarService {
 
   urlEditarNegocio: string = "http://localhost:8091/negocios/editar";
+  urlEditarOferta: string = "http://localhost:8092/ofertas/editar";
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +20,16 @@ export class EditarService {
         'Accept' : 'application/json'
       })
     };
-    console.log('El body para enviar es: '+body);
     return this.http.put(this.urlEditarNegocio, JSON.parse(body), httpOptions);
+  }
+
+  putEditarOferta(body: string): any {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json'
+      })
+    };
+    return this.http.put(this.urlEditarOferta, JSON.parse(body), httpOptions);
   }
 }

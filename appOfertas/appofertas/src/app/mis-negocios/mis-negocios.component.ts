@@ -41,10 +41,14 @@ export class MisNegociosComponent implements OnInit {
     });
   }
 
-  deleteEliminarNegocio(body: string): void {
+  deleteEliminarNegocio(body: string, nombre: string): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
       console.log('Datos devueltos del eliminar negocio: ' + data);
     });
+    alert('Negocio eliminado '+nombre+' correctamente.');
+    this.negocios = [];
+    this.getNegociosAdmin(this.auth.getIdAdmin());
+
   }
 
   putEditarNegocio(body: string): any {
@@ -53,19 +57,22 @@ export class MisNegociosComponent implements OnInit {
     });
   }
 
-  eliminarNegocio(idNegocio: string) {
-    console.log(idNegocio);
-    let body = {
-      "negocio": [
-        {
-          "idnegocio": idNegocio,
-          "parametro": this.auth.getIdAdmin()
-        }
-      ]
-    };
-    this.deleteEliminarNegocio(JSON.stringify(body));
-    //console.log('El body que esta mandando es: '+JSON.stringify(body));
-    alert('Eliminando el negocio ' + idNegocio);
+  eliminarNegocio(idNegocio: string, nombre: string) {
+    let x = confirm("¿Está seguro de eliminar el negocio "+nombre+"?");
+    if(x){
+      console.log(idNegocio);
+      let body = {
+        "negocio": [
+          {
+            "idnegocio": idNegocio,
+            "parametro": this.auth.getIdAdmin()
+          }
+        ]
+      };
+      this.deleteEliminarNegocio(JSON.stringify(body), nombre);
+    } else {
+      console.log('Cancelado el borrado.');
+    }
   }
 
   openDialogEditar(body: any) {
@@ -98,15 +105,17 @@ export class MisNegociosComponent implements OnInit {
     //this.dialog.open(EditarNegoComponent, dialogConfig);
     const dialogRef = this.dialog.open(EditarNegoComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(() =>  {
+    dialogRef.afterClosed().subscribe((data) =>  {
       console.log("Se cerró esa vuelta.")
+      if(data){
       this.negocios = [];
       this.getNegociosAdmin(this.auth.getIdAdmin());
+      }
     }
     );    
   }
 
-  openDialogOferta(idNegocio: string) {
+  openDialogOferta(idNegocio: string, nombre: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -114,15 +123,13 @@ export class MisNegociosComponent implements OnInit {
     dialogConfig.height = '40%';
     dialogConfig.hasBackdrop = true;
     dialogConfig.position = {
-      'top': '0%',
       'right': '25px',
-      'bottom': '10%',
       'left': '20%'
     };
     dialogConfig.data = {
-      idnegocio: idNegocio
+      idnegocio: idNegocio,
+      nombre: nombre
     };
-
     this.dialog.open(CrearOfertaComponent, dialogConfig);
   }
 
@@ -130,7 +137,7 @@ export class MisNegociosComponent implements OnInit {
     this.openDialogEditar(body);
   }
 
-  crearOferta(idNegocio: string) {
-    this.openDialogOferta(idNegocio);
+  crearOferta(idNegocio: string, nombre: string) {
+    this.openDialogOferta(idNegocio, nombre);
   }
 }

@@ -10,4 +10,5 @@ import io.swagger.model.RegistrarRequest;
 public interface UserRepository extends CrudRepository<RegistrarRequest, String>{
 	//public List<User> findByEmail(String email);
 	public Iterable<RegistrarRequest> findByIdnegocio(String idnegocio);
+	public Iterable<RegistrarRequest> findById(String id);
 }

@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { AgmCoreModule } from '@agm/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from "@angular/material";
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
@@ -24,7 +26,7 @@ import { ListarService } from './serviciosListar/listar.service';
 import { RegistrarPersonaService } from './serviciosRegistro/registrar.service';
 import { EliminarService } from './serviciosEliminar/eliminar.service';
 import { EditarService } from './serviciosEditar/editar.service';
-
+import { MatCardModule } from '@angular/material/card';
 
 import { AuthServiceManual } from './authService/auth.service';
 
@@ -38,6 +40,8 @@ import { MapaComponent } from './mapa/mapa.component';
 import { MisNegociosComponent } from './mis-negocios/mis-negocios.component';
 import { EditarNegoComponent } from './editar-nego/editar-nego.component';
 import { CrearOfertaComponent } from './crear-oferta/crear-oferta.component';
+import { MisOfertasComponent } from './mis-ofertas/mis-ofertas.component';
+import { EditarOfertaComponent } from './editar-oferta/editar-oferta.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -83,7 +87,9 @@ export function provideConfig() {
     MapaComponent,
     MisNegociosComponent,
     EditarNegoComponent,
-    CrearOfertaComponent
+    CrearOfertaComponent,
+    MisOfertasComponent,
+    EditarOfertaComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -94,6 +100,15 @@ export function provideConfig() {
       apiKey: 'AIzaSyA-HXVa2jtkGfKtIJwisxgC46RaWqC1xuI'
     }),
     BrowserModule,
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyA8b_QkrYGJ0TJY_ZoV5fe3N_dCzM_aYjQ",
+      authDomain: "appofertas-cdb19.firebaseapp.com",
+      databaseURL: "https://appofertas-cdb19.firebaseio.com",
+      projectId: "appofertas-cdb19",
+      storageBucket: "appofertas-cdb19.appspot.com",
+      messagingSenderId: "195462949744"
+    }),
+    AngularFireStorageModule,
     FormsModule,
     HttpClientModule,
     HttpModule,
@@ -102,9 +117,10 @@ export function provideConfig() {
     SocialLoginModule,
     BrowserAnimationsModule,
     MatGridListModule,
+    MatCardModule,
     MatDialogModule
   ],
-  entryComponents: [EditarNegoComponent, CrearOfertaComponent],
+  entryComponents: [EditarNegoComponent, CrearOfertaComponent, EditarOfertaComponent],
   providers: [
     ListarService,
     RegistrarPersonaService,

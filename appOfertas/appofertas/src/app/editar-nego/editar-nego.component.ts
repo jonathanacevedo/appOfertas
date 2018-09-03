@@ -1,6 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import { EditarService } from '../serviciosEditar/editar.service';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
+
 
 
 
@@ -24,10 +27,19 @@ export class EditarNegoComponent implements OnInit {
 
   private idadmin: string ='';
 
+  private edited: boolean = false;
+
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  uploadProgress: Observable<number>;
+  private porcentaje: number;
+  downloadURL: Observable<string>;
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<EditarNegoComponent>,
-              private editarService: EditarService) {
+              private editarService: EditarService,
+              private afStorage: AngularFireStorage) {
     this.nombre = data.nombre;
     this.nit = data.nit;
     this.email = data.email;
@@ -47,14 +59,14 @@ export class EditarNegoComponent implements OnInit {
   putEditarNegocio(body: string): any {
     this.editarService.putEditarNegocio(body).subscribe((data) => {
       alert('Negocio actualizado correctamente.');
+      this.edited=true;
       this.cerrarDialog();
-      console.log('Datos devueltos del servicio: ' + data);
     });
   }
 
 
   cerrarDialog(){
-    this.dialogRef.close();
+    this.dialogRef.close(this.edited);
   }
 
   editarNegocio() { //este body está en string.
@@ -76,5 +88,18 @@ export class EditarNegoComponent implements OnInit {
       ]
     };
     this.putEditarNegocio(JSON.stringify(body));
+  }
+
+  upload(event) {
+    const id = Math.random().toString(36).substring(2);
+    this.ref = this.afStorage.ref(id);
+    this.task = this.ref.put(event.target.files[0]);
+    this.uploadProgress = this.task.percentageChanges();
+    this.task.then((up) => {
+      this.porcentaje = up.bytesTransferred / up.totalBytes;
+      this.ref.getDownloadURL().subscribe((url) => {
+        this.foto = url;
+      })
+    });
   }
 }

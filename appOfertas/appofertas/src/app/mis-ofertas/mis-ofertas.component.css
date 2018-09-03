@@ -1,0 +1,70 @@
+@font-face {
+  font-family: Lobster;
+  src: url("../../assets/fuentes/Lobster.otf") format("opentype");
+}
+
+.example-card {
+    max-width: 700px;
+    text-align: center;
+  }
+
+.cardNegocios{
+    /* max-width: 700px; */
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    text-align: center;
+  }
+  
+  .example-header-image {
+    background-image: url('../../assets/imagenes/logoNegocio.png');
+    background-size: cover;
+  }
+
+  .containerNegocios{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1{
+  font-family: Lobster;
+  color: #751836;
+}
+
+.tituloCard{
+  font-family: Lobster;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+
+.btnDetalle{
+    background-color: #751836; /* Green */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+.containerCards{
+  padding: 20px;
+}
+
+container{
+  width: 200px;
+  height: 100px;
+  overflow-y: scroll;
+}
+
+btnIcono{
+  width: 1px;
+  height: 1px;
+}

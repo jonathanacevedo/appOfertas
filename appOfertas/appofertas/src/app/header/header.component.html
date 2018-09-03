@@ -24,7 +24,7 @@
         <a class="nav-link" (click)="switchContainer('2')">Registrar Negocio</a>
       </li>
       <li class="nav-item" *ngIf="rol=='Administrador' ">
-        <a class="nav-link" href="#">Historial de Ofertas</a>
+        <a class="nav-link" (click)="switchContainer('4')" >Mis Ofertas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Información</a>
@@ -37,5 +37,6 @@
     <app-mapa *ngSwitchCase="'inicio'"></app-mapa>
     <app-registrar-negocio *ngSwitchCase="'registronegocio'"></app-registrar-negocio>
     <app-mis-negocios *ngSwitchCase="'misnegocios'"></app-mis-negocios>
+    <app-mis-ofertas *ngSwitchCase="'misofertas'"></app-mis-ofertas>
   </div>
 </section>

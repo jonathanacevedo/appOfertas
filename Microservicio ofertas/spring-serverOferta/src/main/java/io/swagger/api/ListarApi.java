@@ -49,4 +49,14 @@ public interface ListarApi {
         method = RequestMethod.GET)
     ResponseEntity<Iterable<RegistrarRequest>> listarOfertaNegocioGet(@ApiParam(value = "se recibe el id del negocio",required=true) @PathVariable("idnegocio") String idnegocio);
     
+    @CrossOrigin(origins = "*")
+    @ApiOperation(value = "buscar una oferta por la id de la oferta", nickname = "listarOfertaNegocioGet", notes = "", response = JsonApiBodyRequest.class, tags={ "ofertas", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "oferta encontrada", response = JsonApiBodyRequest.class),
+        @ApiResponse(code = 404, message = "datos imcompletos o incorrectos", response = JsonApiBodyResponseErrors.class) })
+    @RequestMapping(value = "/listar/oferta/{id}",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<Iterable<RegistrarRequest>> listarOfertaIdGet(@ApiParam(value = "se recibe el id de la oferta ",required=true) @PathVariable("id") String id);
+    
 }
