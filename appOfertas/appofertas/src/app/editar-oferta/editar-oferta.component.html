@@ -3,6 +3,8 @@
   <h1>Crear Oferta para {{nombre}}</h1>
   <br>
   <form>
+      <input type="hidden" id="txtLatitud" #lat>
+      <input type="hidden" id="txtLongitud" #lon>
     <div class="form-group">
       <label for="inputEmail4">Producto:</label>
       <input type="text" class="form-control" id="inputProducto" [(ngModel)]="producto" [ngModelOptions]="{standalone: true}" placeholder="Producto">
@@ -29,13 +31,11 @@
     <input type="text" class="form-control" id="inputFin" [(ngModel)]="fecha_fin" [ngModelOptions]="{standalone: true}" placeholder="Fecha fin">
   </div>
 </div>
-
 <!-- Línea nueva  -->
 <div class="form-group">
   <label for="inputEmail4">Detalle:</label>
   <textarea class="form-control" rows="5" id="detalle2" [(ngModel)]="detalle" [ngModelOptions]="{standalone: true}"></textarea>
 </div>
-
 <div class="container">
     <div class="card">
       <div class="card-header">

@@ -4,7 +4,9 @@
       <div style="width: 100%; height: 420px; overflow-y: scroll;">
         <div class="containerCards" *ngFor="let oferta of ofertas">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg"
+            <!-- <img class="card-img-top" src="https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg"
+              alt="Card image cap"> -->
+              <img class="card-img-top" src="{{oferta.foto}}"
               alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{oferta.producto}}</h5>
@@ -26,6 +28,10 @@
     <td>
       <div class="containerMap">
         <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
+        <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> -->
+        <agm-marker [latitude]="6.2114509" [longitude]="-75.56916660000002">
+            <agm-info-window>Prueba</agm-info-window>
+          </agm-marker>
       </div>
     </td>
   </tr>

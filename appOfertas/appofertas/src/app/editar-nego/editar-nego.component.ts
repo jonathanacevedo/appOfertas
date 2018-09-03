@@ -25,6 +25,9 @@ export class EditarNegoComponent implements OnInit {
   private detalle: string = '';
   private idnegocio: string = '';
 
+  private latitud: string = '';
+  private longitud: string = '';
+
   private idadmin: string ='';
 
   private edited: boolean = false;
@@ -51,6 +54,8 @@ export class EditarNegoComponent implements OnInit {
     this.detalle = data.detalle;   
     this.idadmin = data.idadmin; 
     this.idnegocio = data.idnegocio;
+    this.latitud = data.latitud;
+    this.longitud = data.longitud;
    }
 
   ngOnInit() {
@@ -69,7 +74,13 @@ export class EditarNegoComponent implements OnInit {
     this.dialogRef.close(this.edited);
   }
 
-  editarNegocio() { //este body está en string.
+  editarNegocio(lati: string, long: string) { //este body está en string.
+    if(lati=='' && long==''){
+      console.log('lat y lon vacios, valores sin cambio.');
+    } else {
+      this.latitud = lati;
+      this.longitud = long;
+    }
     let body = {
       "negocio": [
         {
@@ -83,10 +94,13 @@ export class EditarNegoComponent implements OnInit {
           "tipo" : this.tipo,
           "direccion" : this.direccion,
           "foto" : this.foto,
-          "detalle" : this.detalle
+          "detalle" : this.detalle,
+          "latitud" : this.latitud,
+          "longitud" : this.longitud
         }
       ]
     };
+    console.log(JSON.stringify(body));
     this.putEditarNegocio(JSON.stringify(body));
   }
 

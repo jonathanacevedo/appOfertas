@@ -101,6 +101,8 @@ export class MisNegociosComponent implements OnInit {
       nit: body.nit,
       telefono: body.telefono,
       tipo: body.tipo,
+      latitud: body.latitud,
+      longitud: body.longitud
     };
     //this.dialog.open(EditarNegoComponent, dialogConfig);
     const dialogRef = this.dialog.open(EditarNegoComponent, dialogConfig);
@@ -115,7 +117,8 @@ export class MisNegociosComponent implements OnInit {
     );    
   }
 
-  openDialogOferta(idNegocio: string, nombre: string) {
+  openDialogOferta(idNegocio: string, nombre: string, latitud: string, longitud: string) {
+    console.log(nombre+', '+latitud+' - '+longitud);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -128,7 +131,9 @@ export class MisNegociosComponent implements OnInit {
     };
     dialogConfig.data = {
       idnegocio: idNegocio,
-      nombre: nombre
+      nombre: nombre,
+      latitud: latitud,
+      longitud: longitud
     };
     this.dialog.open(CrearOfertaComponent, dialogConfig);
   }
@@ -137,7 +142,7 @@ export class MisNegociosComponent implements OnInit {
     this.openDialogEditar(body);
   }
 
-  crearOferta(idNegocio: string, nombre: string) {
-    this.openDialogOferta(idNegocio, nombre);
-  }
+  // crearOferta(idNegocio: string, nombre: string, latitud: string, longitud: string) {
+  //   this.openDialogOferta(idNegocio, nombre, latitud, longitud);
+  // }
 }

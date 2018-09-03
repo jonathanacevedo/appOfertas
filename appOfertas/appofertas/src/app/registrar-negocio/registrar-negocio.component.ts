@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { DOCUMENT } from '@angular/common'; 
 import { RegistrarPersonaService } from '../serviciosRegistro/registrar.service';
 import { AuthServiceManual } from '../authService/auth.service';
 import { Observable } from 'rxjs/Observable';
@@ -13,6 +14,8 @@ import { THIS_EXPR } from '../../../node_modules/@angular/compiler/src/output/ou
 })
 export class RegistrarNegocioComponent implements OnInit {
 
+
+
   private nit: string = '';
   private nombre: string = '';
   private correo: string = '';
@@ -24,12 +27,14 @@ export class RegistrarNegocioComponent implements OnInit {
   private detalle: string = '';
   private idadmin: string = '';
 
+  private latitud: string = '';
+  private longitud: string = '';
+
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
   uploadProgress: Observable<number>;
   private porcentaje: number;
   downloadURL: Observable<string>;
-
 
 
   constructor(private registrar: RegistrarPersonaService,
@@ -45,11 +50,17 @@ export class RegistrarNegocioComponent implements OnInit {
     this.registrar.registrarNegocio(body).subscribe((data) => {
       console.log('El servicio de registro de negocio devolvió: ' + data);
       this.limpiarCampos();
-      alert('Negocio ' + this.nombre + ' registrado correctamente.')
+      alert('Negocio registrado correctamente.')
     });
   }
 
-  registrarNegocio() {
+  asignarCoordenadas(lati: string, long: string){
+
+  }
+
+  registrarNegocio(lati: string, long: string) {
+    this.latitud = lati;
+    this.longitud = long;
     let body = {
       "negocio": [
         {
@@ -62,7 +73,9 @@ export class RegistrarNegocioComponent implements OnInit {
           "tipo": this.tipo,
           "direccion": this.direccion,
           "foto": this.foto,
-          "detalle": this.detalle
+          "detalle": this.detalle,
+          "latitud" : this.latitud,
+          "longitud" : this.longitud
         }
       ]
     };

@@ -53,6 +53,12 @@ public class RegistrarRequest   {
 
   @JsonProperty("detalle")
   private String detalle = null;
+  
+  @JsonProperty("latitud")
+  private String latitud = null;
+
+  @JsonProperty("longitud")
+  private String longitud = null;
 
   public RegistrarRequest nit(String nit) {
     this.nit = nit;
@@ -284,6 +290,48 @@ public class RegistrarRequest   {
   public void setDetalle(String detalle) {
     this.detalle = detalle;
   }
+  
+  public RegistrarRequest latitud(String latitud) {
+	    this.latitud = latitud;
+	    return this;
+	  }
+	  
+	  /**
+	   * Get latitud
+	   * @return latitud
+	  **/
+	  @ApiModelProperty(required = true, value = "")
+	  @NotNull
+
+	  @DynamoDBAttribute
+	  public String getLatitud() {
+	    return latitud;
+	  }
+
+	  public void setLatitud(String latitud) {
+	    this.latitud = latitud;
+	  }
+
+	  public RegistrarRequest longitud(String longitud) {
+	    this.longitud = longitud;
+	    return this;
+	  }
+	  
+	  /**
+	   * Get longitud
+	   * @return longitud
+	  **/
+	  @ApiModelProperty(required = true, value = "")
+	  @NotNull
+
+	  @DynamoDBAttribute
+	  public String getLongitud() {
+	    return longitud;
+	  }
+
+	  public void setLongitud(String longitud) {
+	    this.longitud = longitud;
+	  }
 
 
   @Override
@@ -305,12 +353,14 @@ public class RegistrarRequest   {
         Objects.equals(this.tipo, registrarRequest.tipo) &&
         Objects.equals(this.direccion, registrarRequest.direccion) &&
         Objects.equals(this.foto, registrarRequest.foto) &&
-        Objects.equals(this.detalle, registrarRequest.detalle);
+        Objects.equals(this.detalle, registrarRequest.detalle) &&
+        Objects.equals(this.latitud, registrarRequest.latitud) &&
+        Objects.equals(this.longitud, registrarRequest.longitud);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nit, nombre, email, idnegocio, idadmin, ciudad, telefono, tipo, direccion, foto, detalle);
+    return Objects.hash(nit, nombre, email, idnegocio, idadmin, ciudad, telefono, tipo, direccion, foto, detalle, latitud, longitud);
   }
 
   @Override
@@ -329,6 +379,8 @@ public class RegistrarRequest   {
     sb.append("    direccion: ").append(toIndentedString(direccion)).append("\n");
     sb.append("    foto: ").append(toIndentedString(foto)).append("\n");
     sb.append("    detalle: ").append(toIndentedString(detalle)).append("\n");
+    sb.append("    latitud: ").append(toIndentedString(latitud)).append("\n");
+    sb.append("    longitud: ").append(toIndentedString(longitud)).append("\n");
     sb.append("}");
     return sb.toString();
   }

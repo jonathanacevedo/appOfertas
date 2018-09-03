@@ -16,6 +16,36 @@
 </head>
 
 <body>
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> -->
+
+    <script>
+         
+    function coordenadas() {
+  
+      var geocoder = new google.maps.Geocoder();
+  
+      var direccion = document.getElementById("direccion").value +","+ "Medellín, Antioquia";
+  
+      if(document.getElementById("direccion").value == ""){
+        return;
+      }
+  
+      geocoder.geocode( { 'address': direccion}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var latitude = results[0].geometry.location.lat();
+        var longitude = results[0].geometry.location.lng();
+        document.getElementById("txtLatitud").value = latitude;
+        document.getElementById("txtLongitud").value = longitude;
+      } else {
+        alert("Ocurrio un error obteniendo su ubicación, verifica si la dirección tiene la estructura recomendada.");
+        document.getElementById("txtLatitud").value = "";
+        document.getElementById("txtLongitud").value = "";
+        return;
+      }
+      });
+  }
+  </script>
   <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
   <!-- <script>
     function loginSuccess(googleUser) {

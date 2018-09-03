@@ -22,7 +22,7 @@ export class EditarOfertaComponent implements OnInit {
   private fecha_fin: string;
   private detalle: string;
   private foto: string;
-
+  
   private edited: boolean = false;
 
   ref: AngularFireStorageReference;
@@ -44,7 +44,6 @@ export class EditarOfertaComponent implements OnInit {
     this.fecha_inicio = data.fecha_inicio;
     this.fecha_fin = data.fecha_fin;
     this.id = data.id;
-
   }
 
   ngOnInit() {

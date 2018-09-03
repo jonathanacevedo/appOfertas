@@ -29,14 +29,12 @@ export class MisOfertasComponent implements OnInit {
   getListarNegociosAdmin(): any {
     this.listarService.getNegociosAdmin(this.auth.getIdAdmin()).subscribe((data) => {
       data.forEach((item) => {
-        console.log(item);
         this.listarService.getOfertasPorIdNegocio(item.idnegocio).subscribe((data2) => {
           item.oferta = data2;
           this.negocios.push(item);
         });
       });
     });
-    console.log(this.negocios);
   }
 
   deleteEliminarOfert(body: string): any {
@@ -90,6 +88,8 @@ export class MisOfertasComponent implements OnInit {
       idnegocio: body.idnegocio,
       producto: body.producto,
       valor: body.valor,
+      latitud: body.latitud,
+      longitud: body.longitud
     };
     //this.dialog.open(EditarNegoComponent, dialogConfig);
     const dialogRef = this.dialog.open(EditarOfertaComponent, dialogConfig);

@@ -13,13 +13,15 @@ export class CrearOfertaComponent implements OnInit {
 
   private idnegocio: string = '';
   private nombre: string = '';
-  private producto: string;
-  private descuento: string;
-  private valor: string;
-  private fecha_inicio: string;
-  private fecha_fin: string;
-  private detalle: string;
-  private foto: string;
+  private producto: string = '';
+  private descuento: string = '';
+  private valor: string = '';
+  private fecha_inicio: string = '';
+  private fecha_fin: string = '';
+  private detalle: string = '';
+  private foto: string = '';
+  private latitud: string = '';
+  private longitud: string = '';
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
@@ -34,10 +36,11 @@ export class CrearOfertaComponent implements OnInit {
 
     this.idnegocio = data.idnegocio;
     this.nombre = data.nombre;
+    this.latitud = data.latitud;
+    this.longitud = data.longitud;
   }
 
   ngOnInit() {
-
   }
 
   postRegistrarOferta(body: string): void {
@@ -58,10 +61,13 @@ export class CrearOfertaComponent implements OnInit {
           "foto" : this.foto,
           "idnegocio" : this.idnegocio,
           "fecha_inicio" : this.fecha_inicio,
-          "fecha_fin" : this.fecha_fin
+          "fecha_fin" : this.fecha_fin,
+          "latitud" : this.latitud,
+          "longitud" : this.longitud
         }
       ]
     };
+    console.log('El body para enviar es: '+JSON.stringify(body));
     this.postRegistrarOferta(JSON.stringify(body));
   }
 
@@ -81,5 +87,4 @@ export class CrearOfertaComponent implements OnInit {
       })
     });
   }
-
 }

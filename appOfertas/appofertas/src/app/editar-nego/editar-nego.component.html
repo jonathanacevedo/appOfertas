@@ -3,6 +3,8 @@
   <h1>Editar Negocio {{nombre}} </h1>
   <br>
   <form>
+      <input type="hidden" id="txtLatitud" #lat>
+      <input type="hidden" id="txtLongitud" #lon>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputEmail4">Nombre:</label>
@@ -16,7 +18,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputEmail4">Dirección:</label>
-        <input type="email" class="form-control" id="inputDireccion2" [(ngModel)]="direccion" [ngModelOptions]="{standalone: true}" placeholder="Direccion">
+        <input type="email" onChange="coordenadas()" class="form-control" id="direccion" [(ngModel)]="direccion" [ngModelOptions]="{standalone: true}" placeholder="Direccion">
       </div>
       <div class="form-group col-md-6">
         <label for="inputPassword4">Email:</label>
@@ -56,6 +58,6 @@
         Archivo subido
       </div>
 <br>
-<button type="submit" (click)="editarNegocio()" class="btnDetalle">Editar Negocio</button>
+<button type="submit" (click)="editarNegocio(lat.value, lon.value)" class="btnDetalle">Editar Negocio</button>
 </form>
 </div>
