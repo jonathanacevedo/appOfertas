@@ -5,6 +5,14 @@
     text-align: center;
 }
 
+.todoContainer{
+    background-color: #FFFFFF;
+    width: 90%;
+    margin: 0 auto;
+    border-style: outset;
+}
+
+
 h1{
     font-family: Lobster;
     color: #751836;

@@ -13,6 +13,12 @@ export class ListarService {
   urlListarNegociosAdmin: string = 'http://localhost:8091/negocios/listar/admin/';
   urlListarOfertasId: string = 'http://localhost:8092/ofertas/listar/oferta/';
   urlListarOfertasIdNegocio: string = 'http://localhost:8092/ofertas/listar/negocio/';
+  urlListarNegocios: string = 'http://localhost:8091/negocios/listar';
+  urlListarNegocioPorId: string = 'http://localhost:8091/negocios/listar/';
+
+
+
+  
  
 
   constructor(public http: HttpClient) { }
@@ -49,6 +55,17 @@ export class ListarService {
     return this.http.get(this.urlListarNegociosAdmin+idAdmin);
   }
 
+
+  getNegocios(): any {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+      )};
+    return this.http.get(this.urlListarNegocios);
+  }
+
   getOfertasPorIdNegocio(idNegocio: string): any {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -58,6 +75,17 @@ export class ListarService {
       )
     };
     return this.http.get(this.urlListarOfertasIdNegocio+idNegocio);
+  }
+
+  getNegocioPorId(idnegocio: string) : any {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+      )
+    };
+    return this.http.get(this.urlListarNegocioPorId+idnegocio);
   }
 
   getOfertasPorId(id: string): any {

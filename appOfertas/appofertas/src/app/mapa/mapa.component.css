@@ -8,6 +8,13 @@ agm-map {
     width: 900px;
 }
 
+h1{
+    font-size: 1.5rem;
+    text-align: center;
+    font-family: Lobster;
+    color: #751836;
+}
+
 .containerCards{
     padding: 20px;
 }
@@ -27,6 +34,26 @@ container{
 td{
     vertical-align: top;
     background-color: beige;
+}
+
+a{
+    cursor: pointer;
+}
+
+.btnCerrar{
+    background-color: #751836;
+    color: #ffffff;
+    border: none;
+    float: right;
+    cursor: pointer;
+}
+
+.btnOfertas{
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #751836;
+    color: #FFFFFF;
 }
 
 table {

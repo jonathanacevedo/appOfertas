@@ -37,9 +37,10 @@ export class MisNegociosComponent implements OnInit {
         this.negocios.push(item);
       });
       this.activarVista = true;
-      console.log(data);
     });
   }
+
+
 
   deleteEliminarNegocio(body: string, nombre: string): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
@@ -82,12 +83,12 @@ export class MisNegociosComponent implements OnInit {
     dialogConfig.width = '55%';
     dialogConfig.height = '40%';
     dialogConfig.hasBackdrop = true;
-    dialogConfig.position = {
-      'top': '0%',
-      'right': '25px',
-      'bottom': '10%',
-      'left': '20%'
-    };
+    // dialogConfig.position = {
+    //   'top': '0%',
+    //   'right': '25px',
+    //   'bottom': '10%',
+    //   'left': '20%'
+    // };
 
     dialogConfig.data = {
       nombre: body.nombre,
@@ -104,7 +105,6 @@ export class MisNegociosComponent implements OnInit {
       latitud: body.latitud,
       longitud: body.longitud
     };
-    //this.dialog.open(EditarNegoComponent, dialogConfig);
     const dialogRef = this.dialog.open(EditarNegoComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe((data) =>  {
@@ -125,10 +125,10 @@ export class MisNegociosComponent implements OnInit {
     dialogConfig.width = '55%';
     dialogConfig.height = '40%';
     dialogConfig.hasBackdrop = true;
-    dialogConfig.position = {
-      'right': '25px',
-      'left': '20%'
-    };
+    // dialogConfig.position = {
+    //   'right': '25px',
+    //   'left': '20%'
+    // };
     dialogConfig.data = {
       idnegocio: idNegocio,
       nombre: nombre,
@@ -142,7 +142,4 @@ export class MisNegociosComponent implements OnInit {
     this.openDialogEditar(body);
   }
 
-  // crearOferta(idNegocio: string, nombre: string, latitud: string, longitud: string) {
-  //   this.openDialogOferta(idNegocio, nombre, latitud, longitud);
-  // }
 }

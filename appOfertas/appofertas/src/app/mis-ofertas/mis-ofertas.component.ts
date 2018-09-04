@@ -71,12 +71,12 @@ export class MisOfertasComponent implements OnInit {
     dialogConfig.width = '55%';
     dialogConfig.height = '40%';
     dialogConfig.hasBackdrop = true;
-    dialogConfig.position = {
-      'top': '0%',
-      'right': '25px',
-      'bottom': '10%',
-      'left': '20%'
-    };
+    // dialogConfig.position = {
+    //   'top': '0%',
+    //   'right': '25px',
+    //   'bottom': '10%',
+    //   'left': '20%'
+    // };
 
     dialogConfig.data = {
       descuento: body.descuento,

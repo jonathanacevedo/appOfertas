@@ -3,13 +3,12 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-import { AgmCoreModule } from '@agm/core';
+import { FormsModule } from '@angular/forms'; // <-- NgModel
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
-
 
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
@@ -42,6 +41,7 @@ import { EditarNegoComponent } from './editar-nego/editar-nego.component';
 import { CrearOfertaComponent } from './crear-oferta/crear-oferta.component';
 import { MisOfertasComponent } from './mis-ofertas/mis-ofertas.component';
 import { EditarOfertaComponent } from './editar-oferta/editar-oferta.component';
+import { VerNegocioComponent } from './ver-negocio/ver-negocio.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -89,7 +89,8 @@ export function provideConfig() {
     EditarNegoComponent,
     CrearOfertaComponent,
     MisOfertasComponent,
-    EditarOfertaComponent
+    EditarOfertaComponent,
+    VerNegocioComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -119,13 +120,14 @@ export function provideConfig() {
     MatGridListModule,
     MatCardModule,
     MatDialogModule
-  ],
-  entryComponents: [EditarNegoComponent, CrearOfertaComponent, EditarOfertaComponent],
+    ],
+  entryComponents: [EditarNegoComponent, CrearOfertaComponent, EditarOfertaComponent, VerNegocioComponent],
   providers: [
     ListarService,
     RegistrarPersonaService,
     EliminarService,
     EditarService,
+    GoogleMapsAPIWrapper,
     AuthServiceManual,
     {
       provide: AuthServiceConfig,

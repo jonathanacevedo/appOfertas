@@ -1,37 +1,51 @@
 <table cellspacing="0" cellpadding="0">
   <tr>
     <td>
-      <div style="width: 100%; height: 420px; overflow-y: scroll;">
-        <div class="containerCards" *ngFor="let oferta of ofertas">
+      <div style="width: 100%; height: 420px; overflow-y: scroll;" #scrolling>
+        <h1>{{nombreNegocio}}</h1>
+        <div class="containerCards" *ngFor="let oferta of ofertas; let i index">
           <div class="card" style="width: 18rem;">
             <!-- <img class="card-img-top" src="https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg"
               alt="Card image cap"> -->
-              <img class="card-img-top" src="{{oferta.foto}}"
-              alt="Card image cap">
+            <img class="card-img-top" src="{{oferta.foto}}" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">{{oferta.producto}}</h5>
+              <h5 class="card-title"> {{oferta.producto}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">Descuento del {{oferta.descuento}}%</h6>
               <p class="card-text">{{oferta.detalle}}</p>
-              <a href="#" class="card-link" style="color: #60132c;
+              <p class="card-tex" style="font-style: italic; color:gray;" >{{oferta.fecha_inicio}} 
+                - {{oferta.fecha_fin}}
+              </p>
+              <a (click)="apuntar(i.latitud, i.longitud)" class="card-link" style="color: #60132c;
                  font-family: Lobster; font-size: 1.1rem;">
                 <img src="../../assets/imagenes/marcador2.png" alt=""> Ubicar
               </a>
-              <a href="#" class="card-link" style="color: #751836;
+              <a (click)="verNegocio(i.idnegocio)" class="card-link" style="color: #751836;
                  font-family: Lobster; font-size: 1.1rem;">
                 <img src="../../assets/imagenes/negocio.png" alt=""> Negocio
               </a>
             </div>
           </div>
         </div>
+          <button type="submit" (click)="mostrarTodas()" *ngIf="nombreNegocio!=='Todas'" class="btnCerrar">Mostrar Todas</button>
       </div>
     </td>
     <td>
       <div class="containerMap">
-        <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
-        <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> -->
-        <agm-marker [latitude]="6.2114509" [longitude]="-75.56916660000002">
-            <agm-info-window>Prueba</agm-info-window>
-          </agm-marker>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (onMapLoad)='loadAPIWrapper($event)'>
+          <div *ngFor="let negocio of negocios; let i index">
+            <agm-marker [latitude]="+negocio.latitud" [longitude]="+negocio.longitud">
+              <agm-info-window>
+                <div style="text-align: center;">
+                  <strong>{{negocio.nombre}}</strong>
+                  <br> {{negocio.tipo}}
+                  <br>
+                  <button class="btnOfertas" (click)="listarOfertas(i.idnegocio, i.nombre)">Ver Ofertas</button>
+                </div>
+              </agm-info-window>
+            </agm-marker>
+          </div>
+        </agm-map>
+
       </div>
     </td>
   </tr>
