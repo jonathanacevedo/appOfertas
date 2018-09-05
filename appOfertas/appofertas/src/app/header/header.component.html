@@ -12,18 +12,18 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav" style="font-size: 1.2rem;">
-      <li class="nav-item active">
+      <li class="nav-item {{activaI}}">
         <a class="nav-link" (click)="switchContainer('1')">Inicio
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item" *ngIf="rol=='Administrador' ">
+      <li class="nav-item {{activaN}}" *ngIf="rol=='Administrador' ">
         <a class="nav-link" (click)="switchContainer('3')" >Mis Negocios</a>
       </li>
-      <li class="nav-item" *ngIf="rol=='Administrador' ">
+      <li class="nav-item {{activaR}}"  *ngIf="rol=='Administrador' ">
         <a class="nav-link" (click)="switchContainer('2')">Registrar Negocio</a>
       </li>
-      <li class="nav-item" *ngIf="rol=='Administrador' ">
+      <li class="nav-item {{activaO}}" *ngIf="rol=='Administrador' ">
         <a class="nav-link" (click)="switchContainer('4')" >Mis Ofertas</a>
       </li>
       <li class="nav-item">
@@ -31,6 +31,10 @@
       </li>
     </ul>
   </div>
+  <div style="float: right;">
+      <a (click)="cerrarSesion()">Cerrar Sesion</a>
+      <img src="../../assets/imagenes/iconSesion.png" style="padding: 4px;" alt="cerrarSesion">
+     </div>
 </nav>
 <section>
   <div [ngSwitch]="currentContainer">

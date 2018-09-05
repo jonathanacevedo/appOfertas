@@ -1,0 +1,27 @@
+<div class="animate-bottom">
+    <table>
+      <tr>
+        <th>Nit</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Ciudad</th>
+        <th>Dirección</th>
+        <th>Foto</th>
+      </tr>
+      <tr *ngFor="let negocio of negocios; let i index">
+        <td><input type="text" [(ngModel)]="negocio.nit"></td>
+        <td><input type="text" [(ngModel)]="negocio.nombre"></td>
+        <td><input type="text" [(ngModel)]="negocio.email"></td>
+        <td><input type="text" [(ngModel)]="negocio.telefono"></td>
+        <td><input type="text" [(ngModel)]="negocio.ciudad"></td>
+        <td><input type="text" [(ngModel)]="negocio.direccion"></td>
+        <td>
+          <input type="text" [(ngModel)]="negocio.foto">
+          <button (click)="verFoto(i.foto)">Ver</button>
+        </td>
+        <td style="text-align: center;"><button class="btnDetalle" (click)="editarNegocio(i)" >Editar</button></td>
+        <td style="text-align: center;"><button class="btnDetalle" (click)="eliminarNegocio(i.idnegocio, i.nombre)" >Eliminar</button></td>
+      </tr>
+    </table>
+    </div>

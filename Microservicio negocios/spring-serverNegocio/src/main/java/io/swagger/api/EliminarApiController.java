@@ -50,13 +50,8 @@ public class EliminarApiController implements EliminarApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-            	RegistrarRequest negocioB = repo.findOne(body.getNegocio().get(0).getIdnegocio());
-            	if(negocioB.getIdadmin().equals(body.getNegocio().get(0).getParametro())) {
             		repo.delete(body.getNegocio().get(0).getIdnegocio());
             		return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \"estado\",  \"id\" : \"id\",  \"nombre\" : \"nombre\"}", JsonApiBodyResponseSuccess.class), HttpStatus.ACCEPTED);
-            	} else {
-            		System.out.println("La persona no es el administrador del negocio");
-            	}
             	//repo.delete(body.getNegocio().get(0).getIdnegocio());
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);

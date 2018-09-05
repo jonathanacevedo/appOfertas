@@ -42,6 +42,11 @@ import { CrearOfertaComponent } from './crear-oferta/crear-oferta.component';
 import { MisOfertasComponent } from './mis-ofertas/mis-ofertas.component';
 import { EditarOfertaComponent } from './editar-oferta/editar-oferta.component';
 import { VerNegocioComponent } from './ver-negocio/ver-negocio.component';
+import { SuperHeaderComponent } from './super-header/super-header.component';
+import { SuperpersonasComponent } from './superpersonas/superpersonas.component';
+import { SupernegociosComponent } from './supernegocios/supernegocios.component';
+import { SuperofertasComponent } from './superofertas/superofertas.component';
+import { VerfotoComponent } from './verfoto/verfoto.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -90,7 +95,12 @@ export function provideConfig() {
     CrearOfertaComponent,
     MisOfertasComponent,
     EditarOfertaComponent,
-    VerNegocioComponent
+    VerNegocioComponent,
+    SuperHeaderComponent,
+    SuperpersonasComponent,
+    SupernegociosComponent,
+    SuperofertasComponent,
+    VerfotoComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -121,7 +131,7 @@ export function provideConfig() {
     MatCardModule,
     MatDialogModule
     ],
-  entryComponents: [EditarNegoComponent, CrearOfertaComponent, EditarOfertaComponent, VerNegocioComponent],
+  entryComponents: [EditarNegoComponent, CrearOfertaComponent, VerfotoComponent, EditarOfertaComponent, VerNegocioComponent],
   providers: [
     ListarService,
     RegistrarPersonaService,

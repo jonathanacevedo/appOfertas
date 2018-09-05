@@ -1,0 +1,22 @@
+<div class="animate-bottom">
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Apellidos</th>
+    <th>Correo</th>
+    <th>Teléfono</th>
+    <th>Genero</th>
+    <th>Rol</th>
+  </tr>
+  <tr *ngFor="let persona of personas; let i index">
+    <td><input type="text" [(ngModel)]="persona.nombre"></td>
+    <td><input type="text" [(ngModel)]="persona.apellidos"></td>
+    <td><input type="text" [(ngModel)]="persona.correo"></td>
+    <td><input type="text" [(ngModel)]="persona.telefono"></td>
+    <td><input type="text" [(ngModel)]="persona.genero"></td>
+    <td><input type="text" [(ngModel)]="persona.rol"></td>
+    <td style="text-align: center;"><button class="btnDetalle" (click)="editarPersona(i)" >Editar</button></td>
+    <td style="text-align: center;"><button class="btnDetalle" (click)="eliminarPersona(i.id, i.nombre)" >Eliminar</button></td>
+  </tr>
+</table>
+</div>

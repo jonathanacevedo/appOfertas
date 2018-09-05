@@ -1,0 +1,30 @@
+@font-face {
+    font-family: Lobster;
+    src: url("../../assets/fuentes/Lobster.otf") format("opentype");
+}
+
+.logoNavBar{
+    width: 8%;
+    height: 8%;
+}
+
+.imgHeader{
+    background-color: #253f3f;
+    width: 12%;
+    height: 130%;
+}
+
+.divImgHeader{
+    height: 100px;
+    background-color: #253f3f;
+    text-align: center;
+}
+
+a{
+    cursor: pointer;
+}
+
+section {
+    height: 100%;
+    width: 100%;
+}

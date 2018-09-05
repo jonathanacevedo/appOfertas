@@ -1,0 +1,24 @@
+<div class="animate-bottom">
+  <table>
+    <tr>
+      <th>Producto</th>
+      <th>Descuento</th>
+      <th>Detalle</th>
+      <th>Fecha de inicio</th>
+      <th>Fecha fin</th>
+    </tr>
+    <tr *ngFor="let oferta of ofertas; let i index">
+      <td><input type="text" [(ngModel)]="oferta.producto"></td>
+      <td><input type="text" [(ngModel)]="oferta.descuento"></td>
+      <td><input type="text" [(ngModel)]="oferta.detalle"></td>
+      <td><input type="text" [(ngModel)]="oferta.fecha_inicio"></td>
+      <td><input type="text" [(ngModel)]="oferta.fecha_fin"></td>
+      <td>
+          <input type="text" [(ngModel)]="oferta.foto">
+          <button (click)="verFoto(i.foto)">Ver</button>
+      </td>
+      <td style="text-align: center;"><button class="btnDetalle" (click)="editarOferta(i)" >Editar</button></td>
+      <td style="text-align: center;"><button class="btnDetalle" (click)="eliminarOferta(i.id, i.idnegocio, i.producto)" >Eliminar</button></td>
+    </tr>
+  </table>
+</div>

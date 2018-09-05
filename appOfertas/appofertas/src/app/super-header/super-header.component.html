@@ -1,0 +1,43 @@
+<div class="divImgHeader">
+  <img class="imgHeader" src="../../assets/imagenes/logoOfertAppSuper.png" alt="logoImg">
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2f4f4f; color: #FFFFFF; font-family: Lobster;">
+  <a class="navbar-brand" style="font-size: 1.5rem;" href="/">
+    OfertApp
+  </a>
+  <!-- <img class="logoNavBar" src="../../assets/imagenes/logoOfertApp.png" alt="LogoMenu"> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav" style="font-size: 1.2rem;">
+      <li class="nav-item {{activaP}}">
+        <a class="nav-link" (click)="switchContainer('1')">Personas
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item {{activaN}}">
+        <a class="nav-link" (click)="switchContainer('2')">Negocios</a>
+      </li>
+      <li class="nav-item {{activaO}}">
+        <a class="nav-link" (click)="switchContainer('3')">Ofertas</a>
+      </li>
+      <li class="nav-item {{activaI}}">
+        <a class="nav-link" href="#">Información</a>
+      </li>
+    </ul>
+  </div>
+  <div style="float: right;">
+   <a (click)="cerrarSesion()">Cerrar Sesion</a>
+   <img src="../../assets/imagenes/iconSesion.png" style="padding: 4px;" alt="cerrarSesion">
+  </div>
+</nav>
+<section>
+  <div [ngSwitch]="currentContainer">
+    <app-mapa *ngSwitchCase="'inicio'"></app-mapa>
+    <app-superpersonas *ngSwitchCase="'personas'"></app-superpersonas>
+    <app-supernegocios *ngSwitchCase="'negocios'"></app-supernegocios>
+    <app-superofertas *ngSwitchCase="'ofertas'"></app-superofertas>
+  </div>
+</section>

@@ -47,13 +47,6 @@ export class LoginComponent implements OnInit {
         console.log('No esta logueado');
       }
     });
-
-    //console.log('Estado de Auth: '+localStorage.getItem('estadoAuth'));
-    // var nombreUsuario = localStorage.getItem('nombreUsuario');
-    // var idUsuario = localStorage.getItem('idUsuario');
-    // var emailUsuario = localStorage.getItem('emailUsuario');
-    // var fotoUsuario = localStorage.getItem('fotoUsuario');
-    // console.log("Datos "+nombreUsuario);
   }
 
   postRegistrarPersona(body: string): void {

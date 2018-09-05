@@ -51,14 +51,8 @@ public class EditarApiController implements EditarApi {
         if (accept != null && accept.contains("application/json")) {
             try {
             	//repo.findOne(body.getPersona().get(0).getId()).getNombre();
-            	RegistrarRequest usuario = repo.findOne(body.getPersona().get(0).getId());
-            	if(usuario.getRol().equals("cliente")) {
-            		System.out.println("El usuario "+usuario.getNombre()+" es un cliente");
             		repo.delete(repo.findOne(body.getPersona().get(0).getId()));
                 	repo.save(body.getPersona().get(0));
-            	} else {
-            		System.out.println("El usuario "+usuario.getNombre()+" no es un cliente");
-            	}
                 return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \"estado\",  \"id\" : \"id\",  \"nombre\" : \"nombre\"}", JsonApiBodyResponseSuccess.class), HttpStatus.ACCEPTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
