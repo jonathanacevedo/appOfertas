@@ -5,11 +5,15 @@
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" style="border: 2px solid #751836; padding: 10px; border-radius: 2px 2px;" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
          <h1 class="labelTitulo">Tipo de Negocio</h1>
           <div class="form-group col-md-6" style="padding-top: 10px;">
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" [(ngModel)]="todas1" value="option4">
+                  <label class="form-check-label" for="inlineCheckbox1">Todos</label>
+                </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" [(ngModel)]="Restaurante" >
               <label class="form-check-label" for="inlineCheckbox1">Restaurante</label>
@@ -19,12 +23,10 @@
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" [(ngModel)]="Bar">
                 <label class="form-check-label" for="inlineCheckbox2">Bar</label>
               </div>
-
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" [(ngModel)]="Hotel">
               <label class="form-check-label" for="inlineCheckbox2">Hotel</label>
             </div>
-
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" [(ngModel)]="Almacen">
               <label class="form-check-label" for="inlineCheckbox3">Almacen</label>
@@ -40,7 +42,7 @@
             <h1 class="labelTitulo">Tipo de Oferta</h1>
             <div class="form-group col-md-6" style=" padding-top: 10px;">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option4">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" [(ngModel)]="todas2" value="option4">
                 <label class="form-check-label" for="inlineCheckbox1">Todas</label>
               </div>
               <div class="form-check form-check-inline">
@@ -51,7 +53,6 @@
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox7" [(ngModel)]="Promocion" value="option6">
                 <label class="form-check-label" for="inlineCheckbox3">Promocion</label>
               </div>
-
             </div>
         </li>
       </ul>
@@ -66,25 +67,3 @@
     </div>
   </nav>
 </div>
-
-<!-- <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav" style="font-size: 1.2rem;">
-      <li class="nav-item">
-        <a class="nav-link">Inicio
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Mis Negocios</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Registrar Negocio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Mis Ofertas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Información</a>
-      </li>
-    </ul>
-  </div> -->

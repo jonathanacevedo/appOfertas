@@ -1,0 +1,59 @@
+<div class="todoContainer">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0px; width: 50%;">
+      <!-- <a class="navbar-brand" href="#">Filtros</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" style="border: 2px solid #751836; padding: 10px; border-radius: 2px 2px;" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown" style="padding-left: 20%;">
+           <h1 class="labelTitulo">Mostrar Ofertas</h1>
+            <div class="form-group col-md-6" style="padding-top: 10px;">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" [(ngModel)]="Todas1" >
+                <label class="form-check-label" for="inlineCheckbox1">Todas</label>
+              </div>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" [(ngModel)]="Vigentes">
+                  <label class="form-check-label" for="inlineCheckbox2">Vigentes</label>
+                </div>
+  
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" [(ngModel)]="Vencidas">
+                <label class="form-check-label" for="inlineCheckbox2">Vencidas</label>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown" style="padding-left: 20%;">
+             <h1 class="labelTitulo">Tipo de Oferta</h1>
+              <div class="form-group col-md-6" style="padding-top: 10px;">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" [(ngModel)]="Todas2" >
+                  <label class="form-check-label" for="inlineCheckbox1">Todas</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" [(ngModel)]="Descuento">
+                    <label class="form-check-label" for="inlineCheckbox2">Descuentos</label>
+                  </div>
+    
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" [(ngModel)]="Promocion">
+                  <label class="form-check-label" for="inlineCheckbox2">Promocion</label>
+                </div>
+              </div>
+            </li>
+          </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <div style="padding-right: 80px;">
+          <button class="btnDetalle" type="submit" (click)="aplicarFiltros()">Aplicar Filtros</button>
+        </div>
+          <span style="padding: 10px;">
+            <button class="btnDetalle" (click)="cerrarDialog()" style="padding: 10px 17px 10px 17px;" type="button">Cancelar</button>
+          </span>
+        </form>
+      </div>
+    </nav>
+  </div>

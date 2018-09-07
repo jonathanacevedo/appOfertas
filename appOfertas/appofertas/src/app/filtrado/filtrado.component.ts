@@ -24,6 +24,8 @@ export class FiltradoComponent implements OnInit {
 
   private Descuento: boolean = false;
   private Promocion: boolean = false;
+  private todas1: boolean = false;
+  private todas2: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   private dialogRef: MatDialogRef<FiltradoComponent>) {}
@@ -34,6 +36,7 @@ export class FiltradoComponent implements OnInit {
 
   aplicarFiltros(){
     this.filtroNegocio= [];
+    this.todas1==true ? this.filtroNegocio.push('Todas') : null;
       this.Restaurante==true ? this.filtroNegocio.push('Restaurante') : null;
       this.Hotel==true ? this.filtroNegocio.push('Hotel') : null;
       this.Bar==true ? this.filtroNegocio.push('Bar') : null;
@@ -41,6 +44,7 @@ export class FiltradoComponent implements OnInit {
       this.Otro==true ? this.filtroNegocio.push('Otro') : null;
     
     this.filtroOferta = [];
+    this.todas2==true ? this.filtroOferta.push('Todas') : null;
       this.Descuento==true ? this.filtroOferta.push('Descuento') : null;
       this.Promocion==true ? this.filtroOferta.push('Promocion') : null; 
 

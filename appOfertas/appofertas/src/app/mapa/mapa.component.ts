@@ -25,7 +25,6 @@ export class MapaComponent implements OnInit {
   private zoom: number = 12;
 
   fecha: Date = new Date();
-  fechaOferta: Date = new Date();
 
   dia: number;
   mes: number;
@@ -46,7 +45,6 @@ export class MapaComponent implements OnInit {
     this.scrolling.nativeElement.scrollTo(0, 0);
     this.nombreNegocio = 'Todas';
     this.getListarOfertasNegocios();
-    //this.getListaOfertas();
   }
 
   apuntar(lat: number, lon: number) {
@@ -80,8 +78,9 @@ export class MapaComponent implements OnInit {
     this.dialog.open(VerNegocioComponent, dialogConfig);
   }
 
-  getListarOfertasNegocios(): any {
+  getListarOfertasNegocios() {
     this.listar.getNegocios().subscribe((data) => {
+      this.ofertas = [];
       data.forEach((item) => {
         this.listar.getOfertasPorIdNegocio(item.idnegocio).subscribe((data2) => {
           if (data2.length > 0) {
@@ -103,15 +102,15 @@ export class MapaComponent implements OnInit {
     this.listar.getNegocios().subscribe((data) => {
       data.forEach((negocios) => {
         for (let i = 0; i < filtros[0].length; i++) {
-          if (negocios.tipo == filtros[0][i]) {
+          if (negocios.tipo == filtros[0][i] || filtros[0] == 'Todas') {
             this.listar.getOfertasPorIdNegocio(negocios.idnegocio).subscribe((data2) => {
               if (data2.length > 0) {
                 data2.forEach((oferta) => {
                   for (let j = 0; j < filtros[1].length; j++) {
-                    if (oferta.tipo == filtros[1][j]) {
+                    if (oferta.tipo == filtros[1][j] || filtros[1] == 'Todas') {
                       if (this.compararFechas(oferta.fecha_fin)) {  //true: activo
                         this.negocios.push(negocios);
-                        this.ofertas.push(oferta)
+                        this.ofertas.push(oferta);
                       }
                     }
                   }
@@ -142,7 +141,6 @@ export class MapaComponent implements OnInit {
 
   getListarOfertasNegocio(idnegocio: string): void {
     this.listar.getOfertasPorIdNegocio(idnegocio).subscribe((data) => {
-      console.log(data);
       this.ofertas = [];
       data.forEach((ofertaNegocio) => {
         this.ofertas.push(ofertaNegocio)
@@ -189,7 +187,10 @@ export class MapaComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       this.filtros = data;
       console.log(data);
-      if (this.filtros.length !== 0) {
+      if (this.filtros[0].length == 0 || this.filtros[1].length == 0) {
+        this.ofertas = [];
+        this.getListarOfertasNegocios();
+      } else {
         this.filtrarNegocios(this.filtros);
       }
     });

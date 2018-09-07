@@ -77,5 +77,4 @@ public class EditarApiController implements EditarApi {
 
         return new ResponseEntity<JsonApiBodyResponseSuccess>(HttpStatus.NOT_IMPLEMENTED);
     }
-
 }

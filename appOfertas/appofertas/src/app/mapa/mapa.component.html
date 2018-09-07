@@ -1,4 +1,8 @@
-<table cellspacing="0" cellpadding="0">
+<div *ngIf="cargando">
+  <img src="../../assets/imagenes/cargando.gif" alt="">
+</div>
+<div *ngIf="!cargando">
+<table cellspacing="0" cellpadding="0" class="animate-bottom">
   <tr>
     <td>
       <div style="width: 100%; height: 420px; overflow-y: scroll;" #scrolling>
@@ -7,7 +11,7 @@
             <img src="../../assets/imagenes/filtrar.png" alt="iconoFiltrar">
           </button>
         </h1>
-        <div class="containerCards" *ngFor="let oferta of ofertas; let i index">
+        <div class="containerCards" *ngFor="let oferta of ofertas; let i index" style="transition: 1s;  ">
           <div class="card" style="width: 18rem;">
             <!-- <img class="card-img-top" src="https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg"
               alt="Card image cap"> -->
@@ -54,3 +58,4 @@
     </td>
   </tr>
 </table>
+</div>
