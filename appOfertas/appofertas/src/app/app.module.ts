@@ -47,6 +47,7 @@ import { SuperpersonasComponent } from './superpersonas/superpersonas.component'
 import { SupernegociosComponent } from './supernegocios/supernegocios.component';
 import { SuperofertasComponent } from './superofertas/superofertas.component';
 import { VerfotoComponent } from './verfoto/verfoto.component';
+import { FiltradoComponent } from './filtrado/filtrado.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -100,7 +101,8 @@ export function provideConfig() {
     SuperpersonasComponent,
     SupernegociosComponent,
     SuperofertasComponent,
-    VerfotoComponent
+    VerfotoComponent,
+    FiltradoComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -131,7 +133,7 @@ export function provideConfig() {
     MatCardModule,
     MatDialogModule
     ],
-  entryComponents: [EditarNegoComponent, CrearOfertaComponent, VerfotoComponent, EditarOfertaComponent, VerNegocioComponent],
+  entryComponents: [EditarNegoComponent, CrearOfertaComponent, VerfotoComponent, FiltradoComponent,EditarOfertaComponent, VerNegocioComponent],
   providers: [
     ListarService,
     RegistrarPersonaService,

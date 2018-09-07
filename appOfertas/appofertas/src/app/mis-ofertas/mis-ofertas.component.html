@@ -25,7 +25,8 @@
               <div class="card-body">
                 <h5 class="card-title">{{ofert.producto}}</h5>
                 <br>
-                <h6 class="card-subtitle mb-2 text-muted">Descuento del {{ofert.descuento}}%</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ofert.tipo}} de
+                   {{ofert.descuento}}<span *ngIf="ofert.tipo=='Descuento'">%</span></h6>
               <p class="card-text">{{ofert.detalle}}</p>
               <p class="card-tex" style="font-style: italic; color:gray;" >{{ofert.fecha_inicio}} 
                   - {{ofert.fecha_fin}}

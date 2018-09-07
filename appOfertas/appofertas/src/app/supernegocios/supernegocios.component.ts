@@ -36,18 +36,26 @@ export class SupernegociosComponent implements OnInit {
 
   putEditarNegocio(body: string): void {
     this.editarService.putEditarNegocio(body).subscribe((data) => {
-      console.log(data)
-      alert('Negocio actualizado correctamente')
+      console.log(data);
+      alert('Negocio actualizado correctamente');
     });
   }
 
   deleteEliminarNegocio(body: any): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
-      console.log(data);
-      this.negocios = [];
-    });
-    alert('Negocio eliminado correctamente')
+      if(data.body!==undefined){
+        console.log(data.body.id);
+        this.listar.getOfertasPorIdNegocio(data.body.id).subscribe((oferta) => {
+          oferta.forEach((ofert) => {
+            this.eliminarOferta(ofert.id, data.body.id, ''); 
+          })
+        }
+        );
+      }
 
+    });
+    this.negocios = [];
+    alert('Negocio eliminado correctamente')
     this.getNegocios();
   }
 
@@ -87,6 +95,25 @@ export class SupernegociosComponent implements OnInit {
       }
       this.deleteEliminarNegocio(JSON.stringify(body));
     }
+  }
+
+  deleteEliminarOferta(body: string): void {
+    this.eliminarService.deleteEliminarOferta(body).subscribe((data) => {
+      console.log(data);
+    });
+  }
+
+  eliminarOferta(id: string, idnegocio: string, producto: string) {
+      let body = {
+        "oferta" : [
+          {
+            "id": id,
+            "parametro": idnegocio
+          }
+        ]
+      };
+      console.log('Body para borrar: '+JSON.stringify(body));
+      this.deleteEliminarOferta(JSON.stringify(body));
   }
 
  verFoto(url: string) {

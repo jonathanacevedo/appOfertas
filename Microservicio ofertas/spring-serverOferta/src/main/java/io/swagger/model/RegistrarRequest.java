@@ -53,6 +53,9 @@ public class RegistrarRequest   {
 
   @JsonProperty("longitud")
   private String longitud = null;
+  
+  @JsonProperty("tipo")
+  private String tipo = null;
 
 
   public RegistrarRequest id(String id) {
@@ -287,6 +290,27 @@ public class RegistrarRequest   {
 	  public void setLongitud(String longitud) {
 	    this.longitud = longitud;
 	  }
+	  
+	  public RegistrarRequest tipo(String tipo) {
+		    this.tipo = tipo;
+		    return this;
+		  }
+		  
+		  /**
+		   * Get longitud
+		   * @return longitud
+		  **/
+		  @ApiModelProperty(required = true, value = "")
+		  @NotNull
+
+		  @DynamoDBAttribute
+		  public String getTipo() {
+		    return tipo;
+		  }
+
+		  public void setTipo(String tipo) {
+		    this.tipo = tipo;
+		  }
 
 
 
@@ -309,12 +333,13 @@ public class RegistrarRequest   {
         Objects.equals(this.fechaInicio, registrarRequest.fechaInicio) &&
         Objects.equals(this.fechaFin, registrarRequest.fechaFin) &&
         Objects.equals(this.latitud, registrarRequest.latitud) &&
-        Objects.equals(this.longitud, registrarRequest.longitud);
+        Objects.equals(this.longitud, registrarRequest.longitud) &&
+        Objects.equals(this.tipo, registrarRequest.tipo);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, producto, detalle, valor, descuento, foto, idnegocio, fechaInicio, fechaFin, latitud, longitud);
+    return Objects.hash(id, producto, detalle, valor, descuento, foto, idnegocio, fechaInicio, fechaFin, latitud, longitud, tipo);
   }
 
   @Override
@@ -332,6 +357,7 @@ public class RegistrarRequest   {
     sb.append("    fechaFin: ").append(toIndentedString(fechaFin)).append("\n");
     sb.append("    latitud: ").append(toIndentedString(latitud)).append("\n");
     sb.append("    longitud: ").append(toIndentedString(longitud)).append("\n");
+    sb.append("    tipo: ").append(toIndentedString(tipo)).append("\n");
 
     sb.append("}");
     return sb.toString();

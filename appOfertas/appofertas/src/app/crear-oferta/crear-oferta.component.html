@@ -9,16 +9,26 @@
       <input type="text" class="form-control" id="inputProducto" [(ngModel)]="producto" [ngModelOptions]="{standalone: true}" placeholder="Producto">
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputEmail4">Descuento %:</label>
-        <input type="text" class="form-control" id="inputDescuento" [(ngModel)]="descuento" [ngModelOptions]="{standalone: true}"
-          placeholder="Descuento">
+        <div class="form-group col-md-4">
+          <label for="inputState">Tipo de oferta:</label>
+          <select id="inputTipo2" class="form-control" [(ngModel)]="tipo" [ngModelOptions]="{standalone: true}">
+            <option>Descuento</option>
+            <option>Promocion</option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">Oferta
+            <span *ngIf="tipo=='Descuento'"> %</span>
+             <span style="color: grey;" *ngIf="tipo=='Promocion'">Ej. 2x1..</span>
+            :
+          </label>
+          <input type="text" class="form-control" id="inputValor" [(ngModel)]="descuento" [ngModelOptions]="{standalone: true}" placeholder="Oferta">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">Valor:</label>
+          <input type="text" class="form-control" id="inputValor" [(ngModel)]="valor" [ngModelOptions]="{standalone: true}" placeholder="Valor">
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">Valor:</label>
-        <input type="text" class="form-control" id="inputValor" [(ngModel)]="valor" [ngModelOptions]="{standalone: true}" placeholder="Valor">
-      </div>
-    </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputEmail4">Fecha de Inicio:</label>

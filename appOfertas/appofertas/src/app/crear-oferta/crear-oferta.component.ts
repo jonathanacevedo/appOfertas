@@ -22,6 +22,7 @@ export class CrearOfertaComponent implements OnInit {
   private foto: string = '';
   private latitud: string = '';
   private longitud: string = '';
+  private tipo: string = '';
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
@@ -63,7 +64,8 @@ export class CrearOfertaComponent implements OnInit {
           "fecha_inicio" : this.fecha_inicio,
           "fecha_fin" : this.fecha_fin,
           "latitud" : this.latitud,
-          "longitud" : this.longitud
+          "longitud" : this.longitud,
+          "tipo" : this.tipo
         }
       ]
     };

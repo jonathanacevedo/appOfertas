@@ -1,27 +1,18 @@
-.containerForm{
-    padding: 20px;
-    margin: auto;
-    width: 50%;
-    text-align: center;
+@font-face {
+    font-family: Lobster;
+    src: url("../../assets/fuentes/Lobster.otf") format("opentype");
 }
 
 .todoContainer{
-    background-color: #FFFFFF;
-    width: 90%;
-    margin: 0 auto;
+    width: 140%;
+    /* margin: 0 auto; */
 }
 
-h1{
+.labelTitulo{
     font-family: Lobster;
+    font-size: 1.2rem; 
+    padding: 10px 0px 0px 10px;
     color: #751836;
-}
-
-.btnCerrar{
-    background-color: #751836;
-    color: #ffffff;
-    border: none;
-    float: right;
-    cursor: pointer;
 }
 
 .btnDetalle{

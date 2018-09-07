@@ -63,6 +63,7 @@ public class EditarApiController implements EditarApi {
             		ofertaObj.setIdnegocio(oferta.getIdnegocio());
             		ofertaObj.setProducto(oferta.getProducto());
             		ofertaObj.setValor(oferta.getValor());
+            		ofertaObj.setTipo(oferta.getTipo());
                 	repo.save(ofertaObj);
             	} else {
             		System.out.println("Esta oferta no pertenece a ese negocio");

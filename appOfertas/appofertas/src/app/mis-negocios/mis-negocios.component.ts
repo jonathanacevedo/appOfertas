@@ -44,12 +44,38 @@ export class MisNegociosComponent implements OnInit {
 
   deleteEliminarNegocio(body: string, nombre: string): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
-      console.log('Datos devueltos del eliminar negocio: ' + data);
+      if(data.body!==undefined){
+        console.log(data.body.id);
+        this.listarService.getOfertasPorIdNegocio(data.body.id).subscribe((oferta) => {
+          oferta.forEach((ofert) => {
+            this.eliminarOferta(ofert.id, data.body.id, ''); 
+          })
+        }
+        );
+      }
     });
-    alert('Negocio eliminado '+nombre+' correctamente.');
     this.negocios = [];
+    alert('Negocio eliminado '+nombre+' correctamente.');
     this.getNegociosAdmin(this.auth.getIdAdmin());
+  }
 
+  deleteEliminarOferta(body: string): void {
+    this.eliminarService.deleteEliminarOferta(body).subscribe((data) => {
+      console.log(data);
+    });
+  }
+
+  eliminarOferta(id: string, idnegocio: string, producto: string) {
+      let body = {
+        "oferta" : [
+          {
+            "id": id,
+            "parametro": idnegocio
+          }
+        ]
+      };
+      console.log('Body para borrar: '+JSON.stringify(body));
+      this.deleteEliminarOferta(JSON.stringify(body));
   }
 
   putEditarNegocio(body: string): any {

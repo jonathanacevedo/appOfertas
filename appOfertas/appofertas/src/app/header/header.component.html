@@ -18,13 +18,13 @@
         </a>
       </li>
       <li class="nav-item {{activaN}}" *ngIf="rol=='Administrador' ">
-        <a class="nav-link" (click)="switchContainer('3')" >Mis Negocios</a>
+        <a class="nav-link" (click)="switchContainer('3')">Mis Negocios</a>
       </li>
-      <li class="nav-item {{activaR}}"  *ngIf="rol=='Administrador' ">
+      <li class="nav-item {{activaR}}" *ngIf="rol=='Administrador' ">
         <a class="nav-link" (click)="switchContainer('2')">Registrar Negocio</a>
       </li>
       <li class="nav-item {{activaO}}" *ngIf="rol=='Administrador' ">
-        <a class="nav-link" (click)="switchContainer('4')" >Mis Ofertas</a>
+        <a class="nav-link" (click)="switchContainer('4')">Mis Ofertas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Información</a>
@@ -32,9 +32,9 @@
     </ul>
   </div>
   <div style="float: right;">
-      <a (click)="cerrarSesion()">Cerrar Sesion</a>
-      <img src="../../assets/imagenes/iconSesion.png" style="padding: 4px;" alt="cerrarSesion">
-     </div>
+    <a (click)="cerrarSesion()" style="font-size: 1.2rem;">Cerrar Sesion</a>
+    <img src="../../assets/imagenes/iconSesion.png" style="padding: 4px;" alt="cerrarSesion">
+  </div>
 </nav>
 <section>
   <div [ngSwitch]="currentContainer">

@@ -45,6 +45,9 @@ public class EditRequest   {
 
   @JsonProperty("parametro")
   private String parametro = null;
+  
+  @JsonProperty("tipo")
+  private String tipo = null;
 
   public EditRequest id(String id) {
     this.id = id;
@@ -255,6 +258,27 @@ public class EditRequest   {
   public void setParametro(String parametro) {
     this.parametro = parametro;
   }
+  
+  public EditRequest tipo(String tipo) {
+	    this.tipo = tipo;
+	    return this;
+	  }
+
+	  /**
+	   * Get parametro
+	   * @return parametro
+	  **/
+	  @ApiModelProperty(required = true, value = "")
+	  @NotNull
+
+
+	  public String getTipo() {
+	    return tipo;
+	  }
+
+	  public void setTipo(String tipo) {
+	    this.tipo = tipo;
+	  }
 
 
   @Override
@@ -275,12 +299,13 @@ public class EditRequest   {
         Objects.equals(this.idnegocio, editRequest.idnegocio) &&
         Objects.equals(this.fechaInicio, editRequest.fechaInicio) &&
         Objects.equals(this.fechaFin, editRequest.fechaFin) &&
-        Objects.equals(this.parametro, editRequest.parametro);
+        Objects.equals(this.parametro, editRequest.parametro)&&
+        Objects.equals(this.tipo, editRequest.tipo);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, producto, detalle, valor, descuento, foto, idnegocio, fechaInicio, fechaFin, parametro);
+    return Objects.hash(id, producto, detalle, valor, descuento, foto, idnegocio, fechaInicio, fechaFin, parametro, tipo);
   }
 
   @Override
@@ -298,6 +323,7 @@ public class EditRequest   {
     sb.append("    fechaInicio: ").append(toIndentedString(fechaInicio)).append("\n");
     sb.append("    fechaFin: ").append(toIndentedString(fechaFin)).append("\n");
     sb.append("    parametro: ").append(toIndentedString(parametro)).append("\n");
+    sb.append("    tipo: ").append(toIndentedString(tipo)).append("\n");
     sb.append("}");
     return sb.toString();
   }

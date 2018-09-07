@@ -68,3 +68,12 @@ btnIcono{
     width: 1px;
     height: 1px;
 }
+
+.btnFiltrar{
+    float: right;
+    border: none;
+    text-decoration: none;
+    background-color: #60132c;
+    color: #FFFFFF;
+    padding-block-end: 2.5%;
+}

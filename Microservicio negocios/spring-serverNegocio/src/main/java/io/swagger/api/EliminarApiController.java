@@ -51,7 +51,7 @@ public class EliminarApiController implements EliminarApi {
         if (accept != null && accept.contains("application/json")) {
             try {
             		repo.delete(body.getNegocio().get(0).getIdnegocio());
-            		return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \"estado\",  \"id\" : \"id\",  \"nombre\" : \"nombre\"}", JsonApiBodyResponseSuccess.class), HttpStatus.ACCEPTED);
+            		return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \"estado\",  \"id\" : \""+body.getNegocio().get(0).getIdnegocio()+"\",  \"nombre\" : \"nombre\"}", JsonApiBodyResponseSuccess.class), HttpStatus.ACCEPTED);
             	//repo.delete(body.getNegocio().get(0).getIdnegocio());
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);

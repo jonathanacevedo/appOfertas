@@ -85,7 +85,7 @@ public class ListarApiController implements ListarApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Iterable<RegistrarRequest>>(repo.findByTipo(tipo), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<Iterable<RegistrarRequest>>(repo.findByTipo(tipo), HttpStatus.OK);
             } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<Iterable<RegistrarRequest>>(HttpStatus.INTERNAL_SERVER_ERROR);

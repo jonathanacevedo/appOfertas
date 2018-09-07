@@ -21,6 +21,7 @@ export class EditarOfertaComponent implements OnInit {
   private fecha_fin: string;
   private detalle: string;
   private foto: string;
+  private tipo: string;
   
   private edited: boolean = false;
 
@@ -43,6 +44,7 @@ export class EditarOfertaComponent implements OnInit {
     this.fecha_inicio = data.fecha_inicio;
     this.fecha_fin = data.fecha_fin;
     this.id = data.id;
+    this.tipo = data.tipo;
   }
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class EditarOfertaComponent implements OnInit {
   putEditarOferta(body: string): any {
     this.editarService.putEditarOferta(body).subscribe((data) => {
       alert('Oferta actualizada correctamente.');
+      console.log(data)
       this.edited = true;
       this.cerrarDialog();
     });
@@ -74,7 +77,8 @@ export class EditarOfertaComponent implements OnInit {
           "idnegocio": this.idnegocio,
           "fecha_inicio": this.fecha_inicio,
           "fecha_fin": this.fecha_fin,
-          "parametro" : this.idnegocio
+          "parametro" : this.idnegocio,
+          "tipo" : this.tipo
         }
       ]
     };

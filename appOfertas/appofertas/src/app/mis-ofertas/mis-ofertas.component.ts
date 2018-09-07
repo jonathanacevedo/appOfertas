@@ -89,15 +89,15 @@ export class MisOfertasComponent implements OnInit {
       producto: body.producto,
       valor: body.valor,
       latitud: body.latitud,
-      longitud: body.longitud
+      longitud: body.longitud,
+      tipo: body.tipo
     };
-    //this.dialog.open(EditarNegoComponent, dialogConfig);
     const dialogRef = this.dialog.open(EditarOfertaComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe((data) =>  {
       console.log("Se cerró esa vuelta. y trajo: "+data);
       if(data){      
-        this.negocios.length = 0;
+        this.negocios = [];
         this.getListarNegociosAdmin();
       }
     }
