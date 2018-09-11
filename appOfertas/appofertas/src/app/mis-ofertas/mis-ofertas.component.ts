@@ -48,6 +48,7 @@ export class MisOfertasComponent implements OnInit {
         });
       });
     });
+    this.negocios.sort();
   }
 
   deleteEliminarOfert(body: string): any {

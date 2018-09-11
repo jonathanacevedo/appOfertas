@@ -19,7 +19,7 @@ export class CrearOfertaComponent implements OnInit {
   private fecha_inicio: string = '';
   private fecha_fin: string = '';
   private detalle: string = '';
-  private foto: string = '';
+  private foto: string = 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png?w=547';
   private latitud: string = '';
   private longitud: string = '';
   private tipo: string = '';
@@ -37,6 +37,7 @@ export class CrearOfertaComponent implements OnInit {
 
     this.idnegocio = data.idnegocio;
     this.nombre = data.nombre;
+    //this.foto = data.foto;
     this.latitud = data.latitud;
     this.longitud = data.longitud;
   }
@@ -69,7 +70,6 @@ export class CrearOfertaComponent implements OnInit {
         }
       ]
     };
-    console.log('El body para enviar es: '+JSON.stringify(body));
     this.postRegistrarOferta(JSON.stringify(body));
   }
 

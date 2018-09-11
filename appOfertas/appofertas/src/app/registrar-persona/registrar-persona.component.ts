@@ -21,44 +21,46 @@ export class RegistrarPersonaComponent implements OnInit {
   private rol: string = '';
   private estado: string = '';
   private token: string = '';
-  
-  constructor(private registrar: RegistrarPersonaService,
-     private router: Router) {
+  private error: string = '';
 
-    this.estado="ACTIVO";
-    this.token="SinToken";
+  constructor(private registrar: RegistrarPersonaService,
+    private router: Router) {
+    this.estado = "ACTIVO";
+    this.token = "SinToken";
 
   }
 
   ngOnInit() {
-    
   }
 
   postRegistrarPersona(body: string): void {
     this.registrar.registrarPersona(body).subscribe(data => {
-      console.log(data);
-      alert(this.rol+' registrado correctamente.')
-      this.router.navigate(['/']);
+      console.log(data.detalle);
+      if (data.codigo == '404') {
+        this.error = data.detalle;
+      } else {
+        alert(this.rol + ' registrado correctamente.')
+        this.router.navigate(['/']);
+      }
     });
   }
 
-
-  registrarPersona(){
-      let body = {
-        "persona": [
-          {
-            "nombre": this.nombre,
-            "apellidos": this.apellidos,
-            "correo": this.correo,
-            "contrasena": this.contrasena,
-            "telefono": this.telefono,
-            "genero": this.genero,
-            "rol": this.rol,
-            "estado": this.estado,
-            "token": this.token
-          }
-        ]
-      };
-      this.postRegistrarPersona(JSON.stringify(body));
+  registrarPersona() {
+    let body = {
+      "persona": [
+        {
+          "nombre": this.nombre,
+          "apellidos": this.apellidos,
+          "correo": this.correo,
+          "contrasena": this.contrasena,
+          "telefono": this.telefono,
+          "genero": this.genero,
+          "rol": this.rol,
+          "estado": this.estado,
+          "token": this.token
+        }
+      ]
+    };
+    this.postRegistrarPersona(JSON.stringify(body));
   }
 }

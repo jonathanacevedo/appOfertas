@@ -5,8 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
 
 
-
-
 @Component({
   selector: 'app-editar-nego',
   templateUrl: './editar-nego.component.html',

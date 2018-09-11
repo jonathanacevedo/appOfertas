@@ -4,6 +4,7 @@ import { EditarService } from '../serviciosEditar/editar.service';
 import { EliminarService } from '../serviciosEliminar/eliminar.service';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { VerfotoComponent } from '../verfoto/verfoto.component';
+import { FiltradoSuperComponent } from '../filtrado-super/filtrado-super.component';
 
 @Component({
   selector: 'app-superofertas',
@@ -12,15 +13,25 @@ import { VerfotoComponent } from '../verfoto/verfoto.component';
 })
 export class SuperofertasComponent implements OnInit {
 
-  private ofertas : any[] = [];
+  private filtros: string;
+  private ofertas: any[] = [];
 
-  constructor(private listar: ListarService, 
-              private editarService: EditarService,
-              private eliminarService: EliminarService,
-              private dialog: MatDialog) { }
+  fecha: Date = new Date();
+
+  private dia: number;
+  private mes: number;
+  private ano: number;
+
+  constructor(private listar: ListarService,
+    private editarService: EditarService,
+    private eliminarService: EliminarService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getListarOfertas();
+    this.dia = this.fecha.getDate();
+    this.mes = this.fecha.getMonth() + 1;
+    this.ano = this.fecha.getFullYear();
   }
 
   getListarOfertas(): void {
@@ -51,7 +62,7 @@ export class SuperofertasComponent implements OnInit {
     let body = {
       "oferta": [
         {
-          "id" : oferta.id,
+          "id": oferta.id,
           "producto": oferta.producto,
           "detalle": oferta.detalle,
           "valor": oferta.valor,
@@ -60,7 +71,8 @@ export class SuperofertasComponent implements OnInit {
           "idnegocio": oferta.idnegocio,
           "fecha_inicio": oferta.fecha_inicio,
           "fecha_fin": oferta.fecha_fin,
-          "parametro" : oferta.idnegocio
+          "tipo" : oferta.tipo,
+          "parametro": oferta.idnegocio
         }
       ]
     };
@@ -68,10 +80,10 @@ export class SuperofertasComponent implements OnInit {
   }
 
   eliminarOferta(id: string, idnegocio: string, producto: string) {
-    let confirmar = confirm('Esta seguro de eliminar la oferta de '+producto+'?');
-    if(confirmar){
+    let confirmar = confirm('Esta seguro de eliminar la oferta de ' + producto + '?');
+    if (confirmar) {
       let body = {
-        "oferta" : [
+        "oferta": [
           {
             "id": id,
             "parametro": idnegocio
@@ -92,7 +104,69 @@ export class SuperofertasComponent implements OnInit {
     dialogConfig.data = {
       url: url
     };
-    const dialogRef = this.dialog.open(VerfotoComponent, dialogConfig); 
+    const dialogRef = this.dialog.open(VerfotoComponent, dialogConfig);
+  }
+
+  compararFechas(fecha: any): boolean {
+    let fec: number = fecha.split("/");
+    let dia = +fec[0];
+    let mes = +fec[1];
+    let ano = +fec[2];
+    if (ano > this.ano) {
+      return true;
+    } else if (ano == this.ano && mes > this.mes) {
+      return true;
+    } else if (mes == this.mes && dia >= this.dia) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  filtrarOfertas(filtros: any): any {
+    this.ofertas = [];
+    this.listar.getOfertas().subscribe((data) => {
+      data.forEach((oferta) => {
+        if (filtros == 'Vigentes') {
+          if (this.compararFechas(oferta.fecha_fin)) {
+            this.ofertas.push(oferta);
+          }
+        } else if(filtros == 'Vencidas') {
+          if (!this.compararFechas(oferta.fecha_fin)) {
+            this.ofertas.push(oferta);
+          }
+        } else {
+          this.ofertas.push(oferta);
+        }
+      });
+    });
+  }
+
+  mostrarFiltros() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '55%';
+    dialogConfig.height = '40%';
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.position = {
+      'top': '0%',
+      'right': '25px',
+      'bottom': '10%',
+      'left': '20%'
+    };
+
+    // dialogConfig.data = {
+    //   idnegocio: ''
+    // };
+    const dialogRef = this.dialog.open(FiltradoSuperComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      this.filtros = data;
+      console.log(data);
+      if (this.filtros !== '') {
+        this.filtrarOfertas(this.filtros);
+      }
+    });
   }
 
 }

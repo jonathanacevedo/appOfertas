@@ -50,16 +50,38 @@ public class RegistrarApiController implements RegistrarApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
+            	RegistrarRequest persona = body.getPersona().get(0);
             	
-            	if((repo.findByCorreo(body.getPersona().get(0).getCorreo())).isEmpty()) {
-                	repo.save(body.getPersona().get(0));
-                	return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \""+body.getPersona().get(0).getEstado()+"\",  \"id\" : \""+body.getPersona().get(0).getId()+"\",  \"nombre\" : \""+body.getPersona().get(0).getNombre()+"\"}", JsonApiBodyResponseSuccess.class), HttpStatus.ACCEPTED);
-            	} else {
+            	if (persona.getNombre()=="") {
             		JsonApiBodyResponseErrors valor =  new JsonApiBodyResponseErrors();
             		valor.setCodigo("404");
-            		valor.setDetalle("El correo ya esta registrado");
-                    return new ResponseEntity<JsonApiBodyResponseErrors>(valor, HttpStatus.BAD_REQUEST);
+            		valor.setDetalle("El campo del nombre esta vacio");
+                    return new ResponseEntity<JsonApiBodyResponseErrors>(valor, HttpStatus.OK);
+				} else if(!(repo.findByCorreo(body.getPersona().get(0).getCorreo())).isEmpty()) {
+	                JsonApiBodyResponseErrors valor =  new JsonApiBodyResponseErrors();
+	            	valor.setCodigo("404");
+	            	valor.setDetalle("El correo ya esta registrado");
+	                return new ResponseEntity<JsonApiBodyResponseErrors>(valor, HttpStatus.OK);
+				} else if(persona.getApellidos()=="") {
+	                JsonApiBodyResponseErrors valor =  new JsonApiBodyResponseErrors();
+	            	valor.setCodigo("404");
+	            	valor.setDetalle("El campo de apellido está vacio");
+	                return new ResponseEntity<JsonApiBodyResponseErrors>(valor, HttpStatus.OK);
+				} else if(persona.getContrasena()=="") {
+	                JsonApiBodyResponseErrors valor =  new JsonApiBodyResponseErrors();
+	            	valor.setCodigo("404");
+	            	valor.setDetalle("El campo de contraseña está vacio");
+	                return new ResponseEntity<JsonApiBodyResponseErrors>(valor, HttpStatus.OK);
+				} else if(persona.getRol()=="") {
+	                JsonApiBodyResponseErrors valor =  new JsonApiBodyResponseErrors();
+	            	valor.setCodigo("404");
+	            	valor.setDetalle("Debe seleccionar un rol antes de registrarse.");
+	                return new ResponseEntity<JsonApiBodyResponseErrors>(valor, HttpStatus.OK);
+				} else {
+            		repo.save(body.getPersona().get(0));
+            		return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \""+body.getPersona().get(0).getEstado()+"\",  \"id\" : \""+body.getPersona().get(0).getId()+"\",  \"nombre\" : \""+body.getPersona().get(0).getNombre()+"\"}", JsonApiBodyResponseSuccess.class), HttpStatus.OK);
             	}
+            	            	
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<JsonApiBodyResponseSuccess>(HttpStatus.INTERNAL_SERVER_ERROR);

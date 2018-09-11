@@ -9,7 +9,12 @@ import io.swagger.model.JsonApiBodyResponseErrorsPersona;
 import io.swagger.model.JsonApiBodyResponseSuccessNegocio;
 import io.swagger.model.JsonApiBodyResponseSuccessOferta;
 import io.swagger.model.JsonApiBodyResponseSuccessPersona;
+import net.bytebuddy.jar.asm.commons.TryCatchBlockSorter;
+import org.json.JSONObject;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
 import io.swagger.annotations.*;
 
 import org.apache.camel.EndpointInject;
@@ -43,7 +48,7 @@ public class RegistrarApiController implements RegistrarApi {
     private final HttpServletRequest request;
     
     @EndpointInject(uri="direct:registrarPersona")
-    private FluentProducerTemplate producerTemplateRegistrarPersona;
+    private FluentProducerTemplate producer;
     
 
     @org.springframework.beans.factory.annotation.Autowired
@@ -76,18 +81,28 @@ public class RegistrarApiController implements RegistrarApi {
                 return new ResponseEntity<JsonApiBodyResponseSuccessOferta>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
-
         return new ResponseEntity<JsonApiBodyResponseSuccessOferta>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<JsonApiBodyResponseSuccessPersona> registrarPersonasPost(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestPersona body) {
+    public ResponseEntity<?> registrarPersonasPost(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestPersona body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-            	System.out.println("Llega hasta acá...");
-            	Object exito = producerTemplateRegistrarPersona.withBody(body).request();
-                return new ResponseEntity<JsonApiBodyResponseSuccessPersona>(objectMapper.readValue("{  \"estado\" : \"estado\",  \"id\" : \"id\",  \"nombre\" : \"nombre\"}", JsonApiBodyResponseSuccessPersona.class), HttpStatus.ACCEPTED);
-            } catch (IOException e) {
+				 Object response = producer.withBody(body).request();
+				 JSONObject jsonArray = new JSONObject(response.toString());
+            	try {
+            		JsonApiBodyResponseSuccessPersona exito = new JsonApiBodyResponseSuccessPersona();
+            		exito.setId(jsonArray.getString("id"));
+                    return new ResponseEntity<JsonApiBodyResponseSuccessPersona>(exito, HttpStatus.ACCEPTED);
+
+				} catch (Exception e) {
+					JsonApiBodyResponseErrorsPersona errors = new JsonApiBodyResponseErrorsPersona();
+					errors.setCodigo(jsonArray.getString("codigo"));
+					errors.setDetalle(jsonArray.getString("detalle"));
+					return new ResponseEntity<JsonApiBodyResponseErrorsPersona>(errors, HttpStatus.ACCEPTED);
+				}
+            	
+            } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<JsonApiBodyResponseSuccessPersona>(HttpStatus.INTERNAL_SERVER_ERROR);
             }

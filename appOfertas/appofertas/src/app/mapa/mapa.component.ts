@@ -4,6 +4,7 @@ import { ListarService } from '../serviciosListar/listar.service';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { VerNegocioComponent } from '../ver-negocio/ver-negocio.component';
 import { FiltradoComponent } from '../filtrado/filtrado.component';
+import { isFulfilled } from '../../../node_modules/@types/q';
 
 
 @Component({
@@ -97,6 +98,7 @@ export class MapaComponent implements OnInit {
   }
 
   filtrarNegocios(filtros: any) {
+    console.log('llamando esa vuelta')
     this.negocios = [];
     this.ofertas = [];
     this.listar.getNegocios().subscribe((data) => {
@@ -108,9 +110,22 @@ export class MapaComponent implements OnInit {
                 data2.forEach((oferta) => {
                   for (let j = 0; j < filtros[1].length; j++) {
                     if (oferta.tipo == filtros[1][j] || filtros[1] == 'Todas') {
-                      if (this.compararFechas(oferta.fecha_fin)) {  //true: activo
-                        this.negocios.push(negocios);
-                        this.ofertas.push(oferta);
+                      if (filtros[1][j] == 'Descuento') {
+                        let valor = filtros[2].split("/");
+                        let valor1 = +valor[0];
+                        let valor2 = +valor[1];
+                        console.log('Buscando entre '+valor1+' y '+valor2);
+                        if (oferta.descuento >= valor1 && oferta.descuento < valor2) {
+                          if (this.compararFechas(oferta.fecha_fin)) {  //true: activo
+                            this.negocios.push(negocios);
+                            this.ofertas.push(oferta);
+                          }
+                        }
+                      } else {
+                        if (this.compararFechas(oferta.fecha_fin)) {  //true: activo
+                          this.negocios.push(negocios);
+                          this.ofertas.push(oferta);
+                        }
                       }
                     }
                   }
@@ -181,16 +196,16 @@ export class MapaComponent implements OnInit {
     };
 
     // dialogConfig.data = {
-    //   idnegocio: ''
+    //   filtros: this.filtros
     // };
     const dialogRef = this.dialog.open(FiltradoComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       this.filtros = data;
-      console.log(data);
       if (this.filtros[0].length == 0 || this.filtros[1].length == 0) {
-        this.ofertas = [];
-        this.getListarOfertasNegocios();
+        // this.ofertas = [];
+        // this.getListarOfertasNegocios();
       } else {
+        console.log(this.filtros[2].split("/"))
         this.filtrarNegocios(this.filtros);
       }
     });

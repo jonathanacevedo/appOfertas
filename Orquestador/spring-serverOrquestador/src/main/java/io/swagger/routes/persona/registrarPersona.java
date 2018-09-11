@@ -19,6 +19,7 @@ public class registrarPersona extends RouteBuilder {
 			.setHeader(Exchange.HTTP_METHOD,constant("POST"))
 			.setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
 			.setHeader("Accept", constant("application/json"))
+			.log("${body}")
 			.process(new Processor() {
 				
 				@Override
@@ -41,15 +42,16 @@ public class registrarPersona extends RouteBuilder {
 			.hystrixConfiguration().executionTimeoutInMilliseconds(3000).end()
 			.to("http4://localhost:8090/personas/registrar")
 			.convertBodyTo(String.class)
-			.unmarshal().json(JsonLibrary.Jackson,JsonApiBodyResponseSuccessPersona.class)
-			.process(new Processor() {
-				
-				@Override
-				public void process(Exchange exchange) throws Exception {
-					JsonApiBodyResponseSuccessPersona exito = (JsonApiBodyResponseSuccessPersona) exchange.getIn().getBody();
-					//System.out.println(exito.toString());
-				}
-			})
+			.log("${body}")
+//			.unmarshal().json(JsonLibrary.Jackson,JsonApiBodyResponseSuccessPersona.class)
+//			.process(new Processor() {
+//				
+//				@Override
+//				public void process(Exchange exchange) throws Exception {
+//					JsonApiBodyResponseSuccessPersona exito = (JsonApiBodyResponseSuccessPersona) exchange.getIn().getBody();
+//					//System.out.println(exito.toString());
+//				}
+//			})
 			.endHystrix()
 			.onFallback()
 			.convertBodyTo(String.class)

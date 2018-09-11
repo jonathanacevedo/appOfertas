@@ -65,6 +65,6 @@ public interface RegistrarApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<JsonApiBodyResponseSuccessPersona> registrarPersonasPost(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestPersona body);
+    ResponseEntity<?> registrarPersonasPost(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestPersona body);
 
 }

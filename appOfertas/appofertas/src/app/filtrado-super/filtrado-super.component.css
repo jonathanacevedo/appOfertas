@@ -13,11 +13,11 @@
     font-family: Lobster;
     font-size: 1.2rem; 
     padding: 10px 0px 0px 10px;
-    color: #751836;
+    color: #253f3f;
 }
 
 .btnDetalle{
-    background-color: #751836; /* Green */
+    background-color: #253f3f; /* Green */
     border: none;
     border-radius: 8px;
     color: white;

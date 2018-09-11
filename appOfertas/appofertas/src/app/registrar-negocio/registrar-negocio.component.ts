@@ -23,7 +23,7 @@ export class RegistrarNegocioComponent implements OnInit {
   private telefono: string = '';
   private tipo: string = '';
   private direccion: string = '';
-  private foto: string = '';
+  private foto: string = '../../assets/imagenes/logoOfertApp.png';
   private detalle: string = '';
   private idadmin: string = '';
 

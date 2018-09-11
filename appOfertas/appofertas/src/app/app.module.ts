@@ -49,6 +49,7 @@ import { SuperofertasComponent } from './superofertas/superofertas.component';
 import { VerfotoComponent } from './verfoto/verfoto.component';
 import { FiltradoComponent } from './filtrado/filtrado.component';
 import { FiltradoAdminComponent } from './filtrado-admin/filtrado-admin.component';
+import { FiltradoSuperComponent } from './filtrado-super/filtrado-super.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -104,7 +105,8 @@ export function provideConfig() {
     SuperofertasComponent,
     VerfotoComponent,
     FiltradoComponent,
-    FiltradoAdminComponent
+    FiltradoAdminComponent,
+    FiltradoSuperComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -135,7 +137,7 @@ export function provideConfig() {
     MatCardModule,
     MatDialogModule
     ],
-  entryComponents: [EditarNegoComponent,FiltradoAdminComponent, CrearOfertaComponent, VerfotoComponent, FiltradoComponent,EditarOfertaComponent, VerNegocioComponent],
+  entryComponents: [FiltradoSuperComponent, EditarNegoComponent, FiltradoAdminComponent, CrearOfertaComponent, VerfotoComponent, FiltradoComponent, EditarOfertaComponent, VerNegocioComponent],
   providers: [
     ListarService,
     RegistrarPersonaService,

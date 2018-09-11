@@ -40,7 +40,6 @@ export class FiltradoAdminComponent implements OnInit {
 
       this.filtros[0] = this.filtro1;
       this.filtros[1] = this.filtro2;
-
     this.dialogRef.close(this.filtros);
   }     
 

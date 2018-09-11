@@ -55,7 +55,7 @@ export class MisNegociosComponent implements OnInit {
       }
     });
     this.negocios = [];
-    alert('Negocio eliminado '+nombre+' correctamente.');
+    alert('Negocio '+nombre+' eliminado correctamente.');
     this.getNegociosAdmin(this.auth.getIdAdmin());
   }
 
@@ -143,8 +143,7 @@ export class MisNegociosComponent implements OnInit {
     );    
   }
 
-  openDialogOferta(idNegocio: string, nombre: string, latitud: string, longitud: string) {
-    console.log(nombre+', '+latitud+' - '+longitud);
+  openDialogOferta(idNegocio: string, nombre: string, foto: string, latitud: string, longitud: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -158,6 +157,7 @@ export class MisNegociosComponent implements OnInit {
     dialogConfig.data = {
       idnegocio: idNegocio,
       nombre: nombre,
+      foto: foto,
       latitud: latitud,
       longitud: longitud
     };

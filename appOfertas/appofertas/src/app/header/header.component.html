@@ -20,14 +20,14 @@
       <li class="nav-item {{activaN}}" *ngIf="rol=='Administrador' ">
         <a class="nav-link" (click)="switchContainer('3')">Mis Negocios</a>
       </li>
+      <li class="nav-item {{activaO}}" *ngIf="rol=='Administrador' ">
+          <a class="nav-link" (click)="switchContainer('4')">Mis Ofertas</a>
+        </li>
       <li class="nav-item {{activaR}}" *ngIf="rol=='Administrador' ">
         <a class="nav-link" (click)="switchContainer('2')">Registrar Negocio</a>
       </li>
-      <li class="nav-item {{activaO}}" *ngIf="rol=='Administrador' ">
-        <a class="nav-link" (click)="switchContainer('4')">Mis Ofertas</a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Información</a>
+        <a class="nav-link">Información</a>
       </li>
     </ul>
   </div>

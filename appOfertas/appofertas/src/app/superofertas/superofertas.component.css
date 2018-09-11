@@ -52,3 +52,11 @@ input{
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+
+.btnFiltrar{
+    border: none;
+    text-decoration: none;
+    background-color: #253f3f;
+    color: #FFFFFF;
+    padding-block-end: 1%;
+  }
