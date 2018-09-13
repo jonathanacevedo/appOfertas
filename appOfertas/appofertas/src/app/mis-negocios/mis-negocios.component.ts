@@ -40,8 +40,6 @@ export class MisNegociosComponent implements OnInit {
     });
   }
 
-
-
   deleteEliminarNegocio(body: string, nombre: string): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
       if(data.body!==undefined){
