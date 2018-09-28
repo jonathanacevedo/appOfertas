@@ -37,6 +37,11 @@ export class SuperofertasComponent implements OnInit {
   getListarOfertas(): void {
     this.listar.getOfertas().subscribe((data) => {
       data.forEach((oferta) => {
+        this.listar.getNegocioPorId(oferta.idnegocio).subscribe((data) => {
+          data.negocio.forEach((negocio) => {
+            oferta.negocio = negocio.nombre
+          });
+        });
         this.ofertas.push(oferta)
       });
     });
@@ -127,6 +132,11 @@ export class SuperofertasComponent implements OnInit {
     this.ofertas = [];
     this.listar.getOfertas().subscribe((data) => {
       data.forEach((oferta) => {
+        this.listar.getNegocioPorId(oferta.idnegocio).subscribe((data) => {
+          data.negocio.forEach((negocio) => {
+            oferta.negocio = negocio.nombre
+          });
+        });
         if (filtros == 'Vigentes') {
           if (this.compararFechas(oferta.fecha_fin)) {
             this.ofertas.push(oferta);

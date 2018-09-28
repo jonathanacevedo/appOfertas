@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit {
 
   rol: string = '';
   currentContainer: any;
+  nombre: string = '';
+
 
   constructor(private auth: AuthServiceManual, private router: Router) { }
 
@@ -23,9 +25,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.switchContainer('1');
     this.rol = this.auth.getRol();
+    this.nombre = this.auth.getNombre();
   }
-
-  reiniciarActivos(){
+  
+  reiniciarActivos() {
     this.activaI = '';
     this.activaN = '';
     this.activaR = '';
@@ -40,23 +43,27 @@ export class HeaderComponent implements OnInit {
   switchContainer(containerName) {
     switch (containerName) {
       case '1':
-      this.reiniciarActivos();
-      this.activaI = 'active';
+        this.reiniciarActivos();
+        this.activaI = 'active';
         this.currentContainer = 'inicio';
         break;
       case '2':
-      this.reiniciarActivos();
-      this.activaR = 'active';
+        this.reiniciarActivos();
+        this.activaR = 'active';
         this.currentContainer = 'registronegocio';
         break;
       case '3':
-      this.reiniciarActivos();
-      this.activaN = 'active';
+        this.reiniciarActivos();
+        this.activaN = 'active';
         this.currentContainer = 'misnegocios';
         break;
       case '4':
-      this.reiniciarActivos();
-      this.activaO = 'active';
+        this.reiniciarActivos();
+        this.currentContainer = 'editarperfil';
+        break;
+      case '5':
+        this.reiniciarActivos();
+        this.activaO = 'active';
         this.currentContainer = 'misofertas';
         break;
       default:

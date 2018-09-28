@@ -44,7 +44,7 @@ export class FiltradoAdminComponent implements OnInit {
   }     
 
   cerrarDialog(){
-    this.dialogRef.close();
+    this.dialogRef.close('vacio');
   }
 
 }

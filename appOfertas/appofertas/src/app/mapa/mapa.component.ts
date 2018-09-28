@@ -21,17 +21,20 @@ export class MapaComponent implements OnInit {
   private nombreNegocio: string = 'Todas';
   private filtros: any[] = [];
 
-  private lat: number = 6.2518400;
-  private lng: number = -75.5635900;
+  private lat: number = 6.2215477;
+  private lng: number = -75.5722723;
   private zoom: number = 12;
 
-  fecha: Date = new Date();
+  private opciones: string[] = [];
 
-  dia: number;
-  mes: number;
-  ano: number;
+  private fecha: Date = new Date();
 
-  map: any;
+  private dia: number;
+  private mes: number;
+  private ano: number;
+
+
+  private map: any;
   constructor(private listar: ListarService, private dialog: MatDialog, private elementRef: ElementRef) { }
 
   ngOnInit() {
@@ -98,7 +101,6 @@ export class MapaComponent implements OnInit {
   }
 
   filtrarNegocios(filtros: any) {
-    console.log('llamando esa vuelta')
     this.negocios = [];
     this.ofertas = [];
     this.listar.getNegocios().subscribe((data) => {
@@ -109,17 +111,20 @@ export class MapaComponent implements OnInit {
               if (data2.length > 0) {
                 data2.forEach((oferta) => {
                   for (let j = 0; j < filtros[1].length; j++) {
-                    if (oferta.tipo == filtros[1][j] || filtros[1] == 'Todas') {
+                    if (oferta.tipo == filtros[1][j] || oferta.tipo == filtros[3] ||filtros[1] == 'Todas') {
                       if (filtros[1][j] == 'Descuento') {
-                        let valor = filtros[2].split("/");
-                        let valor1 = +valor[0];
-                        let valor2 = +valor[1];
-                        console.log('Buscando entre '+valor1+' y '+valor2);
-                        if (oferta.descuento >= valor1 && oferta.descuento < valor2) {
+                        let valor = filtros[2];
+                        if (oferta.descuento == valor) {
                           if (this.compararFechas(oferta.fecha_fin)) {  //true: activo
                             this.negocios.push(negocios);
                             this.ofertas.push(oferta);
                           }
+                        }
+                      } else if (filtros[1][j] == 'Promocion' && filtros[3].length > 0) {
+                        console.log('Comparando '+oferta.tipo+' y '+filtros[3]);
+                        if (oferta.descuento == filtros[3] || oferta.tipo == filtros[3]) {
+                          this.negocios.push(negocios);
+                          this.ofertas.push(oferta);
                         }
                       } else {
                         if (this.compararFechas(oferta.fecha_fin)) {  //true: activo
@@ -181,7 +186,26 @@ export class MapaComponent implements OnInit {
     });
   }
 
+  getOpciones() {
+    this.ofertas.forEach((oferta) => {
+      if (oferta.tipo == 'Promocion') {
+        if (!this.opciones.includes(oferta.descuento)) {
+          this.opciones.push(oferta.descuento);
+        }
+      } else if (oferta.tipo == 'Hora Feliz') {
+        if (!this.opciones.includes('Hora Feliz')) {
+          this.opciones.push('Hora Feliz');
+        }
+      } else if (oferta.tipo == 'Cumpleaños'){
+        if (!this.opciones.includes('Cumpleaños')) {
+          this.opciones.push('Cumpleaños');
+        }
+      }
+    });
+  }
+
   mostrarFiltros() {
+    this.getOpciones();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -195,18 +219,16 @@ export class MapaComponent implements OnInit {
       'left': '20%'
     };
 
-    // dialogConfig.data = {
-    //   filtros: this.filtros
-    // };
+    dialogConfig.data = {
+      opciones: this.opciones
+    };
     const dialogRef = this.dialog.open(FiltradoComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      this.filtros = data;
-      if (this.filtros[0].length == 0 || this.filtros[1].length == 0) {
-        // this.ofertas = [];
-        // this.getListarOfertasNegocios();
-      } else {
-        console.log(this.filtros[2].split("/"))
-        this.filtrarNegocios(this.filtros);
+      if (data !== 'vacio') {
+        this.filtros = data;
+        if (this.filtros[0].length !== 0 || this.filtros[1].length !== 0) {
+          this.filtrarNegocios(this.filtros);
+        }
       }
     });
   }

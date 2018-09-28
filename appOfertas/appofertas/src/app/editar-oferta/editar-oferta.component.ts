@@ -4,7 +4,6 @@ import { EditarService } from '../serviciosEditar/editar.service';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
 
-
 @Component({
   selector: 'app-editar-oferta',
   templateUrl: './editar-oferta.component.html',
@@ -15,7 +14,7 @@ export class EditarOfertaComponent implements OnInit {
   private idnegocio: string = '';
   private producto: string;
   private id: string;
-  private descuento: string;
+  private descuento: string = '';
   private valor: string;
   private fecha_inicio: string;
   private fecha_fin: string;
@@ -38,7 +37,8 @@ export class EditarOfertaComponent implements OnInit {
     this.producto = data.producto;
     this.detalle = data.detalle;
     this.valor = data.valor;
-    this.descuento = data.descuento;
+    data.descuento==null ? this.descuento = '' : this.descuento = data.descuento;
+    //this.descuento = data.descuento;
     this.foto = data.foto;
     this.idnegocio = data.idnegocio;
     this.fecha_inicio = data.fecha_inicio;
@@ -48,6 +48,7 @@ export class EditarOfertaComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   putEditarOferta(body: string): any {

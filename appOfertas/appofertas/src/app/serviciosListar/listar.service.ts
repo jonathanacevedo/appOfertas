@@ -16,11 +16,7 @@ export class ListarService {
   urlListarNegocios: string = 'http://localhost:8091/negocios/listar';
   urlListarNegocioPorId: string = 'http://localhost:8091/negocios/listar/';
   urlListarNegocioPorTipo: string = 'http://localhost:8091/negocios/listar/negocio/';
-
-
-
-  
- 
+  urlListarPersonaPorId: string = 'http://localhost:8090/personas/listar/';
 
   constructor(public http: HttpClient) { }
 
@@ -29,10 +25,20 @@ export class ListarService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
-      )
+      })
     };
     return this.http.get(this.urlListarPersonas);
+  }
+
+
+  getPersonaPorId(id: string): any{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.get(this.urlListarPersonaPorId+id);
   }
 
   getOfertas(): any {
@@ -40,8 +46,7 @@ export class ListarService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
-      )
+      })
     };
     return this.http.get(this.urlListarOfertas);
   }
@@ -51,8 +56,7 @@ export class ListarService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
-      )};
+      })};
     return this.http.get(this.urlListarNegociosAdmin+idAdmin);
   }
 
@@ -61,8 +65,7 @@ export class ListarService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
-      )};
+      })};
     return this.http.get(this.urlListarNegocioPorTipo+tipo);
   }
 
@@ -72,8 +75,7 @@ export class ListarService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
-      )};
+      })};
     return this.http.get(this.urlListarNegocios);
   }
 
@@ -82,8 +84,7 @@ export class ListarService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
-      )
+      })
     };
     return this.http.get(this.urlListarOfertasIdNegocio+idNegocio);
   }
@@ -93,8 +94,7 @@ export class ListarService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
-      )
+      })
     };
     return this.http.get(this.urlListarNegocioPorId+idnegocio);
   }
@@ -104,8 +104,7 @@ export class ListarService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
-      )
+      })
     };
     return this.http.get(this.urlListarOfertasId+id);
   }

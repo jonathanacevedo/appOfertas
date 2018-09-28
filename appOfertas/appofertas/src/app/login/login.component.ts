@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   postRegistrarPersona(body: string): void {
     this.registrar.registrarPersona(body).subscribe(data => {
-      this.auth.Loggin('Cliente', '');
+      this.auth.Loggin('Cliente', '', '');
       this.router.navigate(['/inicio']);
       console.log(data);
     });
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       data.persona.forEach((persona) => {
         if(persona.correo==this.correo && persona.contrasena==this.contrasena){
-          this.iniciar(persona.rol, persona.id);
+          this.iniciar(persona.rol, persona.id, persona.nombre);
           this.router.navigate(['/inicio']);
         }
       });
@@ -105,8 +105,8 @@ export class LoginComponent implements OnInit {
     this.error = 'Datos incorrectos.';
   }
 
-  iniciar(persona: string, idPersona: string) : void {
-    this.auth.Loggin(persona, idPersona);
+  iniciar(persona: string, idPersona: string, nombre: string) : void {
+    this.auth.Loggin(persona, idPersona, nombre);
   }
 
   iniciarSesion() {

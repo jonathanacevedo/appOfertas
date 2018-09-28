@@ -50,6 +50,13 @@ import { VerfotoComponent } from './verfoto/verfoto.component';
 import { FiltradoComponent } from './filtrado/filtrado.component';
 import { FiltradoAdminComponent } from './filtrado-admin/filtrado-admin.component';
 import { FiltradoSuperComponent } from './filtrado-super/filtrado-super.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
+
+
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -75,10 +82,6 @@ let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider("485629587448-lat3u85k1t0du15dlekcq6nmgu7k2jfb.apps.googleusercontent.com")
-  },
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("Facebook-App-Id")
   }
   
 ]);
@@ -111,7 +114,8 @@ export function provideConfig() {
     VerfotoComponent,
     FiltradoComponent,
     FiltradoAdminComponent,
-    FiltradoSuperComponent
+    FiltradoSuperComponent,
+    EditarPerfilComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -140,9 +144,12 @@ export function provideConfig() {
     BrowserAnimationsModule,
     MatGridListModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule
     ],
-  entryComponents: [FiltradoSuperComponent, EditarNegoComponent, FiltradoAdminComponent, CrearOfertaComponent, VerfotoComponent, FiltradoComponent, EditarOfertaComponent, VerNegocioComponent],
+  entryComponents: [FiltradoSuperComponent, EditarPerfilComponent, EditarNegoComponent, FiltradoAdminComponent, CrearOfertaComponent, VerfotoComponent, FiltradoComponent, EditarOfertaComponent, VerNegocioComponent],
   providers: [
     ListarService,
     RegistrarPersonaService,

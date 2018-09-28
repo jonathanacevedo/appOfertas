@@ -12,4 +12,5 @@ public interface UserRepository extends CrudRepository<RegistrarRequest, String>
 	public Iterable<RegistrarRequest> findByEstado(String estado);
 	public Iterable<RegistrarRequest> findByRol(String rol);
 	public List<RegistrarRequest> findByCorreo(String correo);
+	public List<RegistrarRequest> findByCorreoAndContrasena(String correo, String contrasena);
 }

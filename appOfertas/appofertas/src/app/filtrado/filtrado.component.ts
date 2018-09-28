@@ -13,7 +13,7 @@ export class FiltradoComponent implements OnInit {
 
   private filtroNegocio: any[] = [];
   private filtroOferta: any[] = [];
-  private filtroValor: any = '1/100';
+  private filtroValores: any[] = [];
   private filtros: any[] = [];
 
 
@@ -36,14 +36,18 @@ export class FiltradoComponent implements OnInit {
   private todas2: boolean = false;
   private todas3: boolean = false;
 
-  private prueba: any;
+  private valorDescuento: string = '100';
+  private valorPromocion: string = '';
+
+  private opciones: string [] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<FiltradoComponent>) {
+      this.opciones = data.opciones;
   }
 
   ngOnInit() {
-
+    this.opciones.sort();
   }
 
   aplicarFiltros() {
@@ -60,20 +64,22 @@ export class FiltradoComponent implements OnInit {
     this.Descuento == true ? this.filtroOferta.push('Descuento') : null;
     this.Promocion == true ? this.filtroOferta.push('Promocion') : null;
 
-    this.todas3 == true ? this.filtroValor = 'Todas' : null;
-    this.v10 == true ? this.filtroValor = '1/10' : null;
-    this.v1030 == true ? this.filtroValor = '10/30' : null;
-    this.v3050 == true ? this.filtroValor = '30/50' : null;
-    this.v5080 == true ? this.filtroValor = '50/80' : null;
-    this.v80 == true ? this.filtroValor = '80/100' : null;
-
     this.filtros[0] = this.filtroNegocio;
     this.filtros[1] = this.filtroOferta;
-    this.filtros[2] = this.filtroValor;
+    if (this.valorDescuento == 'Todos') {
+      this.filtros[2] = '0-100';
+    } else {
+      this.filtros[2] = this.valorDescuento;
+    }
+    if (this.valorPromocion == 'Todas') {
+      this.filtros[3] = '';
+    } else {    
+      this.filtros[3] = this.valorPromocion;
+    }
     this.dialogRef.close(this.filtros);
   }
 
   cerrarDialog() {
-    this.dialogRef.close('');
+    this.dialogRef.close('vacio');
   }
 }

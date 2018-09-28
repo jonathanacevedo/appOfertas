@@ -4,8 +4,8 @@
 }
 
 agm-map {
-    height: 428px;
-    width: 900px;
+    height: 435px;
+    width: 915px;
 }
 
 h1{
@@ -34,6 +34,7 @@ container{
 td{
     vertical-align: top;
     background-color: beige;
+    padding: 0px;
 }
 
 a{

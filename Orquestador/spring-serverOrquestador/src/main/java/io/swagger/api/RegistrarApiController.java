@@ -93,6 +93,8 @@ public class RegistrarApiController implements RegistrarApi {
             	try {
             		JsonApiBodyResponseSuccessPersona exito = new JsonApiBodyResponseSuccessPersona();
             		exito.setId(jsonArray.getString("id"));
+            		exito.setNombre(jsonArray.getString("nombre"));
+            		exito.setEstado(jsonArray.getString("estado"));
                     return new ResponseEntity<JsonApiBodyResponseSuccessPersona>(exito, HttpStatus.ACCEPTED);
 
 				} catch (Exception e) {

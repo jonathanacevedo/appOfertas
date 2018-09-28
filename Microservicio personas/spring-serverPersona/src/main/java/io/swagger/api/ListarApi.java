@@ -69,4 +69,14 @@ public interface ListarApi {
         method = RequestMethod.GET)
     ResponseEntity<Iterable<RegistrarRequest>> listarRolRolGet(@ApiParam(value = "se recibe el rol del usuario",required=true) @PathVariable("rol") String rol);
 
+    @CrossOrigin(origins = "*")
+    @ApiOperation(value = "loguea una persona", nickname = "loguearPersona", notes = "", response = JsonApiBodyRequest.class, tags={ "personas", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "persona encontrada", response = JsonApiBodyRequest.class),
+        @ApiResponse(code = 404, message = "datos imcompletos o incorrectos", response = JsonApiBodyResponseErrors.class) })
+    @RequestMapping(value = "/loguear",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<?> loguearPersona(@ApiParam(value = "Usuario de logueo",required=true) @RequestParam("usuario") String usuario, @ApiParam(value = "Contraseña de logueo",required=true) @RequestParam("password") String password);
+    
 }

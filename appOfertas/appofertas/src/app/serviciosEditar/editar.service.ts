@@ -13,7 +13,6 @@ export class EditarService {
 
   constructor(private http: HttpClient) { }
 
-
   putEditarPersona(body: string) {
     let httpOptions = {
       headers: new HttpHeaders({

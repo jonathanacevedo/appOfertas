@@ -2,11 +2,14 @@ package io.swagger.api;
 
 import io.swagger.model.JsonApiBodyRequest;
 import io.swagger.model.JsonApiBodyResponseErrors;
+import io.swagger.model.JsonApiBodyResponseSuccess;
 import io.swagger.model.RegistrarRequest;
 import io.swagger.repository.UserRepository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
+
+import org.apache.http.impl.io.SocketOutputBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,6 +115,34 @@ public class ListarApiController implements ListarApi {
         }
 
         return new ResponseEntity<Iterable<RegistrarRequest>>(HttpStatus.NOT_IMPLEMENTED);
+    }
+    
+    public ResponseEntity<?> loguearPersona(@ApiParam(value = "Usuario de logueo",required=true) @RequestParam("usuario") String usuario, @ApiParam(value = "Contraseña de logueo",required=true) @RequestParam("password") String password) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            try {
+            	List<RegistrarRequest> response = repo.findByCorreoAndContrasena(usuario, password);
+            	System.out.println("Tamaño de la lista: "+response.size());
+            	if(response.isEmpty()) {
+            		JsonApiBodyResponseErrors valor =  new JsonApiBodyResponseErrors();
+                 	valor.setCodigo("404");
+                 	valor.setDetalle("Email o contraseña no validos.");
+                    return new ResponseEntity<JsonApiBodyResponseErrors>(valor, HttpStatus.NOT_ACCEPTABLE);
+            	} else {
+                	JsonApiBodyRequest persona = new JsonApiBodyRequest();
+                	persona.setPersona(response);
+                	return new ResponseEntity<JsonApiBodyRequest>(persona, HttpStatus.OK);
+
+            		//return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \"Aceptado\",  \"id\" : \"Aceptado\",  \"nombre\" : \"Aceptado\"}", JsonApiBodyResponseSuccess.class), HttpStatus.OK);
+            	}
+            	 //return new ResponseEntity<JsonApiBodyRequest>(objectMapper.readValue("{  \"persona\" : [ {    \"apellidos\" : \""+usuario.getApellidos()+"\",    \"estado\" : \""+usuario.getEstado()+"\",    \"correo\" : \""+usuario.getCorreo()+"\",    \"genero\" : \""+usuario.getGenero()+"\",    \"contrasena\" : \""+usuario.getContrasena()+"\",    \"id\" : \""+usuario.getId()+"\",    \"telefono\" : \""+usuario.getTelefono()+"\",    \"nombre\" : \""+usuario.getNombre()+"\",    \"rol\" : \""+usuario.getRol()+"\",    \"token\" : \""+usuario.getToken()+"\"  }]}", JsonApiBodyRequest.class), HttpStatus.ACCEPTED);
+            	//return new ResponseEntity<JsonApiBodyRequest>(objectMapper.readValue("{  \"persona\" : [ {    \"apellidos\" : \"apellidos\",    \"estado\" : \"estado\",    \"correo\" : \"correo\",    \"genero\" : \"genero\",    \"contrasena\" : \"contrasena\",    \"id\" : \"id\",    \"telefono\" : \"telefono\",    \"nombre\" : \"nombre\",    \"rol\" : \"rol\",    \"token\" : \"token\"  }, {    \"apellidos\" : \"apellidos\",    \"estado\" : \"estado\",    \"correo\" : \"correo\",    \"genero\" : \"genero\",    \"contrasena\" : \"contrasena\",    \"id\" : \"id\",    \"telefono\" : \"telefono\",    \"nombre\" : \"nombre\",    \"rol\" : \"rol\",    \"token\" : \"token\"  } ]}", JsonApiBodyRequest.class), HttpStatus.ACCEPTED);
+            } catch (Exception e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<JsonApiBodyRequest>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return new ResponseEntity<JsonApiBodyRequest>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

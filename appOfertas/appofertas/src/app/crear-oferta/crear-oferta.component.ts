@@ -37,7 +37,7 @@ export class CrearOfertaComponent implements OnInit {
 
     this.idnegocio = data.idnegocio;
     this.nombre = data.nombre;
-    //this.foto = data.foto;
+    this.foto = data.foto;
     this.latitud = data.latitud;
     this.longitud = data.longitud;
   }

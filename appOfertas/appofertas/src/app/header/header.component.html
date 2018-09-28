@@ -1,11 +1,19 @@
+<!-- <div class="welcome">
+  <img (click)="switchContainer('4')" src="../../assets/imagenes/iconoMenu2.png" class="imgWelcome" alt="perfil">
+  <div style="float: right;">Bienvenido/a {{nombre}}</div>
+</div> -->
+<div class="welcome">
+  <img (click)="switchContainer('4')" src="../../assets/imagenes/iconoMenu2.png" class="imgWelcome" alt="perfil">
+  <div style="float: right;">Bienvenido/a {{nombre}}</div>
+</div>
 <div class="divImgHeader">
-  <img class="imgHeader" src="../../assets/imagenes/logoOfertApp.png" alt="logoImg">
+  <img class="imgHeader" src="../../assets/imagenes/logoOfertAppNuevo2.png" alt="logoImg">
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #751836; color: #FFFFFF; font-family: Lobster;">
-  <a class="navbar-brand" style="font-size: 1.5rem;" href="/">
+  <a class="navbar-brand" style="font-size: 1.5rem;" (click)="switchContainer('1')">
+    <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
     OfertApp
   </a>
-  <!-- <img class="logoNavBar" src="../../assets/imagenes/logoOfertApp.png" alt="LogoMenu"> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -21,8 +29,8 @@
         <a class="nav-link" (click)="switchContainer('3')">Mis Negocios</a>
       </li>
       <li class="nav-item {{activaO}}" *ngIf="rol=='Administrador' ">
-          <a class="nav-link" (click)="switchContainer('4')">Mis Ofertas</a>
-        </li>
+        <a class="nav-link" (click)="switchContainer('5')">Mis Ofertas</a>
+      </li>
       <li class="nav-item {{activaR}}" *ngIf="rol=='Administrador' ">
         <a class="nav-link" (click)="switchContainer('2')">Registrar Negocio</a>
       </li>
@@ -41,6 +49,7 @@
     <app-mapa *ngSwitchCase="'inicio'"></app-mapa>
     <app-registrar-negocio *ngSwitchCase="'registronegocio'"></app-registrar-negocio>
     <app-mis-negocios *ngSwitchCase="'misnegocios'"></app-mis-negocios>
+    <app-editar-perfil *ngSwitchCase="'editarperfil'"></app-editar-perfil>
     <app-mis-ofertas *ngSwitchCase="'misofertas'"></app-mis-ofertas>
   </div>
 </section>

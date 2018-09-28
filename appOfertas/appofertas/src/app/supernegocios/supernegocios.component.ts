@@ -29,6 +29,12 @@ export class SupernegociosComponent implements OnInit {
   getNegocios(): void {
     this.listar.getNegocios().subscribe((data) => {
       data.forEach((negocio) => {
+        this.listar.getPersonaPorId(negocio.idadmin).subscribe((data) => {
+          data.persona.forEach((persona) => {
+            console.log('El negocio ' + negocio.nombre + ' pertenece al usuario ' + persona.nombre);
+            negocio.propietario = persona.nombre
+          })
+        });
         this.negocios.push(negocio)
       });
     });
@@ -43,11 +49,11 @@ export class SupernegociosComponent implements OnInit {
 
   deleteEliminarNegocio(body: any): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
-      if(data.body!==undefined){
+      if (data.body !== undefined) {
         console.log(data.body.id);
         this.listar.getOfertasPorIdNegocio(data.body.id).subscribe((oferta) => {
           oferta.forEach((ofert) => {
-            this.eliminarOferta(ofert.id, data.body.id, ''); 
+            this.eliminarOferta(ofert.id, data.body.id, '');
           })
         }
         );
@@ -104,19 +110,19 @@ export class SupernegociosComponent implements OnInit {
   }
 
   eliminarOferta(id: string, idnegocio: string, producto: string) {
-      let body = {
-        "oferta" : [
-          {
-            "id": id,
-            "parametro": idnegocio
-          }
-        ]
-      };
-      console.log('Body para borrar: '+JSON.stringify(body));
-      this.deleteEliminarOferta(JSON.stringify(body));
+    let body = {
+      "oferta": [
+        {
+          "id": id,
+          "parametro": idnegocio
+        }
+      ]
+    };
+    console.log('Body para borrar: ' + JSON.stringify(body));
+    this.deleteEliminarOferta(JSON.stringify(body));
   }
 
- verFoto(url: string) {
+  verFoto(url: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -127,6 +133,6 @@ export class SupernegociosComponent implements OnInit {
       url: url
     };
     //this.dialog.open(EditarNegoComponent, dialogConfig);
-    const dialogRef = this.dialog.open(VerfotoComponent, dialogConfig); 
+    const dialogRef = this.dialog.open(VerfotoComponent, dialogConfig);
   }
 }

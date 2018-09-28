@@ -142,16 +142,16 @@ export class MisOfertasComponent implements OnInit {
       data.forEach((item) => {
         this.listarService.getOfertasPorIdNegocio(item.idnegocio).subscribe((ofertas) => {
           ofertas.forEach((oferta) => {
-            if (filtros[0] == 'Vigentes') {
+            if (filtros[0] == 'Vigentes' || filtros[0] == 'Todas') {
               console.log('filtros vigentes...');
               if (this.compararFechas(oferta.fecha_fin)) {
-                if(oferta.tipo == filtros[1] || filtros[1]=='Todas'){
+                if (oferta.tipo == filtros[1] || filtros[1] == 'Todas') {
                   this.ofertasValidas.push(oferta);
                 }
               }
-            } else if(filtros[0] == 'Vencidas'){
+            } else if (filtros[0] == 'Vencidas') {
               if (!this.compararFechas(oferta.fecha_fin)) {
-                if(oferta.tipo == filtros[1] || filtros[1]=='Todas'){
+                if (oferta.tipo == filtros[1] || filtros[1] == 'Todas') {
                   this.ofertasValidas.push(oferta);
                 }
               }
@@ -159,9 +159,9 @@ export class MisOfertasComponent implements OnInit {
               this.ofertasValidas.push(oferta);
             }
           });
-        item.oferta = this.ofertasValidas;
-        this.negocios.push(item);
-        this.ofertasValidas = [];
+          item.oferta = this.ofertasValidas;
+          this.negocios.push(item);
+          this.ofertasValidas = [];
         });
       });
     });
@@ -186,10 +186,12 @@ export class MisOfertasComponent implements OnInit {
     // };
     const dialogRef = this.dialog.open(FiltradoAdminComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      this.filtros = data;
-      console.log(data);
-      if (this.filtros.length !== 0) {
-        this.filtrarOfertas(this.filtros);
+      if (data !== 'vacio') {
+        this.filtros = data;
+        console.log(data);
+        if (this.filtros.length !== 0) {
+          this.filtrarOfertas(this.filtros);
+        }
       }
     });
   }
