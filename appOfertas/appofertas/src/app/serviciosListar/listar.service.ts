@@ -8,6 +8,7 @@ import { headersToString } from 'selenium-webdriver/http';
 })
 export class ListarService {
 
+  urlLoguearPersonas: string = 'http://localhost:8090/personas/loguear?'; //usuario=biancabien@gmail.com&password=123456
   urlListarPersonas: string = 'http://localhost:8050/orquestador/listar/personas';
   urlListarOfertas: string = 'http://localhost:8092/ofertas/listar';
   urlListarNegociosAdmin: string = 'http://localhost:8091/negocios/listar/admin/';
@@ -19,6 +20,17 @@ export class ListarService {
   urlListarPersonaPorId: string = 'http://localhost:8090/personas/listar/';
 
   constructor(public http: HttpClient) { }
+
+  loguearPersona(correo, contrasena) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      })
+    };
+    let urlLogin = this.urlLoguearPersonas + 'usuario=' + correo + '&password='+contrasena;
+    return this.http.get(urlLogin);
+  }
 
   getPersonas(): any {
     const httpOptions = {
