@@ -1,6 +1,7 @@
 package io.swagger.api;
 
 import io.swagger.model.EditRequest;
+import io.swagger.model.JsonApiBodyRequest;
 import io.swagger.model.JsonApiBodyRequestEdit;
 import io.swagger.model.JsonApiBodyResponseErrors;
 import io.swagger.model.JsonApiBodyResponseSuccess;
@@ -69,6 +70,21 @@ public class EditarApiController implements EditarApi {
             		System.out.println("Esta oferta no pertenece a ese negocio");
             	}
                 return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \"estado\",  \"id\" : \"id\",  \"nombre\" : \"nombre\"}", JsonApiBodyResponseSuccess.class), HttpStatus.OK);
+            } catch (IOException e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<JsonApiBodyResponseSuccess>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<JsonApiBodyResponseSuccess>(HttpStatus.NOT_IMPLEMENTED);
+    }
+    
+    public ResponseEntity<JsonApiBodyResponseSuccess> eliminarPut(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            try {
+            	repo.delete(body.getOferta().get(0).getId());
+                return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \"estado\",  \"id\" : \"id\",  \"nombre\" : \"nombre\"}", JsonApiBodyResponseSuccess.class), HttpStatus.ACCEPTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<JsonApiBodyResponseSuccess>(HttpStatus.INTERNAL_SERVER_ERROR);

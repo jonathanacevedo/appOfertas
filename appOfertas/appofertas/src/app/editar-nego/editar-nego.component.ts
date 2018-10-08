@@ -98,7 +98,6 @@ export class EditarNegoComponent implements OnInit {
         }
       ]
     };
-    console.log(JSON.stringify(body));
     this.putEditarNegocio(JSON.stringify(body));
   }
 

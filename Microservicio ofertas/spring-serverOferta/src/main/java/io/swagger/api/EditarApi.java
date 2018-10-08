@@ -5,6 +5,7 @@
  */
 package io.swagger.api;
 
+import io.swagger.model.JsonApiBodyRequest;
 import io.swagger.model.JsonApiBodyRequestEdit;
 import io.swagger.model.JsonApiBodyResponseErrors;
 import io.swagger.model.JsonApiBodyResponseSuccess;
@@ -39,5 +40,16 @@ public interface EditarApi {
         consumes = { "application/json" },
         method = RequestMethod.PUT)
     ResponseEntity<JsonApiBodyResponseSuccess> editarPut(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestEdit body);
+
+    @CrossOrigin(origins = "*")
+    @ApiOperation(value = "eliminación de Ofertas", nickname = "eliminarPut", notes = "registro de negocios", response = JsonApiBodyResponseSuccess.class, tags={ "ofertas", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "persona registrada correctamente", response = JsonApiBodyResponseSuccess.class),
+        @ApiResponse(code = 400, message = "datos imcompletos o incorrectos", response = JsonApiBodyResponseErrors.class) })
+    @RequestMapping(value = "/eliminarPut",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.PUT)
+    ResponseEntity<JsonApiBodyResponseSuccess> eliminarPut(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequest body);
 
 }
