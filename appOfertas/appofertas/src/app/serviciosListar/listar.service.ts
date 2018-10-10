@@ -8,15 +8,15 @@ import { headersToString } from 'selenium-webdriver/http';
 })
 export class ListarService {
 
-  urlListarPersonas: string = 'http://localhost:8050/orquestador/listar/personas';
-  urlListarOfertas: string = 'http://localhost:8092/ofertas/listar';
-  urlListarNegociosAdmin: string = 'http://localhost:8091/negocios/listar/admin/';
-  urlListarOfertasId: string = 'http://localhost:8092/ofertas/listar/oferta/';
-  urlListarOfertasIdNegocio: string = 'http://localhost:8092/ofertas/listar/negocio/';
-  urlListarNegocios: string = 'http://localhost:8091/negocios/listar';
-  urlListarNegocioPorId: string = 'http://localhost:8091/negocios/listar/';
-  urlListarNegocioPorTipo: string = 'http://localhost:8091/negocios/listar/negocio/';
-  urlListarPersonaPorId: string = 'http://localhost:8090/personas/listar/';
+  urlListarPersonas: string = 'http://ofertapp-orquestador.us-east-2.elasticbeanstalk.com/orquestador/listar/personas';
+  urlListarOfertas: string = 'http://ofertapp-ofertas.us-east-2.elasticbeanstalk.com/ofertas/listar';
+  urlListarNegociosAdmin: string = 'http://ofertapp-negocio.us-east-2.elasticbeanstalk.com/negocios/listar/admin/';
+  urlListarOfertasId: string = 'http://ofertapp-ofertas.us-east-2.elasticbeanstalk.com/ofertas/listar/oferta/';
+  urlListarOfertasIdNegocio: string = 'http://ofertapp-ofertas.us-east-2.elasticbeanstalk.com/ofertas/listar/negocio/';
+  urlListarNegocios: string = 'http://ofertapp-negocio.us-east-2.elasticbeanstalk.com/negocios/listar';
+  urlListarNegocioPorId: string = 'http://ofertapp-negocio.us-east-2.elasticbeanstalk.com/negocios/listar/';
+  urlListarNegocioPorTipo: string = 'http://ofertapp-negocio.us-east-2.elasticbeanstalk.com/negocios/listar/negocio/';
+  urlListarPersonaPorId: string = 'http://ofertapp-persona.us-east-2.elasticbeanstalk.com/personas/listar';
 
   constructor(public http: HttpClient) { }
 

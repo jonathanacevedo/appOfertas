@@ -6,9 +6,10 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 })
 export class EliminarService {
 
-  urlEliminarNegocio: string = "http://localhost:8091/negocios/eliminar";
-  urlEliminarOferta: string = "http://localhost:8092/ofertas/eliminar";
-  urlEliminarPersona: string = "http://localhost:8090/personas/eliminar";
+  urlEliminarNegocio: string = "http://ofertapp-negocio.us-east-2.elasticbeanstalk.com/negocios/eliminar";
+  urlEliminarOferta: string = "http://ofertapp-ofertas.us-east-2.elasticbeanstalk.com/ofertas/eliminar";
+  urlEliminarPersona: string = "http://ofertapp-persona.us-east-2.elasticbeanstalk.com/personas/eliminar";
+
 
 
 

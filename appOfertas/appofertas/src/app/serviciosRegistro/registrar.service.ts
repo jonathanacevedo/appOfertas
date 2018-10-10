@@ -7,10 +7,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class RegistrarPersonaService {
 
-  urlRegistrarPersona: string = "http://localhost:8050/orquestador/registrar/personas";
-  urlRegistrarNegocio: string = "http://localhost:8091/negocios/registrar";
-  urlRegistrarOferta: string = "http://localhost:8092/ofertas/registrar";
-  
+  urlRegistrarPersona: string = "http://ofertapp-orquestador.us-east-2.elasticbeanstalk.com/orquestador/registrar/personas";
+  urlRegistrarNegocio: string = "http://ofertapp-negocio.us-east-2.elasticbeanstalk.com/negocios/registrar";
+  urlRegistrarOferta: string = "http://ofertapp-ofertas.us-east-2.elasticbeanstalk.com/ofertas/registrar";
 
   constructor(private http: HttpClient) { }
 

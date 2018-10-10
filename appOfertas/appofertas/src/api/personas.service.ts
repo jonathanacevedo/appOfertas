@@ -30,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class PersonasService {
 
-    protected basePath = 'https://localhost:8090/personas';
+    protected basePath = 'http://ofertapp-persona.us-east-2.elasticbeanstalk.com/personas';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

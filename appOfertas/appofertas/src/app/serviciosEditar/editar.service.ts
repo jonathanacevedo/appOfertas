@@ -7,9 +7,10 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 })
 export class EditarService {
 
-  urlEditarNegocio: string = "http://localhost:8091/negocios/editar";
-  urlEditarOferta: string = "http://localhost:8092/ofertas/editar";
-  urlEditarPersona: string = "http://localhost:8090/personas/editar";
+  urlEditarNegocio: string = "http://ofertapp-negocio.us-east-2.elasticbeanstalk.com/negocios/editar";
+  urlEditarOferta: string = "http://ofertapp-ofertas.us-east-2.elasticbeanstalk.com/ofertas/editar";
+  urlEditarPersona: string = "http://ofertapp-persona.us-east-2.elasticbeanstalk.com/personas/editar";
+
 
   constructor(private http: HttpClient) { }
 
