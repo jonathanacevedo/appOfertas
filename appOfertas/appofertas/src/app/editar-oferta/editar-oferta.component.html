@@ -1,75 +1,81 @@
 <div class="todoContainer">
-<button (click)="cerrarDialog()" class="btnCerrar">Cerrar</button>
-<div class="containerForm">
-  <h1>Editar Oferta</h1>
-  <br>
-  <form>
+  <button (click)="cerrarDialog()" class="btnCerrar">Cerrar</button>
+  <div class="containerForm">
+    <h1>Editar Oferta</h1>
+    <br>
+    <form [formGroup]="formulario" (ngSubmit)="editarOferta()">
       <input type="hidden" id="txtLatitud" #lat>
       <input type="hidden" id="txtLongitud" #lon>
-    <div class="form-group">
-      <label for="inputEmail4">Producto:</label>
-      <input type="text" class="form-control" id="inputProducto" [(ngModel)]="producto" [ngModelOptions]="{standalone: true}" placeholder="Producto">
-    </div>
-    <div class="form-row">
+      <div class="form-group">
+        <label for="inputEmail4">Producto:</label>
+        <input type="text" class="form-control" id="inputProducto" formControlName="producto" placeholder="Producto">
+        <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('producto').invalid">{{obtenerMensajeErrorProducto()}}</mat-error>
+      </div>
+      <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="inputState">Tipo de oferta:</label>
-            <select id="inputTipo2" class="form-control" [(ngModel)]="tipo" [ngModelOptions]="{standalone: true}">
-              <option>Descuento</option>
-              <option>Promocion</option>
-              <option>Hora Feliz</option>
-              <option>Cumpleaños</option>
-            </select>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="inputPassword4">Oferta
-              <span *ngIf="tipo=='Descuento'"> %</span>
-              <span style="color: grey;" *ngIf="tipo=='Promocion'">Ej. 2x1..</span>
-              :
-            </label>
-            <input [attr.disabled]="tipo=='Hora Feliz' || tipo=='Cumpleaños' ? '' : null" type="text" class="form-control" id="inputValor"
-              [(ngModel)]="descuento" [ngModelOptions]="{standalone: true}" placeholder="Oferta">
-          </div>
+          <label for="inputState">Tipo de oferta:</label>
+          <select id="inputTipo2" class="form-control" formControlName="tipo">
+            <option>Descuento</option>
+            <option>Promocion</option>
+            <option>Hora Feliz</option>
+            <option>Cumpleaños</option>
+          </select>
+          <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('tipo').invalid">{{obtenerMensajeErrorTipo()}}</mat-error>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">Oferta
+            <span *ngIf="formulario.get('tipo').value=='Descuento'"> %</span>
+            <span style="color: grey;" *ngIf="formulario.get('tipo').value=='Promocion'">Ej. 2x1..</span>
+            :
+          </label>
+          <input [attr.disabled]="formulario.get('tipo').value=='Hora Feliz' || formulario.get('tipo').value=='Cumpleaños' ? '' : null"
+            type="text" class="form-control" id="inputValor" formControlName="descuento" placeholder="Oferta">
+          <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('descuento').invalid">{{obtenerMensajeErrorDescuento()}}</mat-error>
+        </div>
         <div class="form-group col-md-4">
           <label for="inputPassword4">Valor:</label>
-          <input type="text" class="form-control" id="inputValor" [(ngModel)]="valor" [ngModelOptions]="{standalone: true}" placeholder="Valor">
+          <input type="text" class="form-control" id="inputValor" formControlName="valor" placeholder="Valor">
+          <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('valor').invalid">{{obtenerMensajeErrorValor()}}</mat-error>
         </div>
       </div>
-<div class="form-row">
-  <div class="form-group col-md-6">
-    <label for="inputEmail4">Fecha de Inicio:</label>
-    <input type="text" class="form-control" id="inputInicio" [(ngModel)]="fecha_inicio" [ngModelOptions]="{standalone: true}"
-      placeholder="Fecha de inicio">
-  </div>
-  <div class="form-group col-md-6">
-    <label for="inputPassword4">Fecha Fin:</label>
-    <input type="text" class="form-control" id="inputFin" [(ngModel)]="fecha_fin" [ngModelOptions]="{standalone: true}" placeholder="Fecha fin">
-  </div>
-</div>
-<!-- Línea nueva  -->
-<div class="form-group">
-  <label for="inputEmail4">Detalle:</label>
-  <textarea class="form-control" rows="5" id="detalle2" [(ngModel)]="detalle" [ngModelOptions]="{standalone: true}"></textarea>
-</div>
-<div class="container">
-    <div class="card">
-      <div class="card-header">
-        Foto de la oferta
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Fecha de Inicio:</label>
+          <input type="text" class="form-control" id="inputInicio" formControlName="fecha_inicio" placeholder="Fecha de inicio">
+          <mat-error style="color: red;" *ngIf="activarValidacion && (formulario.get('fecha_inicio').invalid || fechaInicioInvalida())">{{obtenerMensajeErrorFechaInicio()}}</mat-error>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Fecha Fin:</label>
+          <input type="text" class="form-control" id="inputFin" formControlName="fecha_fin" placeholder="Fecha fin">
+          <mat-error style="color: red;" *ngIf="activarValidacion && (formulario.get('fecha_fin').invalid || fechaFinInvalida())">{{obtenerMensajeErrorFechaFin()}}</mat-error>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">Seleccionar la foto:</h5>
-        <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+      <!-- Línea nueva  -->
+      <div class="form-group">
+        <label for="inputEmail4">Detalle:</label>
+        <textarea class="form-control" rows="5" id="detalle2" formControlName="detalle"></textarea>
+        <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('detalle').invalid">{{obtenerMensajeErrorDetalle()}}</mat-error>
       </div>
-    </div>
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            Foto de la oferta
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Seleccionar la foto:</h5>
+            <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+          </div>
+        </div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
+          [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div *ngIf="porcentaje=='1'" class="alert alert-info" role="alert">
+        Imagen subida
+      </div>
+      <br>
+      <button type="submit" class="btnDetalle">Editar Oferta</button>
+    </form>
   </div>
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
-      [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
-  </div>
-  <div *ngIf="porcentaje=='1'" class="alert alert-info" role="alert">
-    Imagen subida
-  </div>
-<br>
-<button type="submit" (click)="editarOferta()" class="btnDetalle">Editar Oferta</button>
-</form>
-</div>
 </div>

@@ -9,6 +9,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 import { SocialUser } from "angularx-social-login";
 import { ListarService } from '../serviciosListar/listar.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,13 @@ export class LoginComponent implements OnInit {
 
   private user: SocialUser;
   private loggedIn: boolean;
+
+  private loginForm = new FormGroup({
+    correo: new FormControl('', [Validators.required, Validators.email]),
+    contrasena: new FormControl('', [Validators.required,
+    Validators.minLength(6)
+    ])
+  });
 
   private correo: string = '';
   private contrasena: string = '';
@@ -46,7 +54,8 @@ export class LoginComponent implements OnInit {
       } else {
         console.log('No esta logueado');
       }
-    });
+    }
+    );
   }
 
   postRegistrarPersona(body: string): void {
@@ -89,33 +98,33 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/registrar']);
   }
 
-  getListaPersonas(): void {
+  getListaPersonas(correo, contrasena): void {
+
     this.activarValidacion = false;
-    this.listar.getPersonas().subscribe(data => {
-      console.log(data);
-      data.persona.forEach((persona) => {
-        if(persona.correo==this.correo && persona.contrasena==this.contrasena){
-          this.iniciar(persona.rol, persona.id, persona.nombre);
-          this.router.navigate(['/inicio']);
-        }
-      });
-      this.activarValidacion = true;
+    this.listar.loguearPersona(correo, contrasena).subscribe(data => {
+      this.iniciar(data.persona[0].rol, data.persona[0].id, data.persona[0].nombre);
+      this.router.navigate(['/inicio']);
+    }, err => {
+      alert("Error al loguearse: " + err.error.detalle);
     }
     );
+    this.activarValidacion = true;
     this.error = 'Datos incorrectos.';
   }
 
-  iniciar(persona: string, idPersona: string, nombre: string) : void {
+  iniciar(persona: string, idPersona: string, nombre: string): void {
     this.auth.Loggin(persona, idPersona, nombre);
   }
 
   iniciarSesion() {
-    if(this.correo=='' || this.contrasena==''){
+    if (this.camposSonValidos()) {
+      let correo = this.loginForm.get('correo').value;
+      let contrasena = this.loginForm.get('contrasena').value;
+      this.getListaPersonas(correo, contrasena);
+    } else {
       this.activarValidacion = true;
       this.error = 'Campos incompletos';
-    } else {
-      this.getListaPersonas();
-    }    
+    }
   }
 
   cerrarSesion() {
@@ -126,4 +135,41 @@ export class LoginComponent implements OnInit {
     this.auth.isLogged();
     console.log(this.auth.getRol());
   }
+
+  getEmailErrorMessage() {
+    let correo = this.loginForm.get('correo');
+    return correo.hasError('required') ? 'Ingrese un correo' :
+      correo.hasError('email') ? 'Correo invalido' : '';
+  }
+
+  getPasswordErroMessage() {
+    let password = this.loginForm.get('contrasena');
+    return password.hasError('required') ? 'Ingrese una contraseña' :
+      password.hasError('minlength') ? 'Contraseña muy corta' : '';
+  }
+
+  camposSonValidos() {
+
+    let correo = this.loginForm.get('correo');
+    let password = this.loginForm.get('contrasena');
+
+    // Validacion de campos vacios o nulos
+    if (correo.value == '' || password.value == '' || correo == null || password == null) {
+      return false;
+    }
+
+    // Validaciones para el correo
+    let ingresoCorreo = correo.hasError('required') ? false : true;
+    let esCorreoValido = correo.hasError('email') ? false : true;
+
+    // Validaciones para la contraseña
+    let ingresoPassword = password.hasError('required') ? false : true;
+    let tieneTamanoMinimo = password.hasError('minlength') ? false : true;
+
+    // Validacion de todos los campos
+    let camposValidos = ingresoCorreo && esCorreoValido && ingresoPassword && tieneTamanoMinimo;
+
+    return camposValidos;
+  }
+
 }

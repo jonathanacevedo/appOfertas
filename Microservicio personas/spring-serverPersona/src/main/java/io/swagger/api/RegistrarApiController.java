@@ -5,6 +5,7 @@ import io.swagger.model.JsonApiBodyResponseErrors;
 import io.swagger.model.JsonApiBodyResponseSuccess;
 import io.swagger.model.RegistrarRequest;
 import io.swagger.repository.UserRepository;
+import io.swagger.utils.CorreoBienvenida;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
@@ -36,7 +37,7 @@ public class RegistrarApiController implements RegistrarApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
-    
+    CorreoBienvenida enviarCorreo = new CorreoBienvenida();
     @Autowired
     private UserRepository repo;
 
@@ -79,6 +80,7 @@ public class RegistrarApiController implements RegistrarApi {
 	                return new ResponseEntity<JsonApiBodyResponseErrors>(valor, HttpStatus.OK);
 				} else {
             		repo.save(body.getPersona().get(0));
+            		enviarCorreo.EnviarCorreo(body.getPersona().get(0).getCorreo());
             		return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{  \"estado\" : \""+body.getPersona().get(0).getEstado()+"\",  \"id\" : \""+body.getPersona().get(0).getId()+"\",  \"nombre\" : \""+body.getPersona().get(0).getNombre()+"\"}", JsonApiBodyResponseSuccess.class), HttpStatus.OK);
             	}
             	            	
