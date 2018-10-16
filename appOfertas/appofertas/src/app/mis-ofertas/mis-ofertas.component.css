@@ -51,6 +51,7 @@ h1{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    min-width: 40%;
 }
 
 
@@ -75,4 +76,12 @@ btnIcono{
   background-color: #60132c;
   color: #FFFFFF;
   padding-block-end: 1%;
+}
+.card-img-top{
+  width: 100%;
+  height: 230px;
+}
+.col-4{
+  margin-bottom: 2%;
+
 }

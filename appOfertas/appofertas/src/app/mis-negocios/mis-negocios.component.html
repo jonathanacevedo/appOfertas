@@ -10,7 +10,7 @@
                     <img class="card-img-top" src="{{negocio.foto}}" alt="Banner">
                     <div class="card-body">
                         <h5 class="card-title">{{negocio.nombre}}</h5>
-                        <p class="card-text">{{negocio.detalle}} </p>
+                        <p class="card-text">{{(negocio.detalle.length > 50)? (negocio.detalle | slice:0:50) + '...' : (negocio.detalle) }} </p>
                         <br>
                         <strong>Tipo: </strong>{{negocio.tipo}}
                         <br>

@@ -8,15 +8,15 @@ import { headersToString } from 'selenium-webdriver/http';
 })
 export class ListarService {
 
-  urlListarPersonas: string = 'http://localhost:8050/orquestador/listar/personas';
-  urlListarOfertas: string = 'http://localhost:8092/ofertas/listar';
-  urlListarNegociosAdmin: string = 'http://localhost:8091/negocios/listar/admin/';
-  urlListarOfertasId: string = 'http://localhost:8092/ofertas/listar/oferta/';
-  urlListarOfertasIdNegocio: string = 'http://localhost:8092/ofertas/listar/negocio/';
-  urlListarNegocios: string = 'http://localhost:8091/negocios/listar';
-  urlListarNegocioPorId: string = 'http://localhost:8091/negocios/listar/';
-  urlListarNegocioPorTipo: string = 'http://localhost:8091/negocios/listar/negocio/';
-  urlListarPersonaPorId: string = 'http://localhost:8090/personas/listar/';
+  urlListarPersonas: string = 'http://172.16.0.210:8050/orquestador/listar/personas';
+  urlListarOfertas: string = 'http://172.16.0.210:8092/ofertas/listar';
+  urlListarNegociosAdmin: string = 'http://172.16.0.210:8091/negocios/listar/admin/';
+  urlListarOfertasId: string = 'http://172.16.0.210:8092/ofertas/listar/oferta/';
+  urlListarOfertasIdNegocio: string = 'http://172.16.0.210:8092/ofertas/listar/negocio/';
+  urlListarNegocios: string = 'http://172.16.0.210:8091/negocios/listar';
+  urlListarNegocioPorId: string = 'http://172.16.0.210:8091/negocios/listar/';
+  urlListarNegocioPorTipo: string = 'http://172.16.0.210:8091/negocios/listar/negocio/';
+  urlListarPersonaPorId: string = 'http://172.16.0.210:8090/personas/listar/';
 
   constructor(public http: HttpClient) { }
 

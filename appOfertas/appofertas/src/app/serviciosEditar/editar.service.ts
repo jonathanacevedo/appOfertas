@@ -7,9 +7,9 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 })
 export class EditarService {
 
-  urlEditarNegocio: string = "http://localhost:8091/negocios/editar";
-  urlEditarOferta: string = "http://localhost:8092/ofertas/editar";
-  urlEditarPersona: string = "http://localhost:8090/personas/editar";
+  urlEditarNegocio: string = "http://172.16.0.210:8091/negocios/editar";
+  urlEditarOferta: string = "http://172.16.0.210:8092/ofertas/editar";
+  urlEditarPersona: string = "http://172.16.0.210:8090/personas/editar";
 
   constructor(private http: HttpClient) { }
 
