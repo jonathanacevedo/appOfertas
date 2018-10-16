@@ -21,7 +21,7 @@ public class listarPersonas extends RouteBuilder {
 			.setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
 			.setHeader("Accept", constant("application/json"))
 			//.log("the body para enviar ${body}")
-			.to("http4://localhost:8090/personas/listar")
+			.to("http4://ofertapp-persona.us-east-2.elasticbeanstalk.com/personas/listar")
 			.convertBodyTo(String.class)
 			.log("Respuesta en String: ${body}")
 			.unmarshal().json(JsonLibrary.Jackson, JsonApiBodyRequestPersona.class)

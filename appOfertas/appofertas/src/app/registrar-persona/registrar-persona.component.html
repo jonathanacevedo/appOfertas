@@ -3,80 +3,66 @@
   <img class="imgLogo" src="../../assets/imagenes/logoOfertApp.png" alt="logo">
   <div class="container1">
     <h1>Registrar</h1>
-    <form>
+    <form [formGroup]="registroFormulario" (ngSubmit)="registrarPersona()">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Nombres:</label>
-          <input type="email" class="form-control"
-           id="inputNombre" [(ngModel)]="nombre"
-           [ngModelOptions]="{standalone: true}"
-            placeholder="Nombres">
+          <input type="text" class="form-control" id="inputNombre" formControlName="nombre" placeholder="Nombres"
+            required>
+          <mat-error style="color: red;" *ngIf="activarValidacion && registroFormulario.get('nombre').invalid">{{obtenerMensajeErrorNombre()}}</mat-error>
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4">Apellidos:</label>
-          <input type="text" class="form-control" id="inputApellidos" 
-          [(ngModel)]="apellidos"
-           [ngModelOptions]="{standalone: true}"
-          placeholder="Apellidos">
+          <input type="text" class="form-control" id="inputApellidos" formControlName="apellidos" placeholder="Apellidos"
+            required>
+          <mat-error style="color: red;" *ngIf="activarValidacion && registroFormulario.get('apellidos').invalid">{{obtenerMensajeErrorApellido()}}</mat-error>
         </div>
       </div>
       <!-- Línea nueva  -->
       <div class="form-group">
         <label for="inputEmail4">Email:</label>
-        <input type="email" class="form-control" id="inputEmail"
-        [(ngModel)]="correo"
-           [ngModelOptions]="{standalone: true}"
-        placeholder="Email">
+        <input type="email" class="form-control" id="inputEmail" formControlName="correo" placeholder="Email" required>
+        <mat-error style="color: red;" *ngIf="activarValidacion && registroFormulario.get('correo').invalid">{{obtenerMensajeErrorCorreo()}}</mat-error>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Contraseña:</label>
-          <input type="password" class="form-control" id="inputPassword"
-          [(ngModel)]="contrasena"
-           [ngModelOptions]="{standalone: true}"
-          placeholder="Contraseña">
+          <input type="password" class="form-control" id="inputPassword" formControlName="contrasena" placeholder="Contraseña">
+          <mat-error style="color: red;" *ngIf="activarValidacion && registroFormulario.get('contrasena').invalid">{{obtenerMensajeErrorContrasena()}}</mat-error>
         </div>
         <div class="form-group col-md-6">
           <label for="inputState">Registrarse como:</label>
-          <select id="inputRol" class="form-control" [(ngModel)]="rol"
-          [ngModelOptions]="{standalone: true}">
+          <select id="inputRol" class="form-control" formControlName="rol">
             <option>Cliente</option>
             <option>Administrador</option>
           </select>
+          <mat-error style="color: red;" *ngIf="activarValidacion && registroFormulario.get('rol').invalid">{{obtenerMensajeErrorRol()}}</mat-error>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="inputEmail4">Telefono</label>
-          <input type="email" class="form-control" id="inputTel"
-          [(ngModel)]="telefono"
-           [ngModelOptions]="{standalone: true}"
-          placeholder="Telefono">
+          <input type="number" class="form-control" id="inputTel" formControlName="telefono" placeholder="Telefono">
+          <mat-error style="color: red;" *ngIf="activarValidacion && registroFormulario.get('telefono').invalid">{{obtenerMensajeErrorTelefono()}}</mat-error>
         </div>
-        <!-- <div class="form-group col-md-6">
-          <label for="inputPassword4">Genero</label>
-          <input type="password" class="form-control" id="inputPassword4" placeholder="Apellidos">
-        </div> -->
         <div class="form-group col-md-4">
           <label for="inputState">Genero</label>
-          <select id="inputGenero" class="form-control" [(ngModel)]="genero"
-          [ngModelOptions]="{standalone: true}">
+          <select id="inputGenero" class="form-control" formControlName="genero">
             <option>Masculino</option>
             <option>Femenino</option>
             <option>Otro</option>
           </select>
+          <mat-error style="color: red;" *ngIf="activarValidacion && registroFormulario.get('genero').invalid">{{obtenerMensajeErrorGenero()}}</mat-error>
         </div>
         <div class="form-group col-md-4">
           <label for="inputEmail4">Ciudad</label>
-          <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad">
+          <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad" formControlName="ciudad">
+          <mat-error style="color: red;" *ngIf="activarValidacion && registroFormulario.get('ciudad').invalid">{{obtenerMensajeErrorCiudad()}}</mat-error>
         </div>
       </div>
-      <div *ngIf="error!=''" style="color: red;">
-        {{error}}
-      </div>
-       <br>
-      <button type="submit" (click)="registrarPersona()" class="btnDetalle">Registrar</button>
+      <br>
+      <button type="submit" class="btnDetalle">Registrar</button>
     </form>
   </div>
 </div>
