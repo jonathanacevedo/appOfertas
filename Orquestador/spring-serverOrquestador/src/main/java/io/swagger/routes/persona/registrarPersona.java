@@ -40,7 +40,7 @@ public class registrarPersona extends RouteBuilder {
 			.to("freemarker:templates/registrarPersonaPlantilla.ftl")		
 			.hystrix()
 			.hystrixConfiguration().executionTimeoutInMilliseconds(3000).end()
-			.to("http4://localhost:8090/personas/registrar")
+			.to("http4://ofertapp-persona.us-east-2.elasticbeanstalk.com/personas/registrar")
 			.convertBodyTo(String.class)
 			.log("${body}")
 //			.unmarshal().json(JsonLibrary.Jackson,JsonApiBodyResponseSuccessPersona.class)

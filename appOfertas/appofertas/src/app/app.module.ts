@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { FormsModule } from '@angular/forms'; // <-- NgModel
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from "@angular/material";
@@ -54,7 +54,7 @@ import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -147,7 +147,9 @@ export function provideConfig() {
     MatDialogModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule
     ],
   entryComponents: [FiltradoSuperComponent, EditarPerfilComponent, EditarNegoComponent, FiltradoAdminComponent, CrearOfertaComponent, VerfotoComponent, FiltradoComponent, EditarOfertaComponent, VerNegocioComponent],
   providers: [
