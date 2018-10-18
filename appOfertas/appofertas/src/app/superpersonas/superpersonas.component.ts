@@ -45,7 +45,7 @@ export class SuperpersonasComponent implements OnInit {
 
   putEditarPersona(body: string): void {
     this.editarService.putEditarPersona(body).subscribe((data) => {
-      console.log(data)
+      //console.log(data)
       alert('Persona actualizada correctamente')
     });
   }

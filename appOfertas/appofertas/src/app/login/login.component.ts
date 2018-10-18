@@ -44,15 +44,15 @@ export class LoginComponent implements OnInit {
     public listar: ListarService) { }
 
   ngOnInit() {
-    console.log(this.name);
+    //console.log(this.name);
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
       if (this.loggedIn) {
-        console.log('Esta logueado');
-        console.log(user);
+        //console.log('Esta logueado');
+        //console.log(user);
       } else {
-        console.log('No esta logueado');
+        //console.log('No esta logueado');
       }
     }
     );
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
     this.registrar.registrarPersona(body).subscribe(data => {
       this.auth.Loggin('Cliente', '', '');
       this.router.navigate(['/inicio']);
-      console.log(data);
+      //console.log(data);
     });
   }
 
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
       };
 
       this.postRegistrarPersona(JSON.stringify(body));
-      console.log(user);
+      //console.log(user);
     });
   }
 
@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
   getListaPersonas(correo, contrasena): void {
 
     this.activarValidacion = false;
-    this.listar.loguearPersona(correo, contrasena).subscribe(data => {
+    this.listar.loguearPersona(correo, contrasena).subscribe((data: any) => {
       this.iniciar(data.persona[0].rol, data.persona[0].id, data.persona[0].nombre);
       this.router.navigate(['/inicio']);
     }, err => {
@@ -133,7 +133,7 @@ export class LoginComponent implements OnInit {
 
   consultarSesion() {
     this.auth.isLogged();
-    console.log(this.auth.getRol());
+    //console.log(this.auth.getRol());
   }
 
   getEmailErrorMessage() {

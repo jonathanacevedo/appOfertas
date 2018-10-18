@@ -43,7 +43,7 @@ export class MisNegociosComponent implements OnInit {
   deleteEliminarNegocio(body: string, nombre: string): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
       if(data.body!==undefined){
-        console.log(data.body.id);
+        //console.log(data.body.id);
         this.listarService.getOfertasPorIdNegocio(data.body.id).subscribe((oferta) => {
           oferta.forEach((ofert) => {
             this.eliminarOferta(ofert.id, data.body.id, ''); 
@@ -59,7 +59,7 @@ export class MisNegociosComponent implements OnInit {
 
   deleteEliminarOferta(body: string): void {
     this.eliminarService.deleteEliminarOferta(body).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
     });
   }
 
@@ -72,20 +72,20 @@ export class MisNegociosComponent implements OnInit {
           }
         ]
       };
-      console.log('Body para borrar: '+JSON.stringify(body));
+      //console.log('Body para borrar: '+JSON.stringify(body));
       this.deleteEliminarOferta(JSON.stringify(body));
   }
 
   putEditarNegocio(body: string): any {
     this.editarService.putEditarNegocio(body).subscribe((data) => {
-      console.log('Datos devueltos del servicio: ' + data)
+      //('Datos devueltos del servicio: ' + data)
     });
   }
 
   eliminarNegocio(idNegocio: string, nombre: string) {
     let x = confirm("¿Está seguro de eliminar el negocio "+nombre+"?");
     if(x){
-      console.log(idNegocio);
+      //console.log(idNegocio);
       let body = {
         "negocio": [
           {
@@ -96,7 +96,7 @@ export class MisNegociosComponent implements OnInit {
       };
       this.deleteEliminarNegocio(JSON.stringify(body), nombre);
     } else {
-      console.log('Cancelado el borrado.');
+      //console.log('Cancelado el borrado.');
     }
   }
 
@@ -132,7 +132,7 @@ export class MisNegociosComponent implements OnInit {
     const dialogRef = this.dialog.open(EditarNegoComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe((data) =>  {
-      console.log("Se cerró esa vuelta.")
+      //console.log("Se cerró esa vuelta.")
       if(data){
       this.negocios = [];
       this.getNegociosAdmin(this.auth.getIdAdmin());

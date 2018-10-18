@@ -156,7 +156,7 @@ export class EditarNegoComponent implements OnInit {
       alert("Los campos son invalidos");
     }else{
       if (lati == '' && long == '') {
-        console.log('lat y lon vacios, valores sin cambio.');
+        //console.log('lat y lon vacios, valores sin cambio.');
       } else {
         this.latitud = lati;
         this.longitud = long;
@@ -180,7 +180,7 @@ export class EditarNegoComponent implements OnInit {
           }
         ]
       };
-      console.log(JSON.stringify(body));
+      //(JSON.stringify(body));
       this.putEditarNegocio(JSON.stringify(body));
     }    
   }

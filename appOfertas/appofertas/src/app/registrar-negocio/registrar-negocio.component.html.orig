@@ -1,0 +1,83 @@
+<div class="containerForm">
+  <h1>Registrar Negocio</h1>
+  <br>
+  <form [formGroup]="formulario" (ngSubmit)="registrarNegocio(lat.value, lon.value)">
+    <input type="hidden" id="txtLatitud" #lat>
+    <input type="hidden" id="txtLongitud" #lon>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Nombre:</label>
+        <input type="text" class="form-control" id="inputNombre2" formControlName="nombre"  placeholder="Nombre">
+        <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('nombre').invalid">{{obtenerMensajeErrorNombre()}}</mat-error>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Nit:</label>
+        <input type="text" class="form-control" id="inputApellidos2" formControlName="nit" placeholder="Nit">
+        <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('nit').invalid">{{obtenerMensajeErrorNit()}}</mat-error>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Dirección:</label>
+        <input type="text" onChange="coordenadas()" class="form-control" id="direccion" formControlName="direccion" 
+          placeholder="Direccion">
+          <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('direccion').invalid">{{obtenerMensajeErrorDireccion()}}</mat-error>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Email:</label>
+        <input type="email" class="form-control" id="inputEmail2" formControlName="correo" placeholder="Email">
+        <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('correo').invalid">{{obtenerMensajeErrorEmail()}}</mat-error>
+      </div>
+    </div>
+    <!-- Línea nueva  -->
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputEmail4">Telefono:</label>
+        <input type="number" class="form-control" id="inputTelefono2" formControlName="telefono" 
+          placeholder="Telefono">
+          <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('telefono').invalid">{{obtenerMensajeErrorTelefono()}}</mat-error>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputEmail4">Ciudad:</label>
+        <input type="text" class="form-control" id="inputCiudad2" formControlName="ciudad"  placeholder="Ciudad">
+        <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('ciudad').invalid">{{obtenerMensajeErrorCiudad()}}</mat-error>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">Tipo de negocio:</label>
+        <select id="inputTipo2" class="form-control" formControlName="tipo" >
+          <option>Restaurante</option>
+          <option>Hotel</option>
+          <option>Bar</option>
+          <option>Almacen</option>
+          <option>Otro</option>
+        </select>
+        <mat-error style="color: red;" *ngIf="activarValidacion && formulario.get('tipo').invalid">{{obtenerMensajeErrorTipo()}}</mat-error>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail4">Detalle:</label>
+      <textarea maxlength="50" rows="2" class="form-control" rows="5" id="detalle2" [(ngModel)]="detalle" [ngModelOptions]="{standalone: true}"></textarea>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          Foto del negocio
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Seleccionar la foto:</h5>
+          <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+        </div>
+      </div>
+    </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
+        [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div *ngIf="porcentaje=='1'" class="alert alert-info" role="alert">
+      Imagen subida
+    </div>
+    <br>
+    <button type="submit" class="btnDetalle">Registrar Negocio</button>
+  </form>
+</div>

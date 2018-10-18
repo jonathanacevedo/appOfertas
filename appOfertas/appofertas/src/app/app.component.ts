@@ -21,10 +21,10 @@ export class AppComponent implements OnInit{
       this.user = user;
       this.loggedIn = (user != null);
       if(this.loggedIn){
-        console.log('Esta logueado');
-        console.log(user.name);
+        //console.log('Esta logueado');
+        //console.log(user.name);
       } else {
-        console.log('No esta logueado');
+        //console.log('No esta logueado');
       }
     });
   }

@@ -51,7 +51,7 @@ export class EditarPerfilComponent implements OnInit {
 
   putEditarPerfil(body: string): void {
     this.editarService.putEditarPersona(body).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
       alert('Perfil Actualizado Correctamente');
       if (this.cambioPass) {
         this.auth.Unloggin();

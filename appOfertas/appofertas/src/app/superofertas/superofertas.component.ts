@@ -49,14 +49,14 @@ export class SuperofertasComponent implements OnInit {
 
   putEditarOferta(body: string): void {
     this.editarService.putEditarOferta(body).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
       alert('Oferta acualizada correctamente');
     });
   }
 
   deleteEliminarOferta(body: string): void {
     this.eliminarService.deleteEliminarOferta(body).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
     });
     this.ofertas = [];
     alert('Oferta eliminada correctamente');
@@ -172,7 +172,7 @@ export class SuperofertasComponent implements OnInit {
     const dialogRef = this.dialog.open(FiltradoSuperComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       this.filtros = data;
-      console.log(data);
+      //console.log(data);
       if (this.filtros !== '') {
         this.filtrarOfertas(this.filtros);
       }

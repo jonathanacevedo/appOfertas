@@ -179,7 +179,7 @@ export class EditarOfertaComponent implements OnInit {
     this.activarValidacion = false;
     this.editarService.putEditarOferta(body).subscribe((data) => {
       alert('Oferta actualizada correctamente.');
-      console.log(data)
+      //console.log(data)
       this.edited = true;
       this.cerrarDialog();
     });

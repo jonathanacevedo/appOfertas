@@ -31,7 +31,7 @@ export class SupernegociosComponent implements OnInit {
       data.forEach((negocio) => {
         this.listar.getPersonaPorId(negocio.idadmin).subscribe((data) => {
           data.persona.forEach((persona) => {
-            console.log('El negocio ' + negocio.nombre + ' pertenece al usuario ' + persona.nombre);
+            //console.log('El negocio ' + negocio.nombre + ' pertenece al usuario ' + persona.nombre);
             negocio.propietario = persona.nombre
           })
         });
@@ -42,7 +42,7 @@ export class SupernegociosComponent implements OnInit {
 
   putEditarNegocio(body: string): void {
     this.editarService.putEditarNegocio(body).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
       alert('Negocio actualizado correctamente');
     });
   }
@@ -50,7 +50,7 @@ export class SupernegociosComponent implements OnInit {
   deleteEliminarNegocio(body: any): void {
     this.eliminarService.deleteEliminarNegocio(body).subscribe((data) => {
       if (data.body !== undefined) {
-        console.log(data.body.id);
+        //console.log(data.body.id);
         this.listar.getOfertasPorIdNegocio(data.body.id).subscribe((oferta) => {
           oferta.forEach((ofert) => {
             this.eliminarOferta(ofert.id, data.body.id, '');
@@ -105,7 +105,7 @@ export class SupernegociosComponent implements OnInit {
 
   deleteEliminarOferta(body: string): void {
     this.eliminarService.deleteEliminarOferta(body).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
     });
   }
 
@@ -118,7 +118,7 @@ export class SupernegociosComponent implements OnInit {
         }
       ]
     };
-    console.log('Body para borrar: ' + JSON.stringify(body));
+    //console.log('Body para borrar: ' + JSON.stringify(body));
     this.deleteEliminarOferta(JSON.stringify(body));
   }
 

@@ -53,7 +53,7 @@ export class MisOfertasComponent implements OnInit {
 
   deleteEliminarOfert(body: string): any {
     this.eliminarService.deleteEliminarOferta(body).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
     });
     this.negocios.length = 0;
     this.getListarNegociosAdmin();
@@ -62,7 +62,7 @@ export class MisOfertasComponent implements OnInit {
   eliminarOferta(id: string, idnegocio: string) {
     let x = confirm("¿Está seguro de eliminar la oferta?");
     if (x) {
-      console.log(id);
+      //console.log(id);
       let body = {
         "oferta": [
           {
@@ -73,7 +73,7 @@ export class MisOfertasComponent implements OnInit {
       };
       this.deleteEliminarOfert(JSON.stringify(body));
     } else {
-      console.log('Cancelado el borrado.');
+      //console.log('Cancelado el borrado.');
     }
   }
 
@@ -103,7 +103,7 @@ export class MisOfertasComponent implements OnInit {
     const dialogRef = this.dialog.open(EditarOfertaComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe((data) => {
-      console.log("Se cerró esa vuelta. y trajo: " + data);
+      //console.log("Se cerró esa vuelta. y trajo: " + data);
       if (data) {
         this.negocios = [];
         this.getListarNegociosAdmin();
@@ -143,7 +143,7 @@ export class MisOfertasComponent implements OnInit {
         this.listarService.getOfertasPorIdNegocio(item.idnegocio).subscribe((ofertas) => {
           ofertas.forEach((oferta) => {
             if (filtros[0] == 'Vigentes' || filtros[0] == 'Todas') {
-              console.log('filtros vigentes...');
+              //console.log('filtros vigentes...');
               if (this.compararFechas(oferta.fecha_fin)) {
                 if (oferta.tipo == filtros[1] || filtros[1] == 'Todas') {
                   this.ofertasValidas.push(oferta);
@@ -188,7 +188,7 @@ export class MisOfertasComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (data !== 'vacio') {
         this.filtros = data;
-        console.log(data);
+        //console.log(data);
         if (this.filtros.length !== 0) {
           this.filtrarOfertas(this.filtros);
         }

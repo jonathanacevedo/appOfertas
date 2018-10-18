@@ -121,7 +121,7 @@ export class MapaComponent implements OnInit {
                           }
                         }
                       } else if (filtros[1][j] == 'Promocion' && filtros[3].length > 0) {
-                        console.log('Comparando '+oferta.tipo+' y '+filtros[3]);
+                        //('Comparando '+oferta.tipo+' y '+filtros[3]);
                         if (oferta.descuento == filtros[3] || oferta.tipo == filtros[3]) {
                           this.negocios.push(negocios);
                           this.ofertas.push(oferta);
@@ -170,7 +170,7 @@ export class MapaComponent implements OnInit {
 
   getListarNegocios(): void {
     this.listar.getNegocios().subscribe((data) => {
-      console.log(data)
+      //console.log(data)
       data.forEach((negocio) => {
         this.negocios.push(negocio)
       });

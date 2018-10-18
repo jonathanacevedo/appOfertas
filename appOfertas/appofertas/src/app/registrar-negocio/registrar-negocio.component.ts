@@ -52,7 +52,7 @@ export class RegistrarNegocioComponent implements OnInit {
   postRegistrarNegocio(body: string): void {
     this.activarValidacion = false;
     this.registrar.registrarNegocio(body).subscribe((data) => {
-      console.log('El servicio de registro de negocio devolvió: ' + data);
+      //console.log('El servicio de registro de negocio devolvió: ' + data);
       this.limpiarCampos();
       alert('Negocio registrado correctamente.')
     });

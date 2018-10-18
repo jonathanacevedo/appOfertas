@@ -30,7 +30,7 @@ export class VerNegocioComponent implements OnInit {
 
   listarNegocio(idnegocio: string ): void {
     this.listar.getNegocioPorId(idnegocio).subscribe((data) => {
-      console.log(data.negocio[0])
+      //console.log(data.negocio[0])
       this.negocio = data.negocio[0];
     });
   }
