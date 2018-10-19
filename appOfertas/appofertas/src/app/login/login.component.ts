@@ -83,7 +83,6 @@ export class LoginComponent implements OnInit {
           }
         ]
       };
-
       this.postRegistrarPersona(JSON.stringify(body));
       //console.log(user);
     });
@@ -99,7 +98,6 @@ export class LoginComponent implements OnInit {
   }
 
   getListaPersonas(correo, contrasena): void {
-
     this.activarValidacion = false;
     this.listar.loguearPersona(correo, contrasena).subscribe((data: any) => {
       this.iniciar(data.persona[0].rol, data.persona[0].id, data.persona[0].nombre);
@@ -149,10 +147,8 @@ export class LoginComponent implements OnInit {
   }
 
   camposSonValidos() {
-
     let correo = this.loginForm.get('correo');
     let password = this.loginForm.get('contrasena');
-
     // Validacion de campos vacios o nulos
     if (correo.value == '' || password.value == '' || correo == null || password == null) {
       return false;

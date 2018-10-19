@@ -32,6 +32,7 @@ export class MapaComponent implements OnInit {
   private dia: number;
   private mes: number;
   private ano: number;
+  public opened: boolean;
 
 
   private map: any;
@@ -231,5 +232,13 @@ export class MapaComponent implements OnInit {
         }
       }
     });
+  }
+  IW: any;
+  public openIW(data = undefined) {
+    if (this.IW) {
+      this.IW.close();
+      this.opened = false;
+    }
+    this.IW = data;
   }
 }

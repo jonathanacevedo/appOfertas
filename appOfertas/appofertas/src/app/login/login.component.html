@@ -35,47 +35,34 @@
           </div>
         </div>
     </div>
-    <div class="row">
-      
-
-      
+    <div class="row">     
       <div class ="col-lg-6 col-sm-10 offset-sm-1 col-xs-10 offset-xs-1 col-md-10 offset-md-1 parteDerecha">
           <div class="loginGmail">
               <h1 style="color: #751836; font-family: Lobster; font-size: 2.5rem;">Iniciar sesión:</h1>
-            </div>
-  
+            </div> 
             <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
-  
               <label>Email:</label>
               <input class="form-control inputlogin" placeholder="Ingrese su email" formControlName="correo" required>
-              <mat-error style="color: red;" *ngIf="activarValidacion && loginForm.get('correo').invalid">{{getEmailErrorMessage()}}</mat-error>
-  
+              <mat-error style="color: red;" *ngIf="activarValidacion && loginForm.get('correo').invalid">{{getEmailErrorMessage()}}</mat-error> 
               <br><br>
-  
               <label>Contraseña:</label>
               <input type="password" class="form-control inputlogin" placeholder="Ingrese su contraseña" formControlName="contrasena"
                 required>
               <mat-error style="color: red;" *ngIf="activarValidacion && loginForm.get('contrasena').invalid">{{getPasswordErroMessage()}}</mat-error>
-  
               <br><br>
-  
               <button type="submit" class="btnDetalle">
                 Iniciar Sesión
               </button>
               <button class="btnDetalle" routerLink="/registrar">
                 Registrarse
               </button>
-  
-            </form>
-  
+            </form> 
             <br>
             <button (click)="signInWithGoogle()" class="btnGoogle">
               <img src="../../assets/imagenes/logoGoogle.png" style="width: 25px; height: 25px;" alt=""> Iniciar Sesión
             </button>
             <br>
             <br>
-  
-  
       </div>
 
       </div>

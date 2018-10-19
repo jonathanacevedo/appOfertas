@@ -38,8 +38,8 @@
       <div class="containerMap">
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (onMapLoad)='loadAPIWrapper($event)'>
           <div *ngFor="let negocio of negocios; let i index">
-            <agm-marker [latitude]="+negocio.latitud" [longitude]="+negocio.longitud">
-              <agm-info-window>
+            <agm-marker [latitude]="+negocio.latitud" [longitude]="+negocio.longitud" (markerClick)="openIW(infoWindow)">
+              <agm-info-window #infoWindow>
                 <div style="text-align: center;">
                   <strong><h1  style="font-size: 1.2rem; padding: 0px;">{{negocio.nombre}}</h1></strong>
                   {{negocio.tipo}}
