@@ -29,8 +29,9 @@ import { Configuration }                                     from '../configurat
 
 @Injectable()
 export class PersonasService {
+    urlBase: string = 'http://172.16.1.224';
 
-    protected basePath = 'http://ofertapp-persona.us-east-2.elasticbeanstalk.com/personas';
+    protected basePath = this.urlBase + ':8090/personas';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

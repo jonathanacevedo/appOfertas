@@ -147,7 +147,7 @@ export class RegistrarNegocioComponent implements OnInit {
 
   obtenerMensajeErrorDireccion(){   
     let direccion = this.formulario.get('direccion');
-    let error = direccion.hasError('required') ? 'Direccion vacio' : '';
+    let error = direccion.hasError('required') ? 'Direccion vacia' : '';
     return error;
   }
   obtenerMensajeErrorEmail(){   
@@ -168,7 +168,7 @@ export class RegistrarNegocioComponent implements OnInit {
   }
   obtenerMensajeErrorTipo(){   
     let tipo = this.formulario.get('tipo');
-    let error = tipo.hasError('required') ? 'tipo vacio' : '';
+    let error = tipo.hasError('required') ? 'Tipo vacio' : '';
     return error;
   }
   obtenerMensajeErrorDetalle(){   

@@ -423,3 +423,4 @@ FakesAssemblies/
 *.userprefs
 
 .DS_Store
+/.metadata/

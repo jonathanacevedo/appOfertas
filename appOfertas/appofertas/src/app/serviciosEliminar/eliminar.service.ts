@@ -6,9 +6,12 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 })
 export class EliminarService {
 
-  urlEliminarNegocio: string = "http://172.16.0.210:8091/negocios/eliminar";
-  urlEliminarOferta: string = "http://172.16.0.210:8092/ofertas/eliminar";
-  urlEliminarPersona: string = "http://172.16.0.210:8090/personas/eliminar";
+  //urlBase: string = 'http://172.16.0.210';
+  urlBase: string = 'http://172.16.1.224';
+
+  urlEliminarNegocio: string = this.urlBase + ":8091/negocios/eliminar";
+  urlEliminarOferta: string = this.urlBase + ":8092/ofertas/eliminar";
+  urlEliminarPersona: string = this.urlBase + ":8090/personas/eliminar";
 
 
 

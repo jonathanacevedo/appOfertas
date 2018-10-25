@@ -81,7 +81,7 @@ export class EditarNegoComponent implements OnInit {
 
   obtenerMensajeErrorDireccion(){   
     let direccion = this.formulario.get('direccion');
-    let error = direccion.hasError('required') ? 'Direccion vacio' : '';
+    let error = direccion.hasError('required') ? 'Direccion vacia' : '';
     return error;
   }
   obtenerMensajeErrorEmail(){   

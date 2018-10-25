@@ -7,9 +7,12 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 })
 export class EditarService {
 
-  urlEditarNegocio: string = "http://172.16.0.210:8091/negocios/editar";
-  urlEditarOferta: string = "http://172.16.0.210:8092/ofertas/editar";
-  urlEditarPersona: string = "http://172.16.0.210:8090/personas/editar";
+  //urlBase: string = 'http://172.16.0.210';
+  urlBase: string = 'http://172.16.1.224';
+
+  urlEditarNegocio: string = this.urlBase + ":8091/negocios/editar";
+  urlEditarOferta: string = this.urlBase + ":8092/ofertas/editar";
+  urlEditarPersona: string = this.urlBase + ":8090/personas/editar";
 
   constructor(private http: HttpClient) { }
 
